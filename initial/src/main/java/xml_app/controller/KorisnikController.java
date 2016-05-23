@@ -9,7 +9,6 @@ import java.util.Collection;
 /**
  * Created by Vuletic on 23.5.2016.
  */
-
 @RestController
 @RequestMapping("/korisnici")
 public class KorisnikController {
