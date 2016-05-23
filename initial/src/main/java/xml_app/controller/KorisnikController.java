@@ -19,7 +19,7 @@ public class KorisnikController {
     public Collection<Korisnik> sviKorisnici(){
         ArrayList<Korisnik> korisnici = new ArrayList<>();
         korisnici.add(new Korisnik("Ime","Prezime","email@mail.com","pass","user","064 111 111","Odbornik",111));
-        korisnici.add(new Korisnik("PPP","REEEDD","email@mail.com","pass","user","","Predsednik",32));
+        korisnici.add(new Korisnik("PPP","REEEasdDD","email@mail.com","pass","user","","Predsednik",32));
         return korisnici;
     }
 
