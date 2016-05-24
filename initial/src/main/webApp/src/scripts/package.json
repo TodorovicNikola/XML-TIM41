@@ -1,0 +1,19 @@
+{
+  "name": "poslovnafrontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MsSquirrel/PoslovnaFrontend.git"
+  },
+  "author": "Tim13",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MsSquirrel/PoslovnaFrontend/issues"
+  },
+  "homepage": "https://github.com/MsSquirrel/PoslovnaFrontend#readme"
+}
