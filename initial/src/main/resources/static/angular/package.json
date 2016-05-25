@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MsSquirrel/XMLFrontend.git"
+    "url": "git+https://github.com/nkl58/XML-TIM41.git"
   },
-  "author": "Kristina Satara",
+  "author": "Tim 41",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MsSquirrel/XMLFrontend/issues"
+    "url": "https://github.com//nkl58/XML-TIM41/issues"
   },
-  "homepage": "https://github.com/MsSquirrel/XMLFrontend#readme",
+  "homepage": "https://github.com//nkl58/XML-TIM41#readme",
   "dependencies": {
     "angular": "^1.5.5",
     "angular-route": "^1.5.5",

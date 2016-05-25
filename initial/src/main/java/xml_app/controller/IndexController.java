@@ -3,6 +3,9 @@ package xml_app.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -16,8 +19,20 @@ public class IndexController {
     @RequestMapping("/")
     void sendToHome(HttpServletResponse resp){
         try {
-            resp.sendRedirect("/initial");
+            resp.sendRedirect("/XMLProject");
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/XMLProject")
+    void home(HttpServletRequest req, HttpServletResponse resp){
+        try {
+            RequestDispatcher rd = req.getRequestDispatcher("/angular/dist/index.html");
+            rd.forward(req, resp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
             e.printStackTrace();
         }
     }
