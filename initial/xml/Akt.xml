@@ -54,54 +54,11 @@
             </akt:Tacka>
           </akt:Stav>
         </akt:Clan>
+        <akt:Clan Id="34"  Naslov="string" RedniBroj="201">
+          <akt:Sadrzaj>fasfasf</akt:Sadrzaj>
+        </akt:Clan>
         <!--1 or more repetitions:-->
-        <akt:Pododeljak Id="3" Naslov="string" RedniBroj="201">
-          <!--1 or more repetitions:-->
-          <akt:Clan Id="3" Naslov="string" RedniBroj="201">
-            <!--You have a CHOICE of the next 2 items at this level-->
-            <akt:Sadrzaj>
-              ferant
-              <!--Zero or more repetitions:-->
-              <akt:Referenca ReferencaURI="string">string</akt:Referenca>
-              profundum
-            </akt:Sadrzaj>
-            <akt:Stav Id="3" Naslov="string" RedniBroj="201">
-              <!--You have a CHOICE of the next 2 items at this level-->
-              <akt:Sadrzaj>
-                sceptra
-                <!--Zero or more repetitions:-->
-                <akt:Referenca ReferencaURI="string">string</akt:Referenca>
-                et
-              </akt:Sadrzaj>
-              <akt:Tacka Id="3" Naslov="string" RedniBroj="201">
-                <!--You have a CHOICE of the next 2 items at this level-->
-                <akt:Sadrzaj>
-                  turbine
-                  <!--Zero or more repetitions:-->
-                  <akt:Referenca ReferencaURI="string">string</akt:Referenca>
-                  iovis
-                </akt:Sadrzaj>
-                <akt:Podtacka Id="3" Naslov="string" RedniBroj="201">
-                  flammato
-                  <!--You have a CHOICE of the next 2 items at this level-->
-                  <akt:Alineja>
-                    speluncis
-                    <!--Zero or more repetitions:-->
-                    <akt:Referenca ReferencaURI="string">string</akt:Referenca>
-                    profundum
-                  </akt:Alineja>
-                  <akt:Sadrzaj>
-                    bella
-                    <!--Zero or more repetitions:-->
-                    <akt:Referenca ReferencaURI="string">string</akt:Referenca>
-                    nubibus
-                  </akt:Sadrzaj>
-                  flammas
-                </akt:Podtacka>
-              </akt:Tacka>
-            </akt:Stav>
-          </akt:Clan>
-        </akt:Pododeljak>
+
       </akt:Odeljak>
     </akt:Glava>
   </akt:Deo>

@@ -1,10 +1,13 @@
 <div>
     <h2>Akti</h2>
 
-    <ol>
-        <li ng-repeat="akt in data">{{akt.naslov}} - {{akt.status}}</li>
-
-    </ol>
+    <ul>
+        <li ng-repeat="akt in data">{{akt.id}}. {{akt.naslov}} - {{akt.status}} - {{akt.tip}} - {{akt.datumPodnosenja | date}}
+            <ol>
+                <li ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}}</li>
+            </ol>
+        </li>
+    </ul>
 
 
 </div>
