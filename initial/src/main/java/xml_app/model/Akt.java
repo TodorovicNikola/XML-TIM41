@@ -76,6 +76,8 @@ public class Akt {
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger redniBroj;
 
+
+
     /**
      * Gets the value of the podnosilac property.
      * 
