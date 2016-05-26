@@ -1,7 +1,8 @@
-var myApp = angular.module('xmlApp',['ngRoute', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection', 'ui.grid.resizeColumns']);
+var myApp = angular.module('xmlApp',['ngRoute', 'ngStorage', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection', 'ui.grid.resizeColumns']);
 myApp.controller('mainCtrl', require('./mainController.js'));
 myApp.controller('loginCtrl', require('./loginController.js'));
 myApp.controller('aktiCtrl', require('./aktiController.js'));
+myApp.service('loginService', require('./loginService.js'));
 
 myApp.config(['$routeProvider',
   function($routeProvider) {

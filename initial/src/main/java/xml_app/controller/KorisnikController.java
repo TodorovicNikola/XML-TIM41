@@ -28,6 +28,12 @@ public class KorisnikController {
         return new Korisnik("Ime","Prezime","email@mail.com","pass","user","064 111 111","Odbornik",korisnikId);
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Korisnik login(@RequestParam("username") String username, @RequestParam("password") String password ) {
+        System.out.println(username + password);
+        return null;
+    }
+
     /* PRIMER SA PARAMETROM */
     /*@RequestMapping(method = RequestMethod.GET)
     public Korisnik korisnikParametar(@RequestParam(value="id", defaultValue="4") String idStr){
