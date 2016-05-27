@@ -1,10 +1,15 @@
 package xml_app.controller;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import xml_app.model.Korisnik;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 
 /**
  * Created by Vuletic on 23.5.2016.
@@ -29,9 +34,26 @@ public class KorisnikController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Korisnik login(@RequestParam("username") String username, @RequestParam("password") String password ) {
-        System.out.println(username + password);
-        return null;
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password ) {
+
+        byte[] encodedBytes = Base64.encodeBase64("Test".getBytes());
+        String test = new String(encodedBytes);
+
+        Korisnik k = new Korisnik("Ime","Prezime","email@mail.com","pass","user","064 111 111","Odbornik",15);
+
+        if(username.equals(k.getKorisnickoIme()) && password.equals(k.getLozinka())){
+            JSONObject payload = new JSONObject();
+            payload.put("sub",k.getKorisnickoIme());
+            payload.put("role",k.getTip());
+            payload.put("name",k.getIme() + " " + k.getPrezime());
+
+            String jwt = (Jwts.builder().setPayload(payload.toJSONString()).signWith(SignatureAlgorithm.HS512, test).compact());
+            System.out.println(jwt);
+            return jwt;
+        }else{
+            return null;
+        }
+
     }
 
     /* PRIMER SA PARAMETROM */
