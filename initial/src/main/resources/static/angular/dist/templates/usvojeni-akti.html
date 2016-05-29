@@ -1,0 +1,22 @@
+<div>
+    <h2>Usvojeni akti</h2>
+
+    <table class="table">
+        <thead>
+            <th>Naziv</th>
+            <th>Tip</th>
+            <th>Datum</th>
+            <th>Službeni glasnik</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="akt in data">
+                <td><a href="/api/akti/{{akt.id}}">{{akt.naslov | uppercase}}</a></td>
+                <td>{{akt.tip}}</td>
+                <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
+                <td>{{akt.sluzbeniGlasnik}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

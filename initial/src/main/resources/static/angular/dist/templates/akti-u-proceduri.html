@@ -1,0 +1,21 @@
+<div>
+    <h2>Akti u proceduri</h2>
+
+    <table class="table">
+        <thead>
+        <th>Naziv</th>
+        <th>Tip</th>
+        <th>Datum</th>
+        <th>Podnosilac</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="akt in data">
+            <td><a href="/api/akti/{{akt.id}}">{{akt.naslov | uppercase}}</a></td>
+            <td>{{akt.tip}}</td>
+            <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
+            <td><p ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}} </p></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

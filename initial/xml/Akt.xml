@@ -1,4 +1,4 @@
-<akt:Akt Id="3" Naslov="Naslov akta" RedniBroj="201" DatumPodnosenja="2008-09-29" Tip="Tip akta - zakon" SluzbeniGlasnik="string" Status="Usvojen" xmlns:akt="http://www.xmlProjekat.com/akt">
+<akt:Akt Id="3" Naslov="Naslov akta" RedniBroj="201" DatumPodnosenja="2008-09-29" Tip="zakon" SluzbeniGlasnik="21-16" Status="Usvojen" xmlns:akt="http://www.xmlProjekat.com/akt">
   <!--1 or more repetitions:-->
   <akt:Podnosilac>Podnosilac Podnosilovic</akt:Podnosilac>
   <akt:Podnosilac>Drugi Podnosilovic</akt:Podnosilac>

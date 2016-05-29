@@ -41,9 +41,21 @@ public class AktController {
         return akti;
     }
 
-    @RequestMapping(value = "/{aktId}\"",method = RequestMethod.GET)
+    @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
     public Akt konkretanAkt(@PathVariable int aktId){
-        return null;
+        JAXBContext jc = null;
+        Akt a = null;
+        try {
+            jc = JAXBContext.newInstance(Akt.class);
+            Unmarshaller u = jc.createUnmarshaller();
+            Object o = u.unmarshal( new File( "xml\\Akt.xml" ) );
+            a = (Akt) o;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        System.out.println(aktId);
+        return a;
+
     }
 
 }
