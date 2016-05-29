@@ -28,11 +28,16 @@ public class IndexController {
     @RequestMapping("/XMLProject")
     void home(HttpServletRequest req, HttpServletResponse resp){
         try {
+            //DatabaseHelper dbH = new DatabaseHelper();
+            //dbH.write("xml/Akt.xml","Akt1");
+
             RequestDispatcher rd = req.getRequestDispatcher("/angular/dist/index.html");
             rd.forward(req, resp);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

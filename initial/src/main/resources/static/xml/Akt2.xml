@@ -1,0 +1,64 @@
+<akt:Akt Id="16" Naslov="Drugi akt" RedniBroj="201" DatumPodnosenja="2008-09-29" Tip="Tip akta - zakon" SluzbeniGlasnik="string" Status="U proceduri" xmlns:akt="http://www.xmlProjekat.com/akt">
+  <!--1 or more repetitions:-->
+  <akt:Podnosilac>Aleksandar Vucic</akt:Podnosilac>
+  <!--1 or more repetitions:-->
+  <akt:Deo Id="3" Naslov="string" RedniBroj="201">
+    <!--1 or more repetitions:-->
+    <akt:Glava Id="3" Naslov="string" RedniBroj="201">
+      <!--1 or more repetitions:-->
+      <akt:Odeljak Id="3" Naslov="string" RedniBroj="201">
+        <!--You have a CHOICE of the next 2 items at this level-->
+        <!--1 or more repetitions:-->
+
+        <!--1 or more repetitions:-->
+        <akt:Pododeljak Id="3" Naslov="string" RedniBroj="201">
+          <!--1 or more repetitions:-->
+          <akt:Clan Id="3" Naslov="string" RedniBroj="201">
+            <!--You have a CHOICE of the next 2 items at this level-->
+            <akt:Sadrzaj>
+              ferant
+              <!--Zero or more repetitions:-->
+              <akt:Referenca ReferencaURI="string">string</akt:Referenca>
+              profundum
+            </akt:Sadrzaj>
+            <akt:Stav Id="3" Naslov="string" RedniBroj="201">
+              <!--You have a CHOICE of the next 2 items at this level-->
+              <akt:Sadrzaj>
+                sceptra
+                <!--Zero or more repetitions:-->
+                <akt:Referenca ReferencaURI="string">string</akt:Referenca>
+                et
+              </akt:Sadrzaj>
+              <akt:Tacka Id="3" Naslov="string" RedniBroj="201">
+                <!--You have a CHOICE of the next 2 items at this level-->
+                <akt:Sadrzaj>
+                  turbine
+                  <!--Zero or more repetitions:-->
+                  <akt:Referenca ReferencaURI="string">string</akt:Referenca>
+                  iovis
+                </akt:Sadrzaj>
+                <akt:Podtacka Id="3" Naslov="string" RedniBroj="201">
+                  flammato
+                  <!--You have a CHOICE of the next 2 items at this level-->
+                  <akt:Alineja>
+                    speluncis
+                    <!--Zero or more repetitions:-->
+                    <akt:Referenca ReferencaURI="string">string</akt:Referenca>
+                    profundum
+                  </akt:Alineja>
+                  <akt:Sadrzaj>
+                    bella
+                    <!--Zero or more repetitions:-->
+                    <akt:Referenca ReferencaURI="string">string</akt:Referenca>
+                    nubibus
+                  </akt:Sadrzaj>
+                  flammas
+                </akt:Podtacka>
+              </akt:Tacka>
+            </akt:Stav>
+          </akt:Clan>
+        </akt:Pododeljak>
+      </akt:Odeljak>
+    </akt:Glava>
+  </akt:Deo>
+</akt:Akt>

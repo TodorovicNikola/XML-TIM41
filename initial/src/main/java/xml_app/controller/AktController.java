@@ -38,6 +38,9 @@ public class AktController {
             e.printStackTrace();
         }
 
+        //DatabaseHelper dbh = new DatabaseHelper();
+       // dbh.write("xml/Akt.xml","akt1");
+
         return akti;
     }
 
