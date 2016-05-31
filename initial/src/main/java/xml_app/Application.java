@@ -2,13 +2,6 @@ package xml_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import xml_app.model.Korisnik;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.File;
-import java.io.FileWriter;
 
 @SpringBootApplication
 public class Application {
@@ -40,6 +33,5 @@ public class Application {
         }*/
 
         SpringApplication.run(Application.class, args);
-
     }
 }
