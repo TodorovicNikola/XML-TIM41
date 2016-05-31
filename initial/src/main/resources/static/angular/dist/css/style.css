@@ -2,6 +2,15 @@ div.container div h2{
     margin-top: -5px;
 }
 
+table.table tbody tr td{
+    vertical-align: middle !important;
+}
+
+table.table tbody tr td p{
+    margin: 0 0 0 !important;
+}
+
+/***  LOGIN FORM   ***/
 #login-form {
     width: 300px;
     margin: 0 auto;
