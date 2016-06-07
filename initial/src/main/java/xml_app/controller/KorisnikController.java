@@ -3,12 +3,15 @@ package xml_app.controller;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
+import xml_app.database.DatabaseHelper;
 import xml_app.model.Korisnik;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+import javax.xml.crypto.Data;
 
 
 /**
@@ -17,6 +20,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RestController
 @RequestMapping("/api/korisnici")
 public class KorisnikController {
+
+    private DatabaseHelper db = new DatabaseHelper();
 
     /* PRIMER VRACANJA KOLEKCIJE*/
     @RequestMapping(method = RequestMethod.GET)
@@ -39,7 +44,11 @@ public class KorisnikController {
         byte[] encodedBytes = Base64.encodeBase64("Test".getBytes());
         String test = new String(encodedBytes);
 
-        Korisnik k = new Korisnik("Ime","Prezime","email@mail.com","pass","user","064 111 111","Odbornik",15);
+        Korisnik k = db.findKorisnikById(username);
+        db.release();
+
+        if(k == null)
+            return null;
 
         if(username.equals(k.getKorisnickoIme()) && password.equals(k.getLozinka())){
             JSONObject payload = new JSONObject();
