@@ -1,0 +1,10 @@
+<div id="kreiranje_akta_div">&lt;rootElement&gt;&lt;/rootElement&gt;</div>
+<script>
+    $(function() {
+        var extractor = new Xsd2Json("Amandman.xsd", {"schemaURI":"angular/", "rootElement": "Amandman"});
+
+        $("#kreiranje_akta_div").xmlEditor({
+            schema: extractor.getSchema()
+        });
+    });
+</script>

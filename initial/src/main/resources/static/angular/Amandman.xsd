@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.xmlProjekat.com/amandman"
+    xmlns:am="http://www.xmlProjekat.com/amandman">
+
+    <xs:element name="Amandman">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Podnosilac" type="xs:string"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="ElementAmandmana">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute name="Akcija">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Dodaj"/>
+                                                <xs:enumeration value="Izmeni"/>
+                                                <xs:enumeration value="Obrisi"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="Referencira"> </xs:attribute>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="DatumIVremePodnosenja" type="xs:dateTime"/>
+            <xs:attribute name="Id" type="xs:int" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
