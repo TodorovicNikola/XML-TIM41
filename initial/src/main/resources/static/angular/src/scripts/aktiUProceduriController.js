@@ -5,7 +5,7 @@ module.exports = [
     '$scope', '$http', '$routeParams',
     function myController($scope, $http, $routeParams){
 
-        $http.get("/api/akti").then(function(response) {
+        $http.get("/api/akti/u-proceduri").then(function(response) {
             $scope.data = response.data;
         });
         

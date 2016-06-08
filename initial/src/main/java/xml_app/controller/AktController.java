@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 
 import javax.xml.bind.JAXBContext;
@@ -12,6 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Vuletic on 25.5.2016.
@@ -21,42 +23,32 @@ import java.util.Collection;
 @RequestMapping("/api/akti")
 public class AktController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Collection<Akt> sviAkti(){
-        ArrayList<Akt> akti = new ArrayList<>();
-        JAXBContext jc = null;
-        try {
-            jc = JAXBContext.newInstance(Akt.class);
-            Unmarshaller u = jc.createUnmarshaller();
-            Object o = u.unmarshal( new File( "xml\\Akt.xml" ) );
-            Akt a = (Akt) o;
-            Object ob = u.unmarshal( new File( "xml\\Akt2.xml" ) );
-            Akt ak = (Akt) ob;
-            akti.add(a);
-            akti.add(ak);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+    @RequestMapping(value="/usvojeni", method = RequestMethod.GET)
+    public Collection<Akt> usvojeniAkti(){
+        DatabaseHelper db = new DatabaseHelper();
 
-        //DatabaseHelper dbh = new DatabaseHelper();
-       // dbh.write("xml/Akt.xml","akt1");
+        List<Akt> akti = db.getUsvojeniAkti();
+        db.release();
+        return akti;
+    }
 
+    @RequestMapping(value="/u-proceduri", method = RequestMethod.GET)
+    public Collection<Akt> aktiUProceduri(){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Akt> akti = db.getAktiUProceduri();
+        db.release();
         return akti;
     }
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
     public Akt konkretanAkt(@PathVariable int aktId){
-        JAXBContext jc = null;
-        Akt a = null;
-        try {
-            jc = JAXBContext.newInstance(Akt.class);
-            Unmarshaller u = jc.createUnmarshaller();
-            Object o = u.unmarshal( new File( "xml\\Akt.xml" ) );
-            a = (Akt) o;
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-        System.out.println(aktId);
+        DatabaseHelper db = new DatabaseHelper();
+
+        Akt a = db.findAktById(aktId);
+
+        db.release();
+
         return a;
 
     }

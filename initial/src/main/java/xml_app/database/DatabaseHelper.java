@@ -3,9 +3,10 @@ package xml_app.database;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
 import com.marklogic.client.document.XMLDocumentManager;
-import com.marklogic.client.io.DocumentMetadataHandle;
-import com.marklogic.client.io.InputStreamHandle;
-import com.marklogic.client.io.JAXBHandle;
+import com.marklogic.client.io.*;
+import com.marklogic.client.query.*;
+import com.marklogic.client.util.EditableNamespaceContext;
+import org.w3c.dom.Document;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
@@ -15,6 +16,8 @@ import javax.xml.bind.JAXBException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DatabaseHelper {
@@ -39,7 +42,7 @@ public class DatabaseHelper {
         client.release();
     }
 
-    public void write(String XMLPath, String docId){
+    public void write(String XMLPath, String collId, String docId){
         // Create an input stream handle to hold XML content.
         InputStreamHandle handle = null;
         try {
@@ -47,10 +50,11 @@ public class DatabaseHelper {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        metadata.getCollections().add(collId);
         // Write the document to the
 
-        manager.write(docId, handle);
+        manager.write(docId, metadata, handle);
 
         System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + docId);
     }
@@ -69,18 +73,68 @@ public class DatabaseHelper {
         System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(k.getId()));
     }
 
-    public Korisnik findKorisnikById(String username){
+    public Korisnik findKorisnikById(String username) {
         String docId = "korisnici/" + username + ".xml";
         Korisnik k;
         try {
             k = manager.readAs(docId, Korisnik.class);
-        }catch (Exception e){
+        } catch (Exception e) {
             k = null;
         }
 
         return k;
     }
 
+    public Akt findAktById(int id) {
+        String docId = "akti/" + Integer.toString(id) + ".xml";
+        Akt a;
+        try {
+            a = manager.readAs(docId, Akt.class);
+        } catch (Exception e) {
+            a = null;
+        }
 
+        return a;
+    }
+
+    public List<Akt> getUsvojeniAkti(){
+        QueryManager queryMgr = client.newQueryManager();
+
+        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
+        stringQry.setCollections("akti");
+
+        List<Akt> ret = new ArrayList<>();
+
+        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            if(a.getStatus().equals("Usvojen"))
+                ret.add(a);
+        }
+
+        return ret;
+
+    }
+
+    public List<Akt> getAktiUProceduri(){
+        QueryManager queryMgr = client.newQueryManager();
+
+        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
+        stringQry.setCollections("akti");
+
+        List<Akt> ret = new ArrayList<>();
+
+        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            if(a.getStatus().equals("U proceduri"))
+                ret.add(a);
+        }
+
+        return ret;
+
+    }
 
 }
