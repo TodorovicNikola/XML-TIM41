@@ -14,6 +14,19 @@
 		<link rel="stylesheet" href="angular/dist/css/ui-grid.css">
 		<link rel="stylesheet" href="angular/dist/css/style.css">
 
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/xsd/xsd2json.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/lib/ace/src-min/ace.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/lib/ace/src-min/json2.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/lib/json2.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/lib/cycle.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/lib/jquery.autosize-min.js" ></script>
+		<script type="text/javascript" src ="angular/bower_components/jquery.xmleditor/jquery.xmleditor.js" ></script>
+		<link rel="stylesheet" href="angular/bower_components/jquery.xmleditor/css/jquery.xmleditor.css">
+
+
+
 	</head>
 
 	<body ng-app="xmlApp" ng-controller="appCtrl as main">
@@ -28,6 +41,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer">Akti
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="#/kreiraj-akt">Kreiraj akt</a></li>
 						<li><a href="#/akti-u-proceduri">U proceduri</a></li>
 						<li><a href="#/usvojeni-akti">Usvojeni</a></li>
 					</ul>

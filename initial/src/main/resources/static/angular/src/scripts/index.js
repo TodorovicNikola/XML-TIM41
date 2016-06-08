@@ -21,7 +21,11 @@ myApp.config(['$routeProvider',
 		templateUrl: '/angular/dist/templates/akti-u-proceduri.html',
 		controller: 'aktiUProceduriCtrl'
 	}).
-	  when('/login', {
+	when('/kreiraj-akt', {
+		templateUrl: '/angular/dist/templates/kreiraj-akt.html',
+		controller: 'aktiUProceduriCtrl'
+	}).
+	when('/login', {
 		templateUrl: '/angular/dist/templates/login.html',
 		controller: 'loginCtrl'
 	}).
