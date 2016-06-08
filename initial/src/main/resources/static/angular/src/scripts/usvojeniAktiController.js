@@ -4,7 +4,7 @@
 module.exports = [
     '$scope', '$http',
     function myController($scope, $http){
-        $http.get("/api/akti").then(function(response) {
+        $http.get("/api/akti/usvojeni").then(function(response) {
             $scope.data = response.data;
         });
     }

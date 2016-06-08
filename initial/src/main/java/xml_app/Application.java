@@ -1,5 +1,8 @@
 package xml_app;
 
+import com.marklogic.client.query.QueryManager;
+import com.marklogic.client.query.StructuredQueryBuilder;
+import com.marklogic.client.query.StructuredQueryDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import xml_app.database.DatabaseHelper;
@@ -22,6 +25,7 @@ public class Application {
         DatabaseHelper db = new DatabaseHelper();
         db.writeKorisnik(k1);
         db.writeKorisnik(k2);
+
         db.release();
 
        /* try {
