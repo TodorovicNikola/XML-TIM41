@@ -1,7 +1,7 @@
 /**
  * Created by Vuletic on 9.6.2016.
  */
-
+//TODO ogranicenja: id je broj, datum, prvo podnosioci, pa elementi amandmana, referenca
 module.exports = [
     '$scope', '$http',
     function ctrl($scope){
@@ -37,37 +37,44 @@ module.exports = [
                     attributes: {
                         "Id": {
                             asker: Xonomy.askString
+                        },
+                        "DatumIVremePodnosenja":{
+                            asker: Xonomy.askString
                         }
                     }
                 },
                 "Podnosilac": {
+                    hasText: true,
                     menu: [{
-                        caption: "Add @label=\"something\"",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "label", value: "something"},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("label");
-                        }
-                    }, {
-                        caption: "Delete this <item>",
-                        action: Xonomy.deleteElement
-                    }, {
-                        caption: "New <item> before this",
-                        action: Xonomy.newElementBefore,
-                        actionParameter: "<item/>"
-                    }, {
-                        caption: "New <item> after this",
+                        caption: "Dodaj novi <Podnosilac>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<item/>"
+                        actionParameter: "<Podnosilac/>"
+
+                    }, {
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "ElementAmandmana": {
+                    hasText: true,
+                    menu: [{
+                        caption: "Dodaj novi <ElementAmandmana>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<ElementAmandmana/>"
+
+                    }, {
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
                     }],
-                    canDropTo: ["list"],
                     attributes: {
-                        "label": {
-                            asker: Xonomy.askString,
-                            menu: [{
-                                caption: "Delete this @label",
-                                action: Xonomy.deleteAttribute
-                            }]
+                        "Akcija": {
+                            asker: Xonomy.askPicklist,
+                            askerParameter: [
+                                "Dodaj", "Izmeni", "Obrisi"
+                            ]
+                        },
+                        "Referencira": {
+                            asker: Xonomy.askString
                         }
                     }
                 }
