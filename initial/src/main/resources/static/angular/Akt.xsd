@@ -6,9 +6,149 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" name="Podnosilac" type="xs:string"/>
-                <xs:element maxOccurs="unbounded" ref="ak:Deo"/>
+                <xs:element name="Deo" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Glava" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Odeljak" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:choice maxOccurs="1">
+                                                  <xs:sequence>
+                                                  <xs:element name="Clan" maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Stav">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Tacka">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Podtacka">
+                                                  <xs:complexType mixed="true">
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Alineja" type="ak:SadrzajTip"> </xs:element>
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  <xs:sequence>
+                                                  <xs:element name="Pododeljak"
+                                                  maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Clan" maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Stav">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Tacka">
+                                                  <xs:complexType>
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  <xs:element name="Podtacka">
+                                                  <xs:complexType mixed="true">
+                                                  <xs:choice maxOccurs="unbounded">
+                                                  <xs:element name="Alineja" type="ak:SadrzajTip"> </xs:element>
+                                                  <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  <xs:attribute name="Id" type="xs:int"
+                                                  use="required"/>
+                                                  <xs:attribute name="Naslov" type="xs:string"/>
+                                                  <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                </xs:choice>
+                                                <xs:attribute name="Id" type="xs:int" use="required"/>
+                                                <xs:attribute name="Naslov" type="xs:string"/>
+                                                <xs:attribute name="RedniBroj"
+                                                  type="xs:positiveInteger"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Id" type="xs:int" use="required"/>
+                                    <xs:attribute name="Naslov" type="xs:string"/>
+                                    <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Id" type="xs:int" use="required"/>
+                        <xs:attribute name="Naslov" type="xs:string"/>
+                        <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
             <xs:attribute name="DatumPodnosenja" type="xs:date" use="required"/>
             <xs:attribute name="Tip" type="xs:string"/>
             <xs:attribute name="SluzbeniGlasnik" type="xs:string"/>
@@ -21,22 +161,11 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="Id" type="xs:int" use="required"/>
+            <xs:attribute name="Naslov" type="xs:string"/>
+            <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
         </xs:complexType>
     </xs:element>
-    <xs:element name="Clan">
-        <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
-                <xs:element ref="ak:Stav"/>
-            </xs:choice>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:attributeGroup name="OsnovniPodaci">
-        <xs:attribute name="Id" type="xs:int" use="required"/>
-        <xs:attribute name="Naslov" type="xs:string"/>
-        <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
-    </xs:attributeGroup>
     <xs:complexType mixed="true" name="SadrzajTip">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="Referenca">
@@ -50,71 +179,4 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="Deo">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="ak:Glava"/>
-            </xs:sequence>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Glava">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="ak:Odeljak"/>
-            </xs:sequence>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Odeljak">
-        <xs:complexType>
-            <xs:choice maxOccurs="1">
-                <xs:sequence>
-                    <xs:element ref="ak:Clan" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="ak:Pododeljak"/>
-                </xs:sequence>
-            </xs:choice>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Pododeljak">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="ak:Clan" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Stav">
-        <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
-                <xs:element ref="ak:Tacka"/>
-            </xs:choice>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Tacka">
-        <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
-                <xs:element ref="ak:Podtacka"/>
-            </xs:choice>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Podtacka">
-        <xs:complexType mixed="true">
-            <xs:choice maxOccurs="unbounded">
-                <xs:element ref="ak:Alineja"/>
-                <xs:element ref="ak:Sadrzaj"/>
-            </xs:choice>
-            <xs:attributeGroup ref="ak:OsnovniPodaci"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Alineja" type="ak:SadrzajTip"> </xs:element>
-    <xs:element name="Sadrzaj" type="ak:SadrzajTip"/>
-    <xs:element name="Podnosilac" type="xs:string"/>
 </xs:schema>

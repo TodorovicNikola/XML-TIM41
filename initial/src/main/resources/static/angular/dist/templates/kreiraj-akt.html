@@ -1,7 +1,7 @@
 <div id="kreiranje_akta_div">&lt;Panel&gt;&lt;/Panel&gt;</div>
 <script>
     $(function() {
-        var extractor = new Xsd2Json("Amandman.xsd", {"schemaURI":"angular/", "rootElement": "Amandman"});
+        var extractor = new Xsd2Json("Akt.xsd", {"schemaURI":"angular/", "rootElement": "Akt"});
 
         $("#kreiranje_akta_div").xmlEditor({
             schema: extractor.getSchema()

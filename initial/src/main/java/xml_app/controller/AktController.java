@@ -1,17 +1,13 @@
 package xml_app.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.util.ArrayList;
+import java.io.StringReader;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,6 +47,24 @@ public class AktController {
 
         return a;
 
+    }
+
+    @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
+    public Akt trial(@RequestBody String telo) throws JAXBException {
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(Akt.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(telo);
+
+        try{
+            Akt a = (Akt) unmarshaller.unmarshal(reader);
+            return a;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

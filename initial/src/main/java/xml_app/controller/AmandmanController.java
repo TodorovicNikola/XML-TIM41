@@ -16,10 +16,10 @@ import java.io.StringReader;
  */
 
 @RestController
-@RequestMapping("/api/trial")
-public class TrialController {
+@RequestMapping("/api/amandmani")
+public class AmandmanController {
 
-    @RequestMapping(value = "/prodji",method = RequestMethod.POST)
+    @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
     public Amandman trial(@RequestBody String telo) throws JAXBException {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Amandman.class);

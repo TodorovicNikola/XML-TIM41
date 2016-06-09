@@ -819,16 +819,28 @@ $.widget( "xml.xmlEditor", {
 		// convert XML DOM to string
 		var xmlString = this.xml2Str(this.xmlState.xml);
 		//HARALAMPIJE!?
+		var url = "";
 		if(xmlString.indexOf("xmlns:am=\"http://www.xmlProjekat.com/amandman\"") > -1){
 			var insertionPoint = 15;
 			xmlString = xmlString.replace("<Panel xmlns:am=\"http://www.xmlProjekat.com/amandman\">","");
 			xmlString = xmlString.replace("</Panel>","");
 			xmlString = xmlString.slice(0,insertionPoint) + " xmlns:am=\"http://www.xmlProjekat.com/amandman\"" + xmlString.slice(insertionPoint);
+
+			url = "/api/amandmani/dodaj";
+		}
+
+		if(xmlString.indexOf("xmlns:ak=\"http://www.xmlProjekat.com/akt\"") > -1){
+			var insertionPoint = 10;
+			xmlString = xmlString.replace("<Panel xmlns:ak=\"http://www.xmlProjekat.com/akt\">","");
+			xmlString = xmlString.replace("</Panel>","");
+			xmlString = xmlString.slice(0,insertionPoint) + " xmlns:ak=\"http://www.xmlProjekat.com/akt\"" + xmlString.slice(insertionPoint);
+
+			url = "/api/akti/dodaj";
 		}
 		$("." + submissionStatusClass).html("Submitting...");
 		var self = this;
 		$.ajax({
-			url : "/api/trial/prodji",//HARALAMPIJE!
+			url : url,//HARALAMPIJE!
 			contentType : "application/xml",
 			type : "POST",
 			data : xmlString,
