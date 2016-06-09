@@ -4,7 +4,7 @@
 //TODO ogranicenja: id je broj, datum, prvo podnosioci, pa elementi amandmana, referenca
 module.exports = [
     '$scope', '$http',
-    function ctrl($scope){
+    function ctrl($scope, $http){
         var docSpec={
             onchange: function(){
                 console.log("I been changed now!")
@@ -83,13 +83,16 @@ module.exports = [
             }
         };
 
-        var xml="<Amandman Id=''><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
+        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
 
         $scope.submit = function () {
-            alert(Xonomy.harvest());
+
+            $http.post("/api/amandmani/dodaj", Xonomy.harvest()).success(function(data, status) {
+                $scope.hello = data;
+            })
         }
 
     }
