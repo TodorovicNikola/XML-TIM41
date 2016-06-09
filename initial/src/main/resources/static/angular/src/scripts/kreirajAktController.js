@@ -105,18 +105,11 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <Stav>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Stav/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj");
-                        }
+                        actionParameter: "<Stav/>"
                     },{
                         caption: "Dodaj novi <Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Sadrzaj/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj") ||
-                                jsElement.hasChildElement("Stav");
-                        }
+                        actionParameter: "<Sadrzaj/>"
                     },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
@@ -126,18 +119,11 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <Tacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Tacka/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj");
-                        }
+                        actionParameter: "<Tacka/>"
                     },{
                         caption: "Dodaj novi <Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Sadrzaj/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj") ||
-                                jsElement.hasChildElement("Tacka");
-                        }
+                        actionParameter: "<Sadrzaj/>"
                     },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
@@ -147,18 +133,11 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <Podtacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Podtacka/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj");
-                        }
+                        actionParameter: "<Podtacka/>"
                     },{
                         caption: "Dodaj novi <Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Sadrzaj/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj") ||
-                                jsElement.hasChildElement("Podtacka");
-                        }
+                        actionParameter: "<Sadrzaj/>"
                     },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
@@ -168,18 +147,11 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <Alineja>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Alineja/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj");
-                        }
+                        actionParameter: "<Alineja/>"
                     },{
                         caption: "Dodaj novi <Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<Sadrzaj/>",
-                        hideIf: function(jsElement){
-                            return jsElement.hasChildElement("Sadrzaj") ||
-                                jsElement.hasChildElement("Alineja");
-                        }
+                        actionParameter: "<Sadrzaj/>"
                     },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
