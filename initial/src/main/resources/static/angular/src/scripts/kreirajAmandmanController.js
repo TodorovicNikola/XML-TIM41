@@ -1,16 +1,35 @@
 /**
  * Created by Vuletic on 9.6.2016.
  */
-//TODO ogranicenja: id je broj, datum, prvo podnosioci, pa elementi amandmana, referenca
+//TODO ogranicenja: datum,  referenca
 module.exports = [
-    '$scope', '$http',
-    function ctrl($scope, $http){
+    '$scope', '$http', '$interval',
+    function ctrl($scope, $http, $interval){
+        $scope.warns = 0;
         var docSpec={
-            onchange: function(){
-                console.log("I been changed now!")
-            },
-            validate: function(obj){
-                console.log("I be validatin' now!")
+
+            validate: function(jsElement){
+                //Cycle through the element's attributes:
+                for(var i=0; i<jsElement.attributes.length; i++) {
+                    var jsAttribute=jsElement.attributes[i];
+                    //Make sure item/@label is not an empty string:
+                    if(jsElement.name=="Amandman" && jsAttribute.name=="Id") {
+                        if(!isNormalInteger(jsAttribute.value)) {
+                            Xonomy.warnings.push({
+                                htmlID: jsAttribute.htmlID,
+                                text: "Id mora biti pozitivan ceo broj."}
+                            );
+                        }
+                    }
+                };
+                    //Cycle through the element's children:
+                for(var i=0; i<jsElement.children.length; i++) {
+                    var jsChild=jsElement.children[i];
+                    if(jsChild.type=="element") { //if element
+                        docSpec.validate(jsChild); //recursion
+                    }
+                }
+
             },
             elements: {
                 "Amandman": {
@@ -22,7 +41,7 @@ module.exports = [
                         {
                             caption: "Dodaj <ElementAmandmana>",
                             action: Xonomy.newElementChild,
-                            actionParameter: "<ElementAmandmana/>"
+                            actionParameter: "<ElementAmandmana Akcija='Dodaj' Referencira=''/>"
                         },
                         {
                             caption: "Dodaj @Datum",
@@ -61,7 +80,7 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ElementAmandmana>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<ElementAmandmana/>"
+                        actionParameter: "<ElementAmandmana Akcija='Dodaj' Referencira=''/>"
 
                     }, {
                         caption: "Obriši",
@@ -93,6 +112,15 @@ module.exports = [
             $http.post("/api/amandmani/dodaj", Xonomy.harvest()).success(function(data, status) {
                 $scope.hello = data;
             })
+        }
+
+        $interval(function() {
+            $scope.warns = Xonomy.warnings.length;
+        }, 500);
+
+        function isNormalInteger(str) {
+            var n = ~~Number(str);
+            return String(n) === str && n > 0;
         }
 
     }
