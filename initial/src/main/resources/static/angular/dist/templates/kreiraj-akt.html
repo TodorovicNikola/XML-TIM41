@@ -1,18 +1,2 @@
-<div id="kreiranje_akta_div">&lt;Panel&gt;&lt;/Panel&gt;</div>
-<script>
-    $(function() {
-        var extractor = new Xsd2Json("Akt.xsd", {"schemaURI":"angular/", "rootElement": "Akt"});
-
-        $("#kreiranje_akta_div").xmlEditor({
-            schema: extractor.getSchema()
-        });/*
-        $("#kreiranje_akta_div").xmlEditor({
-            ajaxOptions : {
-                xmlUploadPath: "api/trial/prodjii",
-                xmlRetrievalPath: null,
-                xmlRetrievalParams : null
-            }
-        });*/
-        //&lt;Amandman&gt;&lt;/Amandman&gt;
-    });
-</script>
+<div id="editor"></div>
+<button class="btn btn-default" ng-click="submit()">Submit</button>

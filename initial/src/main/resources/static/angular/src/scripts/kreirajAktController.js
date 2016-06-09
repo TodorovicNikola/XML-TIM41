@@ -4,11 +4,15 @@
 module.exports = [
     '$scope', '$http',
     function ctrl($scope){
-        $scope.init=function()
-        {
-            console.log('Kreiraj akt controller pokrenut');
+        
+        var xml="<Amandman Id=''><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
+        var editor=document.getElementById("editor");
+        Xonomy.setMode("laic");
+        Xonomy.render(xml, editor, docSpec);
+
+        $scope.submit = function () {
+            alert(Xonomy.harvest());
         }
-        $scope.init()
 
     }
 ];

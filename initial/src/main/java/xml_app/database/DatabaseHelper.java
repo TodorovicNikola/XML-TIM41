@@ -73,6 +73,34 @@ public class DatabaseHelper {
         System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(k.getId()));
     }
 
+    public void writeAkt(Akt a){
+
+        String collId = "akti";
+        String docId = "akti/" + a.getId() + ".xml";
+
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        metadata.getCollections().add(collId);
+
+        // Write the document to the database
+        manager.writeAs(docId, metadata, a);
+
+        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(a.getId()));
+    }
+
+    public void writeAmandman(Amandman a){
+
+        String collId = "amandmani";
+        String docId = "amandmani/" + a.getId() + ".xml";
+
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        metadata.getCollections().add(collId);
+
+        // Write the document to the database
+        manager.writeAs(docId, metadata, a);
+
+        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(a.getId()));
+    }
+
     public Korisnik findKorisnikById(String username) {
         String docId = "korisnici/" + username + ".xml";
         Korisnik k;

@@ -4,6 +4,8 @@ myApp.controller('mainCtrl', require('./mainController.js'));
 myApp.controller('loginCtrl', require('./loginController.js'));
 myApp.controller('usvojeniAktiCtrl', require('./usvojeniAktiController.js'));
 myApp.controller('aktiUProceduriCtrl', require('./aktiUProceduriController.js'));
+myApp.controller('kreirajAktCtrl', require('./kreirajAktController.js'));
+myApp.controller('kreirajAmandmanCtrl', require('./kreirajAmandmanController.js'));
 myApp.service('loginService', require('./loginService.js'));
 
 myApp.config(['$routeProvider',
@@ -23,11 +25,11 @@ myApp.config(['$routeProvider',
 	}).
 	when('/kreiraj-akt', {
 		templateUrl: '/angular/dist/templates/kreiraj-akt.html',
-		controller: 'aktiUProceduriCtrl'
+		controller: 'kreirajAktCtrl'
 	}).
 	when('/kreiraj-amandman', {
 		templateUrl: '/angular/dist/templates/kreiraj-amandman.html',
-		controller: 'aktiUProceduriCtrl'
+		controller: 'kreirajAmandmanCtrl'
 	}).
 	when('/login', {
 		templateUrl: '/angular/dist/templates/login.html',

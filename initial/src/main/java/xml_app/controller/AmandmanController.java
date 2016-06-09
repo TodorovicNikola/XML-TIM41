@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import xml_app.database.DatabaseHelper;
 import xml_app.model.Amandman;
 
 import javax.xml.bind.JAXBContext;
@@ -29,6 +30,10 @@ public class AmandmanController {
 
         try{
             Amandman a = (Amandman) unmarshaller.unmarshal(reader);
+            DatabaseHelper db = new DatabaseHelper();
+
+            db.writeAmandman(a);
+
             return a;
         }catch(Exception e){
             e.printStackTrace();

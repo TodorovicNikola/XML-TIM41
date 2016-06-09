@@ -58,7 +58,11 @@ public class AktController {
         StringReader reader = new StringReader(telo);
 
         try{
+            DatabaseHelper db = new DatabaseHelper();
             Akt a = (Akt) unmarshaller.unmarshal(reader);
+
+            db.writeAkt(a);
+
             return a;
         }catch(Exception e){
             e.printStackTrace();
