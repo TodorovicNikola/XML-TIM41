@@ -459,7 +459,7 @@ $.widget( "xml.xmlEditor", {
 		this.modifyMenu.addAttributeMenu(addAttrMenuClass, this.options.addAttrMenuHeaderText, 
 				true, false, true);
 		//this.modifyMenu.addNodeMenu(addNodeMenuClass, "Add Nodes", true, false); HARALAMPIJE
-		this.addTopLevelMenu = this.modifyMenu.addMenu(addTopMenuClass, this.options.addTopMenuHeaderText, 
+		this.addTopLevelMenu = this.modifyMenu.addMenu(addTopMenuClass, this.options.addTopMenuHeaderText,
 				true, true, false, function(target) {
 			var selectedElement = self.guiEditor.selectedElement;
 			if (!selectedElement || selectedElement.length == 0 || selectedElement.isRootElement) 
@@ -818,6 +818,13 @@ $.widget( "xml.xmlEditor", {
 		}*/
 		// convert XML DOM to string
 		var xmlString = this.xml2Str(this.xmlState.xml);
+		//HARALAMPIJE!?
+		if(xmlString.indexOf("xmlns:am=\"http://www.xmlProjekat.com/amandman\"") > -1){
+			var insertionPoint = 15;
+			xmlString = xmlString.replace("<Panel xmlns:am=\"http://www.xmlProjekat.com/amandman\">","");
+			xmlString = xmlString.replace("</Panel>","");
+			xmlString = xmlString.slice(0,insertionPoint) + " xmlns:am=\"http://www.xmlProjekat.com/amandman\"" + xmlString.slice(insertionPoint);
+		}
 		$("." + submissionStatusClass).html("Submitting...");
 		var self = this;
 		$.ajax({
@@ -3447,7 +3454,7 @@ TextEditor.prototype.selectTagAtCursor = function() {
 		var self = this;
 		var instanceNumber = this.tagOccurrences(preceedingLines, tagTitle);
 		// Find the element that matches this tag by occurrence number and tag name
-		var elementNode = this.editor.xmlState.xml[0]
+		var elementNode = this.editor.xmlState.xml[0]//HARALAMPIJE??
 				.getElementsByTagName(tagTitle)[instanceNumber];
 		if (!elementNode) {
 			elementNode = $(unprefixedTitle, this.editor.xmlState.xml)
