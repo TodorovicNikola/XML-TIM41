@@ -4,7 +4,9 @@
 module.exports = [
     '$scope', '$http',
     function ctrl($scope){
-        var docSpec={
+
+        var docSpec = {
+
             onchange: function(){
                 console.log("I been changed now!")
             },
@@ -12,55 +14,172 @@ module.exports = [
                 console.log("I be validatin' now!")
             },
             elements: {
-                "Amandman": {
-                    menu: [{
-                        caption: "Dodaj <Podnosilac>",
-                        action: Xonomy.newElementChild,
-                        actionParameter: "<Podnosilac/>"
-                    },
-                        {
-                            caption: "Dodaj <ElementAmandman>",
-                            action: Xonomy.newElementChild,
-                            actionParameter: "<Podnosilac/>"
-                        }
-                    
+                "Akt":{
+                    menu: [ {
+                                caption: "Dodaj <Podnosilac>",
+                                action: Xonomy.newElementChild,
+                                actionParameter: "<Podnosilac/>"
+                            },
+                            {
+                                caption: "Dodaj <Deo>",
+                                action: Xonomy.newElementChild,
+                                actionParameter: "<Deo/>"
+                            }
                     ]
                 },
-                "Podnosilac": {
+                "Podnosilac":{
+                    hasText: true,
                     menu: [{
-                        caption: "Add @label=\"something\"",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "label", value: "something"},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("label");
-                        }
-                    }, {
-                        caption: "Delete this <item>",
-                        action: Xonomy.deleteElement
-                    }, {
-                        caption: "New <item> before this",
-                        action: Xonomy.newElementBefore,
-                        actionParameter: "<item/>"
-                    }, {
-                        caption: "New <item> after this",
+                        caption: "Dodaj novi <Podnosilac>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<item/>"
+                        actionParameter: "<Podnosilac/>"
+
+                    }, {
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
                     }],
-                    canDropTo: ["list"],
-                    attributes: {
-                        "label": {
-                            asker: Xonomy.askString,
-                            menu: [{
-                                caption: "Delete this @label",
-                                action: Xonomy.deleteAttribute
-                            }]
+                    mustBeBefore: ["Deo"]
+                },
+                "Deo":{
+                    menu: [{
+                        caption: "Dodaj novi <Deo>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<Deo/>"
+
+                    }, {
+                        caption: "Dodaj novu <Glava>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Glava/>"
+
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    mustBeAfter: ["Podnosilac"]
+                },
+                "Glava":{
+                    menu: [{
+                        caption: "Dodaj novi <Odeljak>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Odeljak/>"
+
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "Odeljak":{
+                    menu: [{
+                        caption: "Dodaj novi <Pododeljak>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Pododeljak/>",
+                        hideIf: function(jsElement){
+                            return jsElement.hasChildElement("Clan");
                         }
-                    }
+                    },{
+                        caption: "Dodaj novi <Clan>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Clan/>",
+                        hideIf: function(jsElement){
+                            return jsElement.hasChildElement("Pododeljak");
+                        }
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+
+                },
+                "Pododeljak":{
+
+                    menu: [{
+                        caption: "Dodaj novi <Clan>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Clan/>"
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+
+                },
+                "Clan":{
+                    menu: [{
+                        caption: "Dodaj novi <Stav>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Stav/>"
+                    },{
+                        caption: "Dodaj novi <Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Sadrzaj/>"
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "Stav":{
+                    menu: [{
+                        caption: "Dodaj novi <Tacka>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Tacka/>"
+                    },{
+                        caption: "Dodaj novi <Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Sadrzaj/>"
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "Tacka":{
+                    menu: [{
+                        caption: "Dodaj novi <Podtacka>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Podtacka/>"
+                    },{
+                        caption: "Dodaj novi <Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Sadrzaj/>"
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "Podtacka":{
+                    menu: [{
+                        caption: "Dodaj novi <Alineja>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Alineja/>"
+                    },{
+                        caption: "Dodaj novi <Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<Sadrzaj/>"
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "Alineja":{
+                    hasText: true,
+                    inlineMenu: [{
+                        caption: "Wrap with <Referenca>",
+                        action: Xonomy.wrap,
+                        actionParameter: {template: "<Referenca>$</Referenca>", placeholder: "$"}
+                    }]
+
+                },
+                "Sadrzaj":{
+                    hasText: true,
+                    inlineMenu: [{
+                        caption: "Wrap with <Referenca>",
+                        action: Xonomy.wrap,
+                        actionParameter: {template: "<Referenca>$</Referenca>", placeholder: "$"}
+                    }]
                 }
             }
+
         };
 
-        var xml="<Amandman><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
+
+        var xml="<Akt><Podnosilac></Podnosilac><Deo></Deo></Akt>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);

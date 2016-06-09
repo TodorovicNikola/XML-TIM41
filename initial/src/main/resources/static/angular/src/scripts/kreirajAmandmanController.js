@@ -18,7 +18,7 @@ module.exports = [
                         caption: "Dodaj <Podnosilac>",
                         action: Xonomy.newElementChild,
                         actionParameter: "<Podnosilac/>"
-                    },
+                        },
                         {
                             caption: "Dodaj <ElementAmandmana>",
                             action: Xonomy.newElementChild,
@@ -53,7 +53,8 @@ module.exports = [
                     }, {
                         caption: "Obriši",
                         action: Xonomy.deleteElement
-                    }]
+                    }],
+                    mustBeBefore: ["ElementAmandmana"]
                 },
                 "ElementAmandmana": {
                     hasText: true,
@@ -76,7 +77,8 @@ module.exports = [
                         "Referencira": {
                             asker: Xonomy.askString
                         }
-                    }
+                    },
+                    mustBeAfter: ["Podnosilac"]
                 }
             }
         };
