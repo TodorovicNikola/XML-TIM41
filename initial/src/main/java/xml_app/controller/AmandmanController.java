@@ -1,16 +1,29 @@
 package xml_app.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.connector.Response;
+import org.springframework.web.bind.annotation.*;
 import xml_app.database.DatabaseHelper;
+import xml_app.model.Akt;
 import xml_app.model.Amandman;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.util.JAXBSource;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 /**
  * Created by Vuletic on 25.5.2016.
@@ -40,6 +53,34 @@ public class AmandmanController {
         }
 
         return null;
+    }
+
+    @Produces (MediaType.TEXT_XML)
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public void konkretanAmandman(@PathVariable int id, HttpServletResponse resp){
+        DatabaseHelper db = new DatabaseHelper();
+
+        Amandman a = db.findAmandmanById(id);
+        db.release();
+
+        try{
+            TransformerFactory tf = TransformerFactory.newInstance();
+            StreamSource xslt = new StreamSource("XSDs/amandman.xsl");
+
+            Transformer transformer = tf.newTransformer(xslt);
+
+            JAXBContext jc = JAXBContext.newInstance(Amandman.class);
+            JAXBSource source = new JAXBSource(jc, a);
+
+            StreamResult result = new StreamResult(resp.getOutputStream());
+
+
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

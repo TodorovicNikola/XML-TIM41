@@ -3,7 +3,7 @@
  */
 module.exports = [
     '$scope', '$http',
-    function ctrl($scope){
+    function ctrl($scope, $http){
 
         var docSpec = {
 
@@ -471,13 +471,16 @@ module.exports = [
         };
 
 
-        var xml="<Akt Id='' DatumPodnosenja='' Status='U proceduri'><Podnosilac></Podnosilac><Deo></Deo></Akt>";
+        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Id='' DatumPodnosenja='' Status='U proceduri'><Podnosilac></Podnosilac><Deo></Deo></Akt>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
 
         $scope.submit = function () {
-            alert(Xonomy.harvest());
+            alert("as");
+            $http.post("/api/akti/dodaj", Xonomy.harvest()).success(function(data, status) {
+                alert("Uspešno dodat akt.");
+            })
         }
 
     }

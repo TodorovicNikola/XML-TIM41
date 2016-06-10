@@ -110,7 +110,7 @@ module.exports = [
         $scope.submit = function () {
 
             $http.post("/api/amandmani/dodaj", Xonomy.harvest()).success(function(data, status) {
-                $scope.hello = data;
+                alert("Uspešno dodat amandman.");
             })
         }
 
