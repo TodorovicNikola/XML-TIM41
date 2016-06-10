@@ -437,6 +437,10 @@ module.exports = [
                         caption: "Wrap with <Referenca>",
                         action: Xonomy.wrap,
                         actionParameter: {template: "<Referenca ReferencaURI=''>$</Referenca>", placeholder: "$"}
+                    }],
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
                     }]
                 },
                 "Sadrzaj":{
@@ -445,7 +449,22 @@ module.exports = [
                         caption: "Wrap with <Referenca>",
                         action: Xonomy.wrap,
                         actionParameter: {template: "<Referenca ReferencaURI=''>$</Referenca>", placeholder: "$"}
+                    }],
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
                     }]
+                },
+                "Referenca": {
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "ReferencaURI":{
+                            asker: Xonomy.askString
+                        }
+                    }
                 }
             }
 
