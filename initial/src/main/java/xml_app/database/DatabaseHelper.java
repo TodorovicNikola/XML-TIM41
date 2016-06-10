@@ -165,4 +165,35 @@ public class DatabaseHelper {
 
     }
 
+    public List<Amandman> getAmandmani(){
+        QueryManager queryMgr = client.newQueryManager();
+
+        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
+        stringQry.setCollections("amandmani");
+
+        List<Amandman> ret = new ArrayList<>();
+
+        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Amandman a = manager.readAs(docSum.getUri(), Amandman.class);
+            ret.add(a);
+        }
+
+        return ret;
+
+    }
+
+    public Amandman findAmandmanById(int id) {
+        String docId = "amandmani/" + Integer.toString(id) + ".xml";
+        Amandman a;
+        try {
+            a = manager.readAs(docId, Amandman.class);
+        } catch (Exception e) {
+            a = null;
+        }
+
+        return a;
+    }
+
 }

@@ -3,11 +3,23 @@ package xml_app.controller;
 import org.springframework.web.bind.annotation.*;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
+import xml_app.model.Amandman;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.util.JAXBSource;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,14 +50,30 @@ public class AktController {
     }
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
-    public Akt konkretanAkt(@PathVariable int aktId){
+    public void konkretanAkt(@PathVariable int aktId, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
 
         Akt a = db.findAktById(aktId);
 
         db.release();
 
-        return a;
+        try{
+            TransformerFactory tf = TransformerFactory.newInstance();
+            StreamSource xslt = new StreamSource("XSDs/akt.xsl");
+
+            Transformer transformer = tf.newTransformer(xslt);
+
+            JAXBContext jc = JAXBContext.newInstance(Akt.class);
+            JAXBSource source = new JAXBSource(jc, a);
+
+            StreamResult result = new StreamResult(resp.getOutputStream());
+
+
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -69,6 +97,8 @@ public class AktController {
         }
 
         return null;
+
+
     }
 
 }
