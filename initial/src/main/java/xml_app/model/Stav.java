@@ -48,7 +48,7 @@ public class Stav {
     })
     protected List<Object> sadrzajOrTacka;
     @XmlAttribute(name = "Id", required = true)
-    protected int id;
+    protected String id;
     @XmlAttribute(name = "Naslov")
     protected String naslov;
     @XmlAttribute(name = "RedniBroj")
@@ -88,16 +88,24 @@ public class Stav {
     /**
      * Gets the value of the id property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * Sets the value of the id property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setId(int value) {
+    public void setId(String value) {
         this.id = value;
     }
 

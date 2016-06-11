@@ -92,20 +92,6 @@ public class Korisnik {
     @XmlAttribute(name = "Id", required = true)
     protected int id;
 
-    public Korisnik(String ime, String prezime, String email, String lozinka, String korisnickoIme, String kontaktTelefon, String tip, int id) {
-        this.ime = ime;
-        this.prezime = prezime;
-        this.email = email;
-        this.lozinka = lozinka;
-        this.korisnickoIme = korisnickoIme;
-        this.kontaktTelefon = kontaktTelefon;
-        this.tip = tip;
-        this.id = id;
-    }
-
-    public Korisnik() {
-    }
-
     /**
      * Gets the value of the ime property.
      * 
