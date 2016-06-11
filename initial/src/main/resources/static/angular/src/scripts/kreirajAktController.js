@@ -23,7 +23,7 @@ module.exports = [
                             {
                                 caption: "Dodaj <Deo>",
                                 action: Xonomy.newElementChild,
-                                actionParameter: "<Deo Id=''/>"
+                                actionParameter: "<Deo/>"
                             },
                             {
                                 caption: "Dodaj @Naslov",
@@ -36,9 +36,9 @@ module.exports = [
                             {
                                 caption: "Dodaj @Redni @broj",
                                 action: Xonomy.newAttribute,
-                                actionParameter: {name: "Redni broj", value: ""},
+                                actionParameter: {name: "RedniBroj", value: ""},
                                 hideIf: function(jsElement){
-                                    return jsElement.hasAttribute("Redni broj");
+                                    return jsElement.hasAttribute("RedniBroj");
                                 }
                             }
                     ],
@@ -49,7 +49,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         },
                         "DatumPodnosenja":{
@@ -99,9 +99,9 @@ module.exports = [
                     {
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },
                     {
@@ -116,7 +116,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -142,9 +142,9 @@ module.exports = [
                     },{
                             caption: "Dodaj @Redni @broj",
                             action: Xonomy.newAttribute,
-                            actionParameter: {name: "Redni broj", value: ""},
+                            actionParameter: {name: "RedniBroj", value: ""},
                             hideIf: function(jsElement){
-                                return jsElement.hasAttribute("Redni broj");
+                                return jsElement.hasAttribute("RedniBroj");
                             }
                     },{
                         caption: "Obriši",
@@ -157,7 +157,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -192,9 +192,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -207,7 +207,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -234,9 +234,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -249,7 +249,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -279,9 +279,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -294,7 +294,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -323,9 +323,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -338,7 +338,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -367,9 +367,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -382,7 +382,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -411,9 +411,9 @@ module.exports = [
                     },{
                         caption: "Dodaj @Redni @broj",
                         action: Xonomy.newAttribute,
-                        actionParameter: {name: "Redni broj", value: ""},
+                        actionParameter: {name: "RedniBroj", value: ""},
                         hideIf: function(jsElement){
-                            return jsElement.hasAttribute("Redni broj");
+                            return jsElement.hasAttribute("RedniBroj");
                         }
                     },{
                         caption: "Obriši",
@@ -426,7 +426,7 @@ module.exports = [
                         "Naslov":{
                             asker: Xonomy.askString
                         },
-                        "Redni broj":{
+                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -471,13 +471,14 @@ module.exports = [
         };
 
 
-        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Id='' DatumPodnosenja='' Status='U proceduri'><Podnosilac></Podnosilac><Deo></Deo></Akt>";
+        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Naslov='' Id='' DatumPodnosenja=''><Podnosilac></Podnosilac><Deo></Deo></Akt>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
 
         $scope.submit = function () {
             alert("as");
+
             $http.post("/api/akti/dodaj", Xonomy.harvest()).success(function(data, status) {
                 alert("Uspešno dodat akt.");
             })
