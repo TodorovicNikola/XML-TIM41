@@ -6,6 +6,7 @@ myApp.controller('usvojeniAktiCtrl', require('./usvojeniAktiController.js'));
 myApp.controller('aktiUProceduriCtrl', require('./aktiUProceduriController.js'));
 myApp.controller('kreirajAktCtrl', require('./kreirajAktController.js'));
 myApp.controller('kreirajAmandmanCtrl', require('./kreirajAmandmanController.js'));
+myApp.controller('rukovodjenjeSednicomCtrl', require('./rukovodjenjeSednicomController.js'));
 myApp.service('loginService', require('./loginService.js'));
 
 myApp.config(['$routeProvider',
@@ -30,6 +31,10 @@ myApp.config(['$routeProvider',
 	when('/kreiraj-amandman', {
 		templateUrl: '/angular/dist/templates/kreiraj-amandman.html',
 		controller: 'kreirajAmandmanCtrl'
+	}).
+	when('/rukovodjenje-sednicom', {
+		templateUrl: '/angular/dist/templates/rukovodjenje-sednicom.html',
+		controller: 'rukovodjenjeSednicomCtrl'
 	}).
 	when('/login', {
 		templateUrl: '/angular/dist/templates/login.html',

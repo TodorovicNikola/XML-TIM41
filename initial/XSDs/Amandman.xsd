@@ -21,7 +21,7 @@
     <xs:element name="ElementAmandmana">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="ak:Clan"/>
+                <xs:element ref="ak:Clan" minOccurs="0"/>
             </xs:sequence>
             <xs:attribute name="Akcija">
                 <xs:simpleType>
