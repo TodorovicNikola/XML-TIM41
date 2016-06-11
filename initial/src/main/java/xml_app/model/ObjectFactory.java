@@ -45,6 +45,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ElementAmandmana }
+     * 
+     */
+    public ElementAmandmana createElementAmandmana() {
+        return new ElementAmandmana();
+    }
+
+    /**
+     * Create an instance of {@link Clan }
+     * 
+     */
+    public Clan createClan() {
+        return new Clan();
+    }
+
+    /**
      * Create an instance of {@link Stav }
      * 
      */
@@ -69,11 +85,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Clan }
+     * Create an instance of {@link Amandman }
      * 
      */
-    public Clan createClan() {
-        return new Clan();
+    public Amandman createAmandman() {
+        return new Amandman();
     }
 
     /**

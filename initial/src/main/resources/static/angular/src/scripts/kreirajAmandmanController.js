@@ -76,12 +76,15 @@ module.exports = [
                     mustBeBefore: ["ElementAmandmana"]
                 },
                 "ElementAmandmana": {
-                    hasText: true,
                     menu: [{
                         caption: "Dodaj novi <ElementAmandmana>",
                         action: Xonomy.newElementAfter,
                         actionParameter: "<ElementAmandmana Akcija='Dodaj' Referencira=''/>"
 
+                    }, {
+                        caption: "Dodaj <akt:Clan>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Clan xmlns:akt='http://www.xmlProjekat.com/akt'/>"
                     }, {
                         caption: "Obriši",
                         action: Xonomy.deleteElement
@@ -98,11 +101,222 @@ module.exports = [
                         }
                     },
                     mustBeAfter: ["Podnosilac"]
+                },
+                "akt:Clan":{
+                    menu: [{
+                        caption: "Dodaj novi <akt:Clan>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<akt:Clan xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+
+                    },{
+                        caption: "Dodaj novi <akt:Stav>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Stav xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj @Naslov",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Naslov", value: ""},
+                        hideIf: function(jsElement) {
+                            return jsElement.hasAttribute("Naslov");
+                        }
+                    },{
+                        caption: "Dodaj @Redni @broj",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Redni broj", value: ""},
+                        hideIf: function(jsElement){
+                            return jsElement.hasAttribute("Redni broj");
+                        }
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "Id":{
+                            asker: Xonomy.askString
+                        },
+                        "Naslov":{
+                            asker: Xonomy.askString
+                        },
+                        "Redni broj":{
+                            asker: Xonomy.askString
+                        }
+                    }
+                },
+                "akt:Stav":{
+                    menu: [{
+                        caption: "Dodaj novi <akt:Stav>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<akt:Stav xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+
+                    },{
+                        caption: "Dodaj novi <akt:Tacka>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Tacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj @Naslov",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Naslov", value: ""},
+                        hideIf: function(jsElement) {
+                            return jsElement.hasAttribute("Naslov");
+                        }
+                    },{
+                        caption: "Dodaj @Redni @broj",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Redni broj", value: ""},
+                        hideIf: function(jsElement){
+                            return jsElement.hasAttribute("Redni broj");
+                        }
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "Id":{
+                            asker: Xonomy.askString
+                        },
+                        "Naslov":{
+                            asker: Xonomy.askString
+                        },
+                        "Redni broj":{
+                            asker: Xonomy.askString
+                        }
+                    }
+                },
+                "akt:Tacka":{
+                    menu: [{
+                        caption: "Dodaj novi <akt:Tacka>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<akt:Tacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+
+                    },{
+                        caption: "Dodaj novi <akt:Podtacka>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Podtacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj @Naslov",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Naslov", value: ""},
+                        hideIf: function(jsElement) {
+                            return jsElement.hasAttribute("Naslov");
+                        }
+                    },{
+                        caption: "Dodaj @Redni @broj",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Redni broj", value: ""},
+                        hideIf: function(jsElement){
+                            return jsElement.hasAttribute("Redni broj");
+                        }
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "Id":{
+                            asker: Xonomy.askString
+                        },
+                        "Naslov":{
+                            asker: Xonomy.askString
+                        },
+                        "Redni broj":{
+                            asker: Xonomy.askString
+                        }
+                    }
+                },
+                "akt:Podtacka":{
+                    menu: [{
+                        caption: "Dodaj novi <akt:Podtacka>",
+                        action: Xonomy.newElementAfter,
+                        actionParameter: "<akt:Podtacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+
+                    },{
+                        caption: "Dodaj novi <akt:Alineja>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Alineja xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj novi <akt:adrzaj>",
+                        action: Xonomy.newElementChild,
+                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                    },{
+                        caption: "Dodaj @Naslov",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Naslov", value: ""},
+                        hideIf: function(jsElement) {
+                            return jsElement.hasAttribute("Naslov");
+                        }
+                    },{
+                        caption: "Dodaj @Redni @broj",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {name: "Redni broj", value: ""},
+                        hideIf: function(jsElement){
+                            return jsElement.hasAttribute("Redni broj");
+                        }
+                    },{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "Id":{
+                            asker: Xonomy.askString
+                        },
+                        "Naslov":{
+                            asker: Xonomy.askString
+                        },
+                        "Redni broj":{
+                            asker: Xonomy.askString
+                        }
+                    }
+                },
+                "akt:Alineja":{
+                    hasText: true,
+                    inlineMenu: [{
+                        caption: "Wrap with <akt:Referenca>",
+                        action: Xonomy.wrap,
+                        actionParameter: {template: "<akt:Referenca  xmlns:akt='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</akt:Referenca>", placeholder: "$"}
+                    }],
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "akt:Sadrzaj":{
+                    hasText: true,
+                    inlineMenu: [{
+                        caption: "Wrap with <akt:Referenca>",
+                        action: Xonomy.wrap,
+                        actionParameter: {template: "<akt:Referenca xmlns:akt='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</akt:Referenca>", placeholder: "$"}
+                    }],
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }]
+                },
+                "akt:Referenca": {
+                    menu: [{
+                        caption: "Obriši",
+                        action: Xonomy.deleteElement
+                    }],
+                    attributes:{
+                        "ReferencaURI":{
+                            asker: Xonomy.askString
+                        }
+                    }
                 }
             }
         };
 
-        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
+        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'  xmlns:akt='http://www.xmlProjekat.com/akt'><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);

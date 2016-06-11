@@ -84,7 +84,7 @@ public class DatabaseHelper {
         // Write the document to the database
         manager.writeAs(docId, metadata, a);
 
-        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(a.getId()));
+        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + a.getId());
     }
 
     public void writeAmandman(Amandman a){
@@ -98,7 +98,7 @@ public class DatabaseHelper {
         // Write the document to the database
         manager.writeAs(docId, metadata, a);
 
-        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + Integer.toString(a.getId()));
+        System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + a.getId());
     }
 
     public Korisnik findKorisnikById(String username) {
@@ -113,8 +113,8 @@ public class DatabaseHelper {
         return k;
     }
 
-    public Akt findAktById(int id) {
-        String docId = "akti/" + Integer.toString(id) + ".xml";
+    public Akt findAktById(String id) {
+        String docId = "akti/" + id + ".xml";
         Akt a;
         try {
             a = manager.readAs(docId, Akt.class);
@@ -184,8 +184,8 @@ public class DatabaseHelper {
 
     }
 
-    public Amandman findAmandmanById(int id) {
-        String docId = "amandmani/" + Integer.toString(id) + ".xml";
+    public Amandman findAmandmanById(String id) {
+        String docId = "amandmani/" + id + ".xml";
         Amandman a;
         try {
             a = manager.readAs(docId, Amandman.class);

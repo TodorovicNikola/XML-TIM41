@@ -92,6 +92,15 @@ public class Korisnik {
     @XmlAttribute(name = "Id", required = true)
     protected int id;
 
+    /**
+     * Gets the value of the ime property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+
     public Korisnik(String ime, String prezime, String email, String lozinka, String korisnickoIme, String kontaktTelefon, String tip, int id) {
         this.ime = ime;
         this.prezime = prezime;
@@ -104,16 +113,9 @@ public class Korisnik {
     }
 
     public Korisnik() {
+
     }
 
-    /**
-     * Gets the value of the ime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getIme() {
         return ime;
     }

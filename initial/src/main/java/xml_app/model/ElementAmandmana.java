@@ -4,10 +4,10 @@ package xml_app.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -17,8 +17,11 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * <pre>
  * &lt;complexType>
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element ref="{http://www.xmlProjekat.com/akt}Clan"/>
+ *       &lt;/sequence>
  *       &lt;attribute name="Akcija">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -29,8 +32,8 @@ import javax.xml.bind.annotation.XmlValue;
  *         &lt;/simpleType>
  *       &lt;/attribute>
  *       &lt;attribute name="Referencira" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *     &lt;/extension>
- *   &lt;/simpleContent>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
  * 
@@ -38,13 +41,13 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "value"
+    "clan"
 })
 @XmlRootElement(name = "ElementAmandmana", namespace = "http://www.xmlProjekat.com/amandman")
 public class ElementAmandmana {
 
-    @XmlValue
-    protected String value;
+    @XmlElement(name = "Clan", namespace = "http://www.xmlProjekat.com/akt", required = true)
+    protected Clan clan;
     @XmlAttribute(name = "Akcija")
     protected String akcija;
     @XmlAttribute(name = "Referencira")
@@ -52,27 +55,27 @@ public class ElementAmandmana {
     protected String referencira;
 
     /**
-     * Gets the value of the value property.
+     * Gets the value of the clan property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Clan }
      *     
      */
-    public String getValue() {
-        return value;
+    public Clan getClan() {
+        return clan;
     }
 
     /**
-     * Sets the value of the value property.
+     * Sets the value of the clan property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Clan }
      *     
      */
-    public void setValue(String value) {
-        this.value = value;
+    public void setClan(Clan value) {
+        this.clan = value;
     }
 
     /**

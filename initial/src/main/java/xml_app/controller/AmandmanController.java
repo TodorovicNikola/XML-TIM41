@@ -57,7 +57,7 @@ public class AmandmanController {
 
     @Produces (MediaType.TEXT_XML)
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public void konkretanAmandman(@PathVariable int id, HttpServletResponse resp){
+    public void konkretanAmandman(@PathVariable String id, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
 
         Amandman a = db.findAmandmanById(id);

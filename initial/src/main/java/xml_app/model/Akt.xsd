@@ -10,17 +10,24 @@
             </xs:sequence>
             <xs:attributeGroup ref="ak:OsnovniPodaci"/>
             <xs:attribute name="DatumPodnosenja" type="xs:date" use="required"/>
-            <xs:attribute name="Tip" type="xs:string"/>
+            <xs:attribute name="Tip" use="optional" type="xs:string"/>
             <xs:attribute name="SluzbeniGlasnik" type="xs:string"/>
             <xs:attribute name="Status" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Usvojen"/>
                         <xs:enumeration value="U proceduri"/>
-                        <xs:enumeration value="Odbijen"/>
+                        <xs:enumeration value="U nacelu"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="UNaceluZa" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="UNaceluProtiv" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="UNaceluUzdrzano" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="UCelostiZa" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="UCelostiProtiv" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="UCelostiUzdrzano" type="xs:nonNegativeInteger"/>
+            <xs:attribute name="DatumGlasanja" type="xs:date"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">
@@ -33,7 +40,7 @@
         </xs:complexType>
     </xs:element>
     <xs:attributeGroup name="OsnovniPodaci">
-        <xs:attribute name="Id" type="xs:int" use="required"/>
+        <xs:attribute name="Id" type="xs:string" use="required"/>
         <xs:attribute name="Naslov" type="xs:string"/>
         <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
     </xs:attributeGroup>

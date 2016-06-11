@@ -29,17 +29,30 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;/sequence>
  *       &lt;attGroup ref="{http://www.xmlProjekat.com/akt}OsnovniPodaci"/>
  *       &lt;attribute name="DatumPodnosenja" use="required" type="{http://www.w3.org/2001/XMLSchema}date" />
- *       &lt;attribute name="Tip" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="Tip">
+ *         &lt;simpleType>
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             &lt;enumeration value=""/>
+ *           &lt;/restriction>
+ *         &lt;/simpleType>
+ *       &lt;/attribute>
  *       &lt;attribute name="SluzbeniGlasnik" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="Status" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *             &lt;enumeration value="Usvojen"/>
  *             &lt;enumeration value="U proceduri"/>
- *             &lt;enumeration value="Odbijen"/>
+ *             &lt;enumeration value="U nacelu"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
+ *       &lt;attribute name="UNaceluZa" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="UNaceluProtiv" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="UNaceluUzdrzano" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="UCelostiZa" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="UCelostiProtiv" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="UCelostiUzdrzano" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
+ *       &lt;attribute name="DatumGlasanja" type="{http://www.w3.org/2001/XMLSchema}date" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -68,15 +81,34 @@ public class Akt {
     protected String sluzbeniGlasnik;
     @XmlAttribute(name = "Status", required = true)
     protected String status;
+    @XmlAttribute(name = "UNaceluZa")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uNaceluZa;
+    @XmlAttribute(name = "UNaceluProtiv")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uNaceluProtiv;
+    @XmlAttribute(name = "UNaceluUzdrzano")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uNaceluUzdrzano;
+    @XmlAttribute(name = "UCelostiZa")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uCelostiZa;
+    @XmlAttribute(name = "UCelostiProtiv")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uCelostiProtiv;
+    @XmlAttribute(name = "UCelostiUzdrzano")
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger uCelostiUzdrzano;
+    @XmlAttribute(name = "DatumGlasanja")
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar datumGlasanja;
     @XmlAttribute(name = "Id", required = true)
-    protected int id;
+    protected String id;
     @XmlAttribute(name = "Naslov")
     protected String naslov;
     @XmlAttribute(name = "RedniBroj")
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger redniBroj;
-
-
 
     /**
      * Gets the value of the podnosilac property.
@@ -233,18 +265,194 @@ public class Akt {
     }
 
     /**
+     * Gets the value of the uNaceluZa property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUNaceluZa() {
+        return uNaceluZa;
+    }
+
+    /**
+     * Sets the value of the uNaceluZa property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUNaceluZa(BigInteger value) {
+        this.uNaceluZa = value;
+    }
+
+    /**
+     * Gets the value of the uNaceluProtiv property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUNaceluProtiv() {
+        return uNaceluProtiv;
+    }
+
+    /**
+     * Sets the value of the uNaceluProtiv property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUNaceluProtiv(BigInteger value) {
+        this.uNaceluProtiv = value;
+    }
+
+    /**
+     * Gets the value of the uNaceluUzdrzano property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUNaceluUzdrzano() {
+        return uNaceluUzdrzano;
+    }
+
+    /**
+     * Sets the value of the uNaceluUzdrzano property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUNaceluUzdrzano(BigInteger value) {
+        this.uNaceluUzdrzano = value;
+    }
+
+    /**
+     * Gets the value of the uCelostiZa property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUCelostiZa() {
+        return uCelostiZa;
+    }
+
+    /**
+     * Sets the value of the uCelostiZa property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUCelostiZa(BigInteger value) {
+        this.uCelostiZa = value;
+    }
+
+    /**
+     * Gets the value of the uCelostiProtiv property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUCelostiProtiv() {
+        return uCelostiProtiv;
+    }
+
+    /**
+     * Sets the value of the uCelostiProtiv property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUCelostiProtiv(BigInteger value) {
+        this.uCelostiProtiv = value;
+    }
+
+    /**
+     * Gets the value of the uCelostiUzdrzano property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getUCelostiUzdrzano() {
+        return uCelostiUzdrzano;
+    }
+
+    /**
+     * Sets the value of the uCelostiUzdrzano property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setUCelostiUzdrzano(BigInteger value) {
+        this.uCelostiUzdrzano = value;
+    }
+
+    /**
+     * Gets the value of the datumGlasanja property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDatumGlasanja() {
+        return datumGlasanja;
+    }
+
+    /**
+     * Sets the value of the datumGlasanja property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDatumGlasanja(XMLGregorianCalendar value) {
+        this.datumGlasanja = value;
+    }
+
+    /**
      * Gets the value of the id property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * Sets the value of the id property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setId(int value) {
+    public void setId(String value) {
         this.id = value;
     }
 
