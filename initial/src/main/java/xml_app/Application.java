@@ -19,36 +19,21 @@ public class Application {
 
     public static void main(String[] args) {
 
-        Korisnik k1 = new Korisnik("Jovan","Jovanović","jovan@mail.com","pass","user","064 111 111","Odbornik",3);
+       /* Korisnik k1 = new Korisnik("Jovan","Jovanović","jovan@mail.com","pass","user","064 111 111","Odbornik",3);
         Korisnik k2 = new Korisnik("Petar","Petrović","predsednik@mail.com","a","a","064 111 111","Predsednik",4);
 
         DatabaseHelper db = new DatabaseHelper();
         db.writeKorisnik(k1);
         db.writeKorisnik(k2);
 
-        db.release();
+        db.write("XSDs/Akt.xsd.xml", "akti", "akti/2.xml");
+        db.write("XSDs/Akt2.xsd.xml", "akti", "akti/1.xml");
+        db.write("XSDs/Akt3.xsd.xml", "akti", "akti/3.xml");
+        db.write("XSDs/Akt4.xsd.xml", "akti", "akti/4.xml");
+        db.write("XSDs/Amandman.xsd.xml", "amandmani", "amandmani/1.xml");
 
-       /* try {
+        db.release();*/
 
-            File file = new File("D:\\file.xml");
-
-            JAXBContext jaxbContext = JAXBContext.newInstance(Korisnik.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-            FileWriter fw = new FileWriter(file);
-            fw.write("<?xml version='1.0'?>\n");
-            fw.write("<?xml-stylesheet type='text/xsl' href=\"fafa\"?>\n");
-            //Do this or else the XML is all one line and not human friendly...
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-
-            jaxbMarshaller.marshal(k, fw);
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
 
         SpringApplication.run(Application.class, args);
     }

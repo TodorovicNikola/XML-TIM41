@@ -55,7 +55,7 @@ public class Amandman {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar datumIVremePodnosenja;
     @XmlAttribute(name = "Id", required = true)
-    protected int id;
+    protected String id;
 
     /**
      * Gets the value of the podnosilac property.
@@ -143,7 +143,7 @@ public class Amandman {
      * Gets the value of the id property.
      * 
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -151,7 +151,7 @@ public class Amandman {
      * Sets the value of the id property.
      * 
      */
-    public void setId(int value) {
+    public void setId(String value) {
         this.id = value;
     }
 

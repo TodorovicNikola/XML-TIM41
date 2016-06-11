@@ -10,13 +10,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="ak:OsnovniPodaci"/>
             <xs:attribute name="DatumPodnosenja" type="xs:date" use="required"/>
-            <xs:attribute name="Tip" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value=""/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Tip" use="optional" type="xs:string"/>
             <xs:attribute name="SluzbeniGlasnik" type="xs:string"/>
             <xs:attribute name="Status" use="required">
                 <xs:simpleType>

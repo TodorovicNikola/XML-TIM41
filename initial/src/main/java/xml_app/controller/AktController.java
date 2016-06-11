@@ -50,7 +50,7 @@ public class AktController {
     }
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
-    public void konkretanAkt(@PathVariable int aktId, HttpServletResponse resp){
+    public void konkretanAkt(@PathVariable String aktId, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
 
         Akt a = db.findAktById(aktId);
