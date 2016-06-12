@@ -2,6 +2,8 @@ package xml_app.controller;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
@@ -9,20 +11,27 @@ import xml_app.model.Amandman;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -39,13 +48,31 @@ public class AmandmanController {
         JAXBContext jaxbContext = JAXBContext.newInstance(Amandman.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
+        telo = telo.replace("xml:space='preserve'", "");
+
         StringReader reader = new StringReader(telo);
 
         try{
-            Amandman a = (Amandman) unmarshaller.unmarshal(reader);
-            DatabaseHelper db = new DatabaseHelper();
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            dbFactory.setNamespaceAware(true);
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(new InputSource(reader));
+            doc.getDocumentElement().normalize();
 
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Source schemaFile = new StreamSource(new File("XSDs/Amandman.xsd"));
+            Schema schema = factory.newSchema(schemaFile);
+
+            Validator validator = schema.newValidator();
+            validator.validate(new DOMSource(doc));
+
+            Amandman a = (Amandman) unmarshaller.unmarshal(reader);
+            GregorianCalendar date = new GregorianCalendar();
+            a.setDatumIVremePodnosenja( DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
+
+            DatabaseHelper db = new DatabaseHelper();
             db.writeAmandman(a);
+            db.release();
 
             return a;
         }catch(Exception e){
