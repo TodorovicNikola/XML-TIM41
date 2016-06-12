@@ -1,23 +1,18 @@
 package xml_app;
 
-import com.marklogic.client.query.QueryManager;
-import com.marklogic.client.query.StructuredQueryBuilder;
-import com.marklogic.client.query.StructuredQueryDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import xml_app.database.DatabaseHelper;
-import xml_app.model.Korisnik;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
 
 @SpringBootApplication
 public class Application {
+    public static String currentState = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        DatabaseHelper db = new DatabaseHelper();
+        db.initState();
 
        /* Korisnik k1 = new Korisnik("Jovan","Jovanović","jovan@mail.com","pass","user","064 111 111","Odbornik",3);
         Korisnik k2 = new Korisnik("Petar","Petrović","predsednik@mail.com","a","a","064 111 111","Predsednik",4);

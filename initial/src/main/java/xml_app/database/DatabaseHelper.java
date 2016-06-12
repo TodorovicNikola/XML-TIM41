@@ -3,17 +3,18 @@ package xml_app.database;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
 import com.marklogic.client.document.XMLDocumentManager;
-import com.marklogic.client.io.*;
-import com.marklogic.client.query.*;
-import com.marklogic.client.util.EditableNamespaceContext;
-import org.w3c.dom.Document;
+import com.marklogic.client.io.DocumentMetadataHandle;
+import com.marklogic.client.io.InputStreamHandle;
+import com.marklogic.client.io.JAXBHandle;
+import com.marklogic.client.io.SearchHandle;
+import com.marklogic.client.query.MatchDocumentSummary;
+import com.marklogic.client.query.QueryManager;
+import com.marklogic.client.query.StringQueryDefinition;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
 
-
 import javax.xml.bind.JAXBException;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -196,4 +197,74 @@ public class DatabaseHelper {
         return a;
     }
 
+    public void initState(){
+        String collId = "state";
+        String docId = "stateVal";
+
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        metadata.getCollections().add(collId);
+
+        // Write the document to the database
+        manager.writeAs(docId, metadata, "idle");
+    }
+
+    public String getState(){
+        String docId = "stateVal";
+        String state;
+
+        try {
+            state = manager.readAs(docId, String.class);
+        } catch (Exception e) {
+            state = null;
+        }
+
+        return state;
+    }
+
+    public void nextState(){
+        String docId = "stateVal";
+        String collId = "state";
+        String state;
+
+        try {
+            state = manager.readAs(docId, String.class);
+        } catch (Exception e) {
+            state = null;
+        }
+
+        state = state.trim();
+
+        switch(state){
+            case "idle": {
+                state = "predlaganjeAkata";
+
+            } break;
+            case "predlaganjeAkata": {
+                state = "predlaganjeAmandmana";
+
+            } break;
+            case "predlaganjeAmandmana": {
+                state = "glasanjeUNacelu";
+
+            } break;
+            case "glasanjeUNacelu": {
+                state = "glasanjeZaAmandmane";
+
+            } break;
+            case "glasanjeZaAmandmane": {
+                state = "glasanjeUCelosti";
+
+            } break;
+            case "glasanjeUCelosti": {
+                state = "idle";
+
+            } break;
+        }
+
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        metadata.getCollections().add(collId);
+
+        // Write the document to the database
+        manager.writeAs(docId, metadata, state);
+    }
 }
