@@ -72,7 +72,7 @@ public class Akt {
     protected List<String> podnosilac;
     @XmlElement(name = "Deo", namespace = "http://www.xmlProjekat.com/akt", required = true)
     protected List<Deo> deo;
-    @XmlAttribute(name = "DatumPodnosenja", required = true)
+    @XmlAttribute(name = "DatumPodnosenja")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumPodnosenja;
     @XmlAttribute(name = "Tip")

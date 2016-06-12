@@ -49,9 +49,6 @@ module.exports = [
                         "RedniBroj":{
                             asker: Xonomy.askString
                         },
-                        "DatumPodnosenja":{
-                            asker: Xonomy.askString
-                        },
                         "Status": {
                             asker: Xonomy.askPicklist,
                             askerParameter: [
@@ -444,7 +441,7 @@ module.exports = [
         };
 
 
-        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Naslov='' DatumPodnosenja=''><Podnosilac></Podnosilac><Deo></Deo></Akt>";
+        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Naslov=''><Podnosilac></Podnosilac><Deo></Deo></Akt>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
