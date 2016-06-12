@@ -8,12 +8,14 @@ import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
-import java.util.Hashtable;
+
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
 import javax.xml.bind.*;
 import javax.xml.bind.util.JAXBSource;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,9 +34,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Vuletic on 25.5.2016.
@@ -115,7 +114,6 @@ public class AktController {
 
             fillInIds(doc.getDocumentElement(), doc);
 
-
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Source schemaFile = new StreamSource(new File("XSDs/Akt.xsd"));
             Schema schema = factory.newSchema(schemaFile);
@@ -128,6 +126,9 @@ public class AktController {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             Akt a = (Akt) unmarshaller.unmarshal(doc);
 
+            GregorianCalendar date = new GregorianCalendar();
+            a.setDatumPodnosenja( DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
+
             DatabaseHelper db = new DatabaseHelper();
             db.writeAkt(a);
 
@@ -138,6 +139,8 @@ public class AktController {
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
 
