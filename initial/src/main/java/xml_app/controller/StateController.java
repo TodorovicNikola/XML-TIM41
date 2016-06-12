@@ -12,8 +12,10 @@ public class StateController {
     @RequestMapping(value="/getState", method = RequestMethod.GET)
     public String getState(){
         DatabaseHelper db = new DatabaseHelper();
+        String ret = db.getState();
+        db.release();
 
-        return db.getState();
+        return ret;
     }
 
     @RequestMapping(value="/nextState", method = RequestMethod.GET)
@@ -21,6 +23,7 @@ public class StateController {
         DatabaseHelper db = new DatabaseHelper();
 
         db.nextState();
+        db.release();
     }
 
 }
