@@ -7,7 +7,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
-import xml_app.model.Amandman;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +26,10 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 import java.util.List;
 
 /**
@@ -94,8 +90,10 @@ public class AktController {
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
     public Akt trial(@RequestBody String telo) throws JAXBException {
 
+        String uuid = UUID.randomUUID().toString();
+
         telo = telo.replace("xml:space='preserve'", "");
-        telo = telo.replace("<Akt","<Akt Status='U proceduri' ");
+        telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri' ");
         telo = telo.replace("<Deo","<Deo Id='' ");
         telo = telo.replace("<Glava","<Glava Id='' ");
         telo = telo.replace("<Odeljak","<Odeljak Id='' ");
@@ -131,6 +129,8 @@ public class AktController {
             DatabaseHelper db = new DatabaseHelper();
             db.writeAkt(a);
 
+
+            System.out.print(" Ovo jeee uuid: " + uuid);
             return a;
 
         } catch (ParserConfigurationException e) {

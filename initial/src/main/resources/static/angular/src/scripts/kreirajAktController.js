@@ -43,9 +43,6 @@ module.exports = [
                             }
                     ],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -110,9 +107,6 @@ module.exports = [
                     }],
                     mustBeAfter: ["Podnosilac"],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -151,9 +145,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -201,9 +192,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -243,9 +231,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -288,9 +273,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -332,9 +314,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -376,9 +355,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -420,9 +396,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -471,7 +444,7 @@ module.exports = [
         };
 
 
-        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Naslov='' Id='' DatumPodnosenja=''><Podnosilac></Podnosilac><Deo></Deo></Akt>";
+        var xml="<Akt xmlns='http://www.xmlProjekat.com/akt' Naslov='' DatumPodnosenja=''><Podnosilac></Podnosilac><Deo></Deo></Akt>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
