@@ -45,5 +45,6 @@ public class StateController {
         db.release();
 
         return retVal;
+        db.release();
     }
 }

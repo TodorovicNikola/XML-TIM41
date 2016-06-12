@@ -31,14 +31,12 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer">Akti
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#/kreiraj-akt">Kreiraj akt</a></li>
 						<li><a href="#/akti-u-proceduri">U proceduri</a></li>
 						<li><a href="#/usvojeni-akti">Usvojeni</a></li>
-						<li><a href="#/kreiraj-amandman">Kreiraj amandman</a></li>
 					</ul>
 				</li>
-				<li ng-show="currentUser"><a href="#">Predloži akt</a></li>
-				<li><a href="#/rukovodjenje-sednicom">Rukovodi sednicom</a></li>
+				<li ng-show="currentUser"><a href="#/kreiraj-akt">Predloži akt</a></li>
+				<li ng-show="currentUser.role == 'Predsednik'"><a href="#/rukovodjenje-sednicom">Rukovodi sednicom</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li ng-hide="currentUser"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

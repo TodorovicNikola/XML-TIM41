@@ -128,6 +128,7 @@ public class AktController {
             JAXBContext jaxbContext = JAXBContext.newInstance(Akt.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             Akt a = (Akt) unmarshaller.unmarshal(doc);
+            a.setTip("Zakon");
 
             GregorianCalendar date = new GregorianCalendar();
             a.setDatumPodnosenja( DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
