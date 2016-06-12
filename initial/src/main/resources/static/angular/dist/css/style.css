@@ -97,3 +97,25 @@ p#error{
     margin-bottom: -10px;
 }
 
+.button-tr  > td{
+    padding: 5px;
+}
+
+.state-button{
+    width: 250px !important;
+}
+
+div.rs_left{
+    position:relative;
+    float:left;
+    width:20%;
+}
+
+div.rs_right{
+    position:relative;
+    float:right;
+    width:75%;
+}
+
+
+

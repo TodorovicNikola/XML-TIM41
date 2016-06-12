@@ -12,15 +12,38 @@ public class StateController {
     @RequestMapping(value="/getState", method = RequestMethod.GET)
     public String getState(){
         DatabaseHelper db = new DatabaseHelper();
+        String retVal = "{ \"data\": \"" + db.getState() + "\" }";
 
-        return db.getState();
+        db.release();
+
+        return retVal;
     }
 
     @RequestMapping(value="/nextState", method = RequestMethod.GET)
-    public void nextState(){
+    public String nextState(){
         DatabaseHelper db = new DatabaseHelper();
 
-        db.nextState();
-    }
+        switch (db.getState()){
+            case "glasanjeUNacelu": {
+                //TODO: provera da li su svi izglasani u nacelu
+                db.nextState();
+            } break;
+            case "glasanjeZaAmandmane": {
+                //TODO: provera da li su svi izglasani
+                db.nextState();
+            } break;
+            case "glasanjeUCelosti": {
+                //TODO: provera da li su svi izglasani u celosti
+                db.nextState();
+            } break;
+            default: { db.nextState(); }
+            break;
+        }
 
+        String retVal = "{ \"data\": \"" + db.getState() + "\" }";
+
+        db.release();
+
+        return retVal;
+    }
 }
