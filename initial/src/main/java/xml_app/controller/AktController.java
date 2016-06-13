@@ -1,18 +1,20 @@
 package xml_app.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 
-import java.util.*;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -30,11 +32,7 @@ import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collection;
-import java.util.UUID;
-import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.*;
 
 /**
  * Created by Vuletic on 25.5.2016.
@@ -62,6 +60,17 @@ public class AktController {
         db.release();
         return akti;
     }
+
+    @RequestMapping(value="/u-nacelu", method = RequestMethod.GET)
+    public Collection<Akt> aktiUsvojeniUNacelu(){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Akt> akti = db.getAktiUsvojeniUNacelu();
+        db.release();
+        return akti;
+    }
+
+
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
     public void konkretanAkt(@PathVariable String aktId, HttpServletResponse resp){

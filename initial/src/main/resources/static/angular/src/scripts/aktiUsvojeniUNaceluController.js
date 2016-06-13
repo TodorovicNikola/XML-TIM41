@@ -1,11 +1,8 @@
-/**
- * Created by Vuletic on 29.5.2016.
- */
 module.exports = [
     '$scope', '$http', '$routeParams',
     function myController($scope, $http, $routeParams){
 
-        $http.get("/api/akti/u-proceduri").then(function(response) {
+        $http.get("/api/akti/u-nacelu").then(function(response) {
             $scope.data = response.data;
         });
 
@@ -17,7 +14,7 @@ module.exports = [
         }).then(function (response) {
             $scope.state = response.data.data;
         });
-        
+
         $scope.glasoviZa;
         $scope.glasoviProtiv;
         $scope.glasoviUzdrzani;
@@ -34,15 +31,15 @@ module.exports = [
             data = { idAkta: $scope.idAkta, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
             $http({
                 method: "Post",
-                url: "api/vote/voteUNacelu",
+                url: "api/vote/voteUCelosti",
                 data: data,
                 dataType: "json",
                 traditional:true
             }).then(function (response) {
-               alert(response.data.data);
+                alert(response.data.data);
             });
             angular.element(document.querySelector('#voteModal')).modal('hide');
         }
-        
+
     }
 ];
