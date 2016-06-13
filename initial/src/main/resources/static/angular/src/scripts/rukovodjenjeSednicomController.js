@@ -29,7 +29,7 @@ module.exports = [
 
                 }else{                     
                     $scope.data = response.data.data;
-
+                    $scope.refreshState();
                 }
             });
         }

@@ -13,7 +13,7 @@
         <th>Datum</th>
         <th>Podnosilac</th>
         <th>PDF</th>
-        <th ng-show="state == 'glasanjeUCelosti'" >Glasanje</th>
+        <th ng-show="state == 'glasanjeUCelosti' && currentUser.role == 'Predsednik'" >Glasanje</th>
         </thead>
         <tbody>
         <tr ng-repeat="akt in data">
@@ -26,7 +26,7 @@
                     <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
                 </a>
             </td>
-            <td ng-show="state == 'glasanjeUCelosti'">
+            <td ng-show="state == 'glasanjeUCelosti' && currentUser.role == 'Predsednik'">
                 <button class="open-voteModal btn btn-default" data-toggle="modal" ng-click="setParams(akt.id, akt.naslov)" data-target="#voteModal">Iniciraj</button>
             </td>
         </tr>

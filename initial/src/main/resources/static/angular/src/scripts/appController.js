@@ -27,5 +27,17 @@ module.exports = [
 
         });
 
+        $scope.refreshState = function () {
+            $http({
+                method: "Get",
+                url: "api/state/getState",
+                dataType: "json",
+                traditional:true
+
+            }).then(function (response) {
+                $scope.state = response.data.data;
+            });
+        }
+
     }
 ];

@@ -29,7 +29,7 @@ module.exports = [
 
 
         $scope.setParams = function(id, naslov){
-            $scope.idAkta = id;
+            $scope.idAmandmana = id;
             $scope.naslov = naslov;
 
         }
@@ -41,7 +41,7 @@ module.exports = [
             $http({
 
                 method: "Post",
-                url: "api/vote/voteUNacelu",
+                url: "api/vote/voteAmandman",
                 data: data,
                 dataType: "json",
                 traditional:true

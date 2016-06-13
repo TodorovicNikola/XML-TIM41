@@ -45,7 +45,7 @@ public class KorisnikController {
         String test = new String(encodedBytes);
 
         Korisnik k = db.findKorisnikById(username);
-        db.release();
+        //db.release();
 
         if(k == null)
             return null;
