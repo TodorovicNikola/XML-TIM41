@@ -1,7 +1,7 @@
 module.exports = [
-    '$scope', '$http', '$routeParams',
+    '$scope', '$http', '$routeParams', '$route',
 
-    function myController($scope, $http, $routeParams){
+    function myController($scope, $http, $routeParams, $route){
         $http.get("/api/akti/u-nacelu").then(function(response) {
             $scope.data = response.data;
 
@@ -52,7 +52,7 @@ module.exports = [
         }
 
         $scope.submitVotes = function(){
-            data = { idAkta: $scope.idAkta, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
+            data = { id: $scope.idAkta, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
 
             $http({
                 method: "Post",
@@ -62,10 +62,11 @@ module.exports = [
                 traditional:true
             }).then(function (response) {
                 alert(response.data.data);
+                angular.element(document.querySelector('#voteModal')).modal('hide');
+                $route.reload();
 
             });
 
-            angular.element(document.querySelector('#voteModal')).modal('hide');
         }
     }
 

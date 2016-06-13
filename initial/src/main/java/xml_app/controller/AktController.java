@@ -229,6 +229,7 @@ public class AktController {
             DatabaseHelper db = new DatabaseHelper();
             db.writeAkt(a);
 
+            db.release();
 
             System.out.print(" Ovo jeee uuid: " + uuid);
             return a;

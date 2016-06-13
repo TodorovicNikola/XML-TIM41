@@ -1,6 +1,6 @@
 module.exports = [
-    '$scope', '$http', '$routeParams',
-    function myController($scope, $http, $routeParams){
+    '$scope', '$http', '$routeParams', '$route',
+    function myController($scope, $http, $routeParams, $route){
         $http.get("/api/amandmani/svi").then(function(response) {
             $scope.data = response.data;
                         
@@ -34,11 +34,9 @@ module.exports = [
 
         }
 
-
-
         $scope.submitVotes = function(){
 
-            data = { idAmandmana: $scope.idAmandmana, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
+            data = { id: $scope.idAmandmana, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
 
             $http({
 
@@ -49,8 +47,11 @@ module.exports = [
                 traditional:true
             }).then(function (response) {
                 alert(response.data.data);
+                angular.element(document.querySelector('#voteModal')).modal('hide');
+                $route.reload();
+
             });
-            angular.element(document.querySelector('#voteModal')).modal('hide');
+
         }
 
     }
