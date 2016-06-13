@@ -447,7 +447,7 @@ module.exports = [
         Xonomy.render(xml, editor, docSpec);
 
         $scope.submit = function () {
-            alert("as");
+            //alert("as");
 
             $http.post("/api/akti/dodaj", Xonomy.harvest()).success(function(data, status) {
                 alert("Uspešno dodat akt.");
