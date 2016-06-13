@@ -16,5 +16,16 @@ module.exports = [
             $scope.currentUser  = $localStorage.currentUser;
         }
 
+        $http({
+            method: "Get",
+            url: "api/state/getState",
+            dataType: "json",
+            traditional:true
+
+        }).then(function (response) {
+            $scope.state = response.data.data;
+
+        });
+
     }
 ];

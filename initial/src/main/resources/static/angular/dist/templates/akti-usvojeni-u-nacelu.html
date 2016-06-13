@@ -2,7 +2,7 @@
     <h2>Akti usvojeni u načelu</h2>
     <table class="table">
         <tr>
-            <td width="15%"><h4><span class="label label-default">Pretraga po sadržaju:</h4></span></td>
+            <td width="15%"><h4><span class="label label-default">Pretraga po sadržaju:</span></h4></td>
             <td width="85%"><input type="text" ng-model="kriterijumPretrage" ng-change="pretraga(kriterijumPretrage)" class="form-control input-sm"></td>
         </tr>
     </table>
@@ -12,7 +12,7 @@
         <th>Tip</th>
         <th>Datum</th>
         <th>Podnosilac</th>
-        <th>Pogledaj PDF</th>
+        <th>PDF</th>
         <th ng-show="state == 'glasanjeUCelosti'" >Glasanje</th>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             <td><p ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}} </p></td>
             <td>
                 <a href="api/akti/{{akt.id}}/pdf">
-                    <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="40" height="40" style="position: relative; left: 20px;">
+                    <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
                 </a>
             </td>
             <td ng-show="state == 'glasanjeUCelosti'">

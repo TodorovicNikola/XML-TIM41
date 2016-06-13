@@ -48,9 +48,8 @@ public class VoteController {
 
             return "{ \"data\": \"Akt označen kao 'USVOJEN U NAČELU'!\" }";
         }else{
-            //TODO: OBRISATI AKT
-
-
+            //TODO: OBRISATI AMANDMANE BRISANOG AKTA
+            db.deleteAkt(votes.getId());
 
             db.release();
 
@@ -74,9 +73,9 @@ public class VoteController {
             return "{ \"data\": \"Amandman primenjen!\" }";
 
         }else{
-            //TODO: OBRISATI AMANDMAN
 
 
+            db.deleteAmandman(votes.getId());
 
             db.release();
 
@@ -115,9 +114,9 @@ public class VoteController {
             return "{ \"data\": \"Akt označen kao 'USVOJEN'!\" }";
 
         }else{
-            //TODO: OBRISATI AKT
+            //TODO: OBRISATI AMANDMANE BRISANOG AKTA
 
-
+            db.deleteAkt(votes.getId());
 
             db.release();
 

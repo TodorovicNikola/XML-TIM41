@@ -30,7 +30,7 @@ myApp.config(['$routeProvider',
 		templateUrl: '/angular/dist/templates/kreiraj-akt.html',
 		controller: 'kreirajAktCtrl'
 	}).
-	when('/kreiraj-amandman', {
+	when('/kreiraj-amandman/:id', {
 		templateUrl: '/angular/dist/templates/kreiraj-amandman.html',
 		controller: 'kreirajAmandmanCtrl'
 	}).

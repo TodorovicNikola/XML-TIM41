@@ -3,8 +3,9 @@
  */
 //TODO ogranicenja: datum,  referenca
 module.exports = [
-    '$scope', '$http', '$interval',
-    function ctrl($scope, $http, $interval){
+    '$scope', '$http', '$interval', '$routeParams',
+    function ctrl($scope, $http, $interval, $routeParams){
+        alert($routeParams.id);
         $scope.warns = 0;
         var docSpec={
 

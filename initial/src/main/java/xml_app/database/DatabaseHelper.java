@@ -111,6 +111,14 @@ public class DatabaseHelper {
         System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + a.getId());
     }
 
+    public void deleteAkt(String id){
+        manager.delete("akti/" + id + ".xml");
+    }
+
+    public void deleteAmandman(String id){
+        manager.delete("amandmani/" + id + ".xml");
+    }
+
     public Korisnik findKorisnikById(String username) {
         String docId = "korisnici/" + username + ".xml";
         Korisnik k;
