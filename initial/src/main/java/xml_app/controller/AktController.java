@@ -67,6 +67,14 @@ public class AktController {
         return akti;
     }
 
+ @RequestMapping(value="/u-nacelu", method = RequestMethod.GET)
+    public Collection<Akt> aktiUsvojeniUNacelu(){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Akt> akti = db.getAktiUsvojeniUNacelu();
+        db.release();
+        return akti;
+    }
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
     public void konkretanAkt(@PathVariable String aktId, HttpServletResponse resp){
