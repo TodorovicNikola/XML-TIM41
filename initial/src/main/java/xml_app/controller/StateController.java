@@ -25,34 +25,32 @@ public class StateController {
 
         switch (db.getState()){
             case "glasanjeUNacelu": {
-                if(db.getAktiUProceduri().isEmpty()){
+                /*if(db.getAktiUProceduri().isEmpty()){
                     db.nextState();
 
                 }else{
                    return "{ \"data\": \"error\" }";
 
-                }
-
+                }*/
+                db.nextState();
             } break;
             case "glasanjeZaAmandmane": {
-                if(db.getAmandmani().isEmpty()){
+                /*if(db.getAmandmani().isEmpty()){
                     db.nextState();
 
                 }else{
                     return "{ \"data\": \"error\" }";
 
-                }
+                }*/
                 db.nextState();
             } break;
             case "glasanjeUCelosti": {
-                //TODO: provera da li su svi izglasani u celosti
-                /*
-                * if(){
-                *
-                * }else{
-                *   return "{ \"data\": \"error\" }";
-                * }
-                * */
+                /*if(db.getAktiUsvojeniUNacelu().isEmpty()){
+                    db.nextState();
+                }else{
+                    return "{ \"data\": \"error\" }";
+
+                }*/
                 db.nextState();
             } break;
             default: { db.nextState(); }
