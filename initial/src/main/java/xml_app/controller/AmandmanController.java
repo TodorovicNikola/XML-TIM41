@@ -1,7 +1,5 @@
 package xml_app.controller;
 
-import net.sf.saxon.TransformerFactoryImpl;
-import org.apache.catalina.connector.Response;
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
@@ -12,7 +10,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
-import xml_app.model.Akt;
 import xml_app.model.Amandman;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +21,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.*;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
@@ -35,7 +33,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.*;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -46,6 +44,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/amandmani")
 public class AmandmanController {
+
+    @RequestMapping(value="/svi", method = RequestMethod.GET)
+    public Collection<Amandman> amandmani(){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Amandman> amandmani = db.getAmandmani();
+        db.release();
+        return amandmani;
+    }
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
     public Amandman trial(@RequestBody String telo) throws JAXBException {
