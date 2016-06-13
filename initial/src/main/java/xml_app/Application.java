@@ -2,7 +2,6 @@ package xml_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import xml_app.database.DatabaseHelper;
 
 import java.io.IOException;
 
@@ -11,8 +10,9 @@ public class Application {
     public static String currentState = null;
 
     public static void main(String[] args) throws IOException {
+        /*
         DatabaseHelper db = new DatabaseHelper();
-        db.initState();
+        db.initState();*/
 
        /* Korisnik k1 = new Korisnik("Jovan","Jovanović","jovan@mail.com","pass","user","064 111 111","Odbornik",3);
         Korisnik k2 = new Korisnik("Petar","Petrović","predsednik@mail.com","a","a","064 111 111","Predsednik",4);

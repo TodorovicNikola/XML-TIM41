@@ -12,18 +12,55 @@ public class StateController {
     @RequestMapping(value="/getState", method = RequestMethod.GET)
     public String getState(){
         DatabaseHelper db = new DatabaseHelper();
-        String ret = db.getState();
+        String retVal = "{ \"data\": \"" + db.getState() + "\" }";
+
         db.release();
 
-        return ret;
+        return retVal;
     }
 
     @RequestMapping(value="/nextState", method = RequestMethod.GET)
-    public void nextState(){
+    public String nextState(){
         DatabaseHelper db = new DatabaseHelper();
 
-        db.nextState();
-        db.release();
-    }
+        switch (db.getState()){
+            case "glasanjeUNacelu": {
+                /*if(db.getAktiUProceduri().isEmpty()){
+                     db.nextState();
 
+                 }else{
+                    return "{ \"data\": \"error\" }";
+
+                 }*/
+                db.nextState();
+            } break;
+            case "glasanjeZaAmandmane": {
+                /*if(db.getAmandmani().isEmpty()){
+                     db.nextState();
+
+                 }else{
+                     return "{ \"data\": \"error\" }";
+
+                 }*/
+                db.nextState();
+            } break;
+            case "glasanjeUCelosti": {
+                /*if(db.getAktiUsvojeniUNacelu().isEmpty()){
+                     db.nextState();
+                }else{
+                    return "{ \"data\": \"error\" }";
+
+                 }*/
+                db.nextState();
+            } break;
+            default: { db.nextState(); }
+            break;
+        }
+
+        String retVal = "{ \"data\": \"" + db.getState() + "\" }";
+
+        db.release();
+
+        return retVal;
+    }
 }

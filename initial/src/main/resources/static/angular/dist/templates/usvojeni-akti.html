@@ -7,7 +7,7 @@
             <th>Tip</th>
             <th>Datum</th>
             <th>Službeni glasnik</th>
-            <th>PDF</th>
+            <th>Pogledaj PDF</th>
         </thead>
         <tbody>
             <tr ng-repeat="akt in data">
@@ -16,8 +16,8 @@
                 <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
                 <td>{{akt.sluzbeniGlasnik}}</td>
                 <td>
-                    <a href="">
-                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="24" height="24" style="position: relative; left: 0px;">
+                    <a href="api/akti/{{akt.id}}/pdf">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="40" height="40" style="position: relative; left: 20px;">
                     </a>
                 </td>
             </tr>

@@ -85,10 +85,11 @@
                                         <xsl:when test="akt:Pododeljak">
                                             <xsl:for-each select="akt:Pododeljak">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
+                                                <i><h6>Kod za dodavanje: <xsl:value-of select="@Id"/></h6></i>
                                                 
                                                 <xsl:for-each select="akt:Clan">
                                                     <h5><xsl:value-of select="@Naslov"/></h5>
-                                                    
+                                                    <i><h6>Kod za izmenu i brisanje: <xsl:value-of select="@Id"/></h6></i>
                                                     <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                     
                                                     <xsl:for-each select="akt:Stav">
@@ -120,8 +121,10 @@
                                             </xsl:for-each>
                                         </xsl:when>
                                         <xsl:otherwise>
+                                            <i><h6>Kod za dodavanje: <xsl:value-of select="@Id"/></h6></i>
                                             <xsl:for-each select="akt:Clan">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
+                                                <i><h6>Kod za izmenu i brisanje: <xsl:value-of select="@Id"/></h6></i>
                                                 
                                                 <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                 
