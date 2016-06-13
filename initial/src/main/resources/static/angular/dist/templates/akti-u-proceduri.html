@@ -16,7 +16,7 @@
             <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
             <td><p ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}} </p></td>
             <td>
-                <a href="">
+                <a href="api/akti/{{akt.id}}/pdf">
                     <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="40" height="40" style="position: relative; left: 20px;">
                 </a>
             </td>

@@ -49,6 +49,14 @@ dependencies {
     // Needed for loading modules into MarkLogic
     compile "com.marklogic:ml-javaclient-util:2.9.0-RC1"
 
+
+
+
+    compile group: 'commons-io', name: 'commons-io', version: '1.3'
+
+    compile group: 'org.apache.xmlgraphics', name: 'fop', version: '2.0'
+    compile group: 'org.apache.avalon.framework', name: 'avalon-framework-impl', version: '4.3.1'
+    compile group: 'net.sf.saxon', name: 'saxon', version: '8.5.1'
     // Needed for the Upload feature using mlcp
     compile "com.marklogic:mlcp-util:0.2.0"
     runtime "commons-fileupload:commons-fileupload:1.3.1"
