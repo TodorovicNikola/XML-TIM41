@@ -86,7 +86,7 @@ public class AktController {
 
         try{
             TransformerFactory tf = TransformerFactory.newInstance();
-            StreamSource xslt = new StreamSource("XSDs/Akt.xsl");
+            StreamSource xslt = new StreamSource("XSDs/AktZaAmandmane.xsl");
 
             Transformer transformer = tf.newTransformer(xslt);
 

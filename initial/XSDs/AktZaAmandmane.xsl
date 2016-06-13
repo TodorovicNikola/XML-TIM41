@@ -82,7 +82,7 @@
                                     <h4><xsl:value-of select="@Naslov"/></h4>
                                     
                                     <xsl:choose>
-                                        <xsl:when test="Pododeljak">
+                                        <xsl:when test="akt:Pododeljak">
                                             <xsl:for-each select="akt:Pododeljak">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
                                                 <i><h6>Kod za dodavanje: <xsl:value-of select="@Id"/></h6></i>
