@@ -168,7 +168,7 @@ public class AktController {
         String uuid = UUID.randomUUID().toString();
 
         telo = telo.replace("xml:space='preserve'", "");
-        telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri");
+        telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri'");
         telo = telo.replace("<Deo","<Deo Id='' ");
         telo = telo.replace("<Glava","<Glava Id='' ");
         telo = telo.replace("<Odeljak","<Odeljak Id='' ");
@@ -186,7 +186,7 @@ public class AktController {
             Document doc = dBuilder.parse(new InputSource(new StringReader(telo)));
             doc.getDocumentElement().normalize();
 
-            fillInIds(doc.getDocumentElement(), doc);
+            fillInIds(doc.getDocumentElement(), doc, "/");
 
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Source schemaFile = new StreamSource(new File("XSDs/Akt.xsd"));
@@ -227,7 +227,7 @@ public class AktController {
 
     }
 
-    private void fillInIds(Node node, Document doc){
+    private void fillInIds(Node node, Document doc, String parentsId){
 
         Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
 
@@ -258,10 +258,10 @@ public class AktController {
                 if(elNode.getAttributeNode("Id") == null) {
                     continue;
                 }else{
-                    elNode.getAttributeNode("Id").setValue( nameKey + count.toString());
+                    elNode.getAttributeNode("Id").setValue( parentsId + "/" + nameKey + count.toString());
 
                 }
-                fillInIds(subnode, doc);
+                fillInIds(subnode, doc,  parentsId + "/" + nameKey + count.toString());
             }
         }
 
