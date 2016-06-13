@@ -40,11 +40,6 @@ module.exports = [
                         actionParameter: "<Podnosilac/>"
                         },
                         {
-                            caption: "Dodaj <ElementAmandmana>",
-                            action: Xonomy.newElementChild,
-                            actionParameter: "<ElementAmandmana Akcija='Dodaj' Referencira=''/>"
-                        },
-                        {
                             caption: "Dodaj @Datum",
                             action: Xonomy.newAttribute,
                             actionParameter: {name: "DatumIVremePodnosenja", value: "1.1.2001."},
@@ -78,45 +73,20 @@ module.exports = [
                 },
                 "ElementAmandmana": {
                     menu: [{
-                        caption: "Dodaj novi <ElementAmandmana>",
-                        action: Xonomy.newElementAfter,
-                        actionParameter: "<ElementAmandmana Akcija='Dodaj' Referencira=''/>"
-
-                    }, {
-                        caption: "Dodaj <akt:Clan>",
-                        action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Clan xmlns:akt='http://www.xmlProjekat.com/akt'/>"
-                    }, {
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
-                    attributes: {
-                        "Akcija": {
-                            asker: Xonomy.askPicklist,
-                            askerParameter: [
-                                "Dodaj", "Izmeni", "Obrisi"
-                            ]
-                        },
-                        "Referencira": {
-                            asker: Xonomy.askString
-                        }
-                    },
                     mustBeAfter: ["Podnosilac"]
                 },
-                "akt:Clan":{
+                "ns2:Clan":{
                     menu: [{
-                        caption: "Dodaj novi <akt:Clan>",
-                        action: Xonomy.newElementAfter,
-                        actionParameter: "<akt:Clan xmlns:akt='http://www.xmlProjekat.com/akt'/>"
-
-                    },{
-                        caption: "Dodaj novi <akt:Stav>",
+                        caption: "Dodaj novi <ns2:Stav>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Stav xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Stav xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
-                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Sadrzaj xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj @Naslov",
                         action: Xonomy.newAttribute,
@@ -136,9 +106,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -147,20 +114,20 @@ module.exports = [
                         }
                     }
                 },
-                "akt:Stav":{
+                "ns2:Stav":{
                     menu: [{
-                        caption: "Dodaj novi <akt:Stav>",
+                        caption: "Dodaj novi <ns2:Stav>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<akt:Stav xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Stav xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
-                        caption: "Dodaj novi <akt:Tacka>",
+                        caption: "Dodaj novi <ns2:Tacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Tacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Tacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
-                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Sadrzaj xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj @Naslov",
                         action: Xonomy.newAttribute,
@@ -180,9 +147,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -191,20 +155,20 @@ module.exports = [
                         }
                     }
                 },
-                "akt:Tacka":{
+                "ns2:Tacka":{
                     menu: [{
-                        caption: "Dodaj novi <akt:Tacka>",
+                        caption: "Dodaj novi <ns2:Tacka>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<akt:Tacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Tacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
-                        caption: "Dodaj novi <akt:Podtacka>",
+                        caption: "Dodaj novi <ns2:Podtacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Podtacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Podtacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
-                        caption: "Dodaj novi <akt:Sadrzaj>",
+                        caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Sadrzaj xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj @Naslov",
                         action: Xonomy.newAttribute,
@@ -224,9 +188,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -235,20 +196,20 @@ module.exports = [
                         }
                     }
                 },
-                "akt:Podtacka":{
+                "ns2:Podtacka":{
                     menu: [{
-                        caption: "Dodaj novi <akt:Podtacka>",
+                        caption: "Dodaj novi <ns2:Podtacka>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<akt:Podtacka xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Podtacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
-                        caption: "Dodaj novi <akt:Alineja>",
+                        caption: "Dodaj novi <ns2:Alineja>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Alineja xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Alineja xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
-                        caption: "Dodaj novi <akt:adrzaj>",
+                        caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<akt:Sadrzaj xmlns:akt='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Sadrzaj xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj @Naslov",
                         action: Xonomy.newAttribute,
@@ -268,9 +229,6 @@ module.exports = [
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
-                        "Id":{
-                            asker: Xonomy.askString
-                        },
                         "Naslov":{
                             asker: Xonomy.askString
                         },
@@ -279,31 +237,31 @@ module.exports = [
                         }
                     }
                 },
-                "akt:Alineja":{
+                "ns2:Alineja":{
                     hasText: true,
                     inlineMenu: [{
-                        caption: "Wrap with <akt:Referenca>",
+                        caption: "Wrap with <ns2:Referenca>",
                         action: Xonomy.wrap,
-                        actionParameter: {template: "<akt:Referenca  xmlns:akt='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</akt:Referenca>", placeholder: "$"}
+                        actionParameter: {template: "<ns2:Referenca xmlns:ns2='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</ns2:Referenca>", placeholder: "$"}
                     }],
                     menu: [{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }]
                 },
-                "akt:Sadrzaj":{
+                "ns2:Sadrzaj":{
                     hasText: true,
                     inlineMenu: [{
-                        caption: "Wrap with <akt:Referenca>",
+                        caption: "Wrap with <ns2:Referenca>",
                         action: Xonomy.wrap,
-                        actionParameter: {template: "<akt:Referenca xmlns:akt='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</akt:Referenca>", placeholder: "$"}
+                        actionParameter: {template: "<ns2:Referenca xmlns:ns2='http://www.xmlProjekat.com/akt' ReferencaURI=''>$</ns2:Referenca>", placeholder: "$"}
                     }],
                     menu: [{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }]
                 },
-                "akt:Referenca": {
+                "ns2:Referenca": {
                     menu: [{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
@@ -317,16 +275,43 @@ module.exports = [
             }
         };
 
-        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'  xmlns:akt='http://www.xmlProjekat.com/akt'><Podnosilac></Podnosilac><ElementAmandmana Akcija='Dodaj' Referencira=''></ElementAmandmana></Amandman>";
+        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'  xmlns:ns2='http://www.xmlProjekat.com/akt'><Podnosilac></Podnosilac></Amandman>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
+        
+        
+        
+        
+        $scope.form = {};
+        $scope.form.reference = '';
+        $scope.form.action = '';
+        $scope.form.submit = function(){
 
+            var dto = {};
+            dto.amandman = Xonomy.harvest();
+            dto.reference = $scope.form.reference;
+            dto.action = $scope.form.action;
+            dto.aktId = "4cc7c811-7788-4401-a36d-1755501bc577";
+
+            $http.post("/api/amandmani/dogradi", dto).success(function(data, status) {
+
+                if($scope.form.reference === '' && $scope.form.action === '')
+                    return;
+
+
+                alert("Uspešno dodat amandman.");
+                Xonomy.render(data.am, editor, docSpec);
+
+                $scope.form.reference = '';
+                $scope.form.action = '';
+            });
+
+        }
+        
         $scope.submit = function () {
 
-            $http.post("/api/amandmani/dodaj", Xonomy.harvest()).success(function(data, status) {
-                alert("Uspešno dodat amandman.");
-            })
+
         }
 
         $interval(function() {
