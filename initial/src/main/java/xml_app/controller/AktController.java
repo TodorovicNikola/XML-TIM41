@@ -168,7 +168,7 @@ public class AktController {
         String uuid = UUID.randomUUID().toString();
 
         telo = telo.replace("xml:space='preserve'", "");
-        telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri");
+        telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri' ");
         telo = telo.replace("<Deo","<Deo Id='' ");
         telo = telo.replace("<Glava","<Glava Id='' ");
         telo = telo.replace("<Odeljak","<Odeljak Id='' ");
