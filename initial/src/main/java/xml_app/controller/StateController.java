@@ -25,32 +25,15 @@ public class StateController {
 
         switch (db.getState()){
             case "glasanjeUNacelu": {
-                /*if(db.getAktiUProceduri().isEmpty()){
-                    db.nextState();
-
-                }else{
-                   return "{ \"data\": \"error\" }";
-
-                }*/
+                //TODO: provera da li su svi izglasani u nacelu
                 db.nextState();
             } break;
             case "glasanjeZaAmandmane": {
-                /*if(db.getAmandmani().isEmpty()){
-                    db.nextState();
-
-                }else{
-                    return "{ \"data\": \"error\" }";
-
-                }*/
+                //TODO: provera da li su svi izglasani
                 db.nextState();
             } break;
             case "glasanjeUCelosti": {
-                /*if(db.getAktiUsvojeniUNacelu().isEmpty()){
-                    db.nextState();
-                }else{
-                    return "{ \"data\": \"error\" }";
-
-                }*/
+                //TODO: provera da li su svi izglasani u celosti
                 db.nextState();
             } break;
             default: { db.nextState(); }
@@ -62,5 +45,6 @@ public class StateController {
         db.release();
 
         return retVal;
+        db.release();
     }
 }

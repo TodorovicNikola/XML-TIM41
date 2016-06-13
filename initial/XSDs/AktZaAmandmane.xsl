@@ -76,37 +76,38 @@
                  
                  <xsl:for-each select="//akt:Deo">
                      <h2><xsl:value-of select="@Naslov"/></h2>
-                     <xsl:for-each select="//akt:Glava">
+                     <xsl:for-each select="akt:Glava">
                             <h3><xsl:value-of select="@Naslov"/></h3>
-                                <xsl:for-each select="//akt:Odeljak">
+                                <xsl:for-each select="akt:Odeljak">
                                     <h4><xsl:value-of select="@Naslov"/></h4>
                                     
                                     <xsl:choose>
-                                        <xsl:when test="//Pododeljak">
-                                            <xsl:for-each select="//akt:Pododeljak">
+                                        <xsl:when test="Pododeljak">
+                                            <xsl:for-each select="akt:Pododeljak">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
+                                                <i><h6>Kod za dodavanje: <xsl:value-of select="@Id"/></h6></i>
                                                 
-                                                <xsl:for-each select="//akt:Clan">
+                                                <xsl:for-each select="akt:Clan">
                                                     <h5><xsl:value-of select="@Naslov"/></h5>
-                                                    
+                                                    <i><h6>Kod za izmenu i brisanje: <xsl:value-of select="@Id"/></h6></i>
                                                     <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                     
-                                                    <xsl:for-each select="//akt:Stav">
+                                                    <xsl:for-each select="akt:Stav">
                                                         <h6><xsl:value-of select="@Naslov"/></h6>
                                                         
                                                         <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                         
-                                                        <xsl:for-each select="//akt:Tacka">
+                                                        <xsl:for-each select="akt:Tacka">
                                                             <h6 class="TackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                             
                                                             <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                             
-                                                            <xsl:for-each select="//akt:Podtacka">
+                                                            <xsl:for-each select="akt:Podtacka">
                                                                 <h6 class="PodtackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                                 
                                                                 <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                                 
-                                                                <xsl:for-each select="//akt:Alineja">                                                            
+                                                                <xsl:for-each select="akt:Alineja">                                                            
                                                                     <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                                     
                                                                 </xsl:for-each>
@@ -120,27 +121,29 @@
                                             </xsl:for-each>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:for-each select="//akt:Clan">
+                                            <i><h6>Kod za dodavanje: <xsl:value-of select="@Id"/></h6></i>
+                                            <xsl:for-each select="akt:Clan">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
+                                                <i><h6>Kod za izmenu i brisanje: <xsl:value-of select="@Id"/></h6></i>
                                                 
                                                 <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                 
-                                                <xsl:for-each select="//akt:Stav">
+                                                <xsl:for-each select="akt:Stav">
                                                     <h6><xsl:value-of select="@Naslov"/></h6>
                                                     
                                                     <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                     
-                                                    <xsl:for-each select="//akt:Tacka">
+                                                    <xsl:for-each select="akt:Tacka">
                                                         <h6 class="TackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                         
                                                         <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                         
-                                                        <xsl:for-each select="//akt:Podtacka">
+                                                        <xsl:for-each select="akt:Podtacka">
                                                             <h6 class="PodtackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                             
                                                             <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                             
-                                                            <xsl:for-each select="//akt:Alineja">                                                            
+                                                            <xsl:for-each select="akt:Alineja">                                                            
                                                                 <p><xsl:value-of select="akt:Sadrzaj"/></p>
                                                                 
                                                             </xsl:for-each>
