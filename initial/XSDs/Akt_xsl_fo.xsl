@@ -16,15 +16,15 @@
 
             <fo:page-sequence master-reference="akt-strana">
                 <fo:flow flow-name="xsl-region-body">
-            <fo:block font-family="sans-serif" font-size="10px"   width="70%" margin-left="10%" margin-right="10%" >
+            <fo:block font-family="Helvetica" font-size="10px"   width="70%" margin-left="10%" margin-right="10%" >
                 <xsl:for-each select="a:Akt">
 
-                    <fo:block font-family="sans-serif" text-align="center" font-size="23" margin="20px" >
+                    <fo:block font-family="Helvetica" text-align="center" font-size="23" margin="20px" >
                         <xsl:value-of select="@Naslov"/>
 
                     </fo:block>
                         <xsl:for-each select="//a:Deo">
-                            <fo:block font-family="sans-serif" text-align="center" font-size="21" margin="20px" >
+                            <fo:block font-family="TimesRoman" text-align="center" font-size="21" margin="20px" >
                                <xsl:value-of select="@Naslov"/>
                             </fo:block>
 
@@ -44,7 +44,7 @@
                                        <xsl:value-of select="a:Sadrzaj"/>
                                     </fo:block>
                                     <xsl:choose>
-                                        <xsl:when test="Pododeljak">
+                                        <xsl:when test="a:Pododeljak">
 
                                     <xsl:for-each select="a:Pododeljak">
                                         <fo:block font-family="sans-serif" text-align="center" font-size="15" margin="20px">

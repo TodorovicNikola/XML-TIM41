@@ -34,6 +34,22 @@ module.exports = [
             $scope.naslov = naslov;
 
         }
+        $scope.pretraga=function(pretraga)
+        {
+            data = { kriterijum:pretraga,tip:"sadrzaj",status:"U nacelu" };
+            $http({
+                method: "post",
+                url: "api/akti/sadrzaj",
+                data: data,
+                dataType: "json",
+                traditional:true
+            }).then(function (response) {
+                $scope.data=response.data;
+            }).then(function(error)
+            {
+                console.log('Greska prilikom pretrage akata' );
+            });
+        }
 
         $scope.submitVotes = function(){
             data = { idAkta: $scope.idAkta, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };

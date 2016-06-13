@@ -5,7 +5,9 @@ import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
+import org.apache.fop.render.java2d.SystemFontMetricsMapper;
 import org.apache.xmlgraphics.util.MimeConstants;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,6 +17,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
+import xml_app.model.utils.PretragaKriterijum;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
@@ -104,6 +107,21 @@ public class AktController {
 
     }
 
+    @RequestMapping(value="/sadrzaj", method = RequestMethod.POST)
+    public Collection<Akt> aktiPretraga(@RequestBody PretragaKriterijum kriterijum){
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("evo ga " + kriterijum.getKriterijum());
+        String pretraga=kriterijum.getKriterijum();
+        DatabaseHelper db = new DatabaseHelper();
+        List<Akt> akti = db.getAktiByCriteria(pretraga,kriterijum.getStatus());
+        db.release();
+
+        return akti;
+
+    }
+
+
+
     @RequestMapping(value = "/{aktId}/pdf",method = RequestMethod.GET)
     public void konkretanAktPdf(@PathVariable String aktId, HttpServletResponse resp) throws IOException {
         //trebalo bi ovo wrapovati u neku metodu, ali za sada neka ostane tako
@@ -156,6 +174,10 @@ public class AktController {
         } catch (TransformerException e) {
             e.printStackTrace();
         }
+
+        resp.setContentType("application/pdf; charset=UTF-8");
+        resp.setCharacterEncoding("utf-8");
+
 
         resp.getOutputStream().write(outStream.toByteArray());
         System.out.println("Outputovan pdf");

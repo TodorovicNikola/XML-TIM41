@@ -10,13 +10,22 @@ import com.marklogic.client.io.SearchHandle;
 import com.marklogic.client.query.MatchDocumentSummary;
 import com.marklogic.client.query.QueryManager;
 import com.marklogic.client.query.StringQueryDefinition;
+import com.sun.xml.internal.fastinfoset.sax.SystemIdResolver;
+import com.sun.xml.txw2.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,6 +154,32 @@ public class DatabaseHelper {
         return ret;
 
     }
+
+    public List<Akt> getAktiByCriteria(String searchCriteria,String tip){
+        QueryManager queryMgr = client.newQueryManager();
+
+        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
+        stringQry.setCollections("akti");
+        stringQry.setCriteria(searchCriteria);
+
+        List<Akt> ret = new ArrayList<>();
+
+        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            if (a.getStatus().equals(tip)) {
+                System.out.println(a.getStatus()+"sss");
+                ret.add(a);
+            }
+        }
+
+        System.out.println(ret.size());
+
+        return ret;
+
+    }
+
 
        public List<Akt> getAktiUsvojeniUNacelu(){
            QueryManager queryMgr = client.newQueryManager();
