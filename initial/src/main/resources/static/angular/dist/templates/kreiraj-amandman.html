@@ -1,6 +1,22 @@
 <div>
-<div id="editor"></div>
 
-<button class="btn btn-default" ng-click="submit()" ng-disabled="warns > 0">Submit</button>
+
+    <div class="form-group">
+
+        Kod: <input type="text" data-toggle="tooltip" data-placement="top" title="Unesite kod ." class="form-control" ng-model="form.reference"/>
+        <select name="actionSelect" class="form-control" ng-model="form.action">
+            <option value="Izmeni">Izmeni</option>
+            <option value="Dodaj">Dodaj</option>
+            <option value="Obrisi">Obriši</option>
+        </select>
+        <br/>
+        <button ng-click="form.submit()" type="button" class="btn btn-primary">Dodaj element amandmana</button>
+        <br>
+    </div>
+
+    <hr/>
+    <div id="editor"></div>
+
+    <button class="btn btn-default" ng-click="submit()" ng-disabled="warns > 0">Submit</button>
 
 </div>

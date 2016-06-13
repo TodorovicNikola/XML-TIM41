@@ -6,12 +6,17 @@ import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.xalan.processor.TransformerFactoryImpl;
 import org.apache.xmlgraphics.util.MimeConstants;
+import org.springframework.util.xml.SimpleNamespaceContext;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
-import xml_app.model.Amandman;
+import xml_app.model.*;
+import xml_app.model.DTOs.AmandmanString;
+import xml_app.model.DTOs.BuildAmandmanDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Produces;
@@ -19,11 +24,13 @@ import javax.ws.rs.core.MediaType;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
@@ -32,12 +39,11 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import javax.xml.xpath.*;
+import java.io.*;
 import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -96,6 +102,124 @@ public class AmandmanController {
 
         return null;
     }
+
+
+    @RequestMapping(value = "/dogradi",method = RequestMethod.POST)
+    public AmandmanString trial(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
+
+
+        JAXBContext jaxbContextAm = JAXBContext.newInstance(Amandman.class);
+        Unmarshaller unmarshaller = jaxbContextAm.createUnmarshaller();
+
+        StringReader reader = new StringReader(dto.getAmandman());
+        Amandman a = (Amandman) unmarshaller.unmarshal(reader);
+
+
+
+
+        if(dto.getAction().equals("Izmeni")) {
+
+            DatabaseHelper dbh = new DatabaseHelper();
+            Akt akt = dbh.findAktById(dto.getAktId());//getReference:)
+            dbh.release();
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            dbFactory.setNamespaceAware(true);
+
+
+            Document doc;
+            try {
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                doc = dBuilder.newDocument();
+
+                JAXBContext jaxbContextAk = JAXBContext.newInstance(Akt.class);
+                Marshaller marshaller = jaxbContextAk.createMarshaller();
+                marshaller.marshal(akt, doc);
+
+                HashMap<String, String> prefMap = new HashMap<>();
+                prefMap.put("ns2", "http://www.xmlProjekat.com/akt");
+
+
+                XPathFactory xPathFactory = XPathFactory.newInstance();
+                XPath xPath = xPathFactory.newXPath();
+                xPath.setNamespaceContext(new NameSpaceContext(prefMap));
+                XPathExpression xPathExpression = xPath.compile("//ns2:Clan[@Id = '" + dto.getReference() +"']");////Deo1/Glava1/Odeljak1/Clan1
+
+
+                Node node = (Node) xPathExpression.evaluate(doc, XPathConstants.NODE);
+
+                List<ElementAmandmana> lea = a.getElementAmandmana();
+                ElementAmandmana ea = new ElementAmandmana();
+
+                JAXBContext jaxbContextCl = JAXBContext.newInstance(Clan.class);
+                Unmarshaller u = jaxbContextCl.createUnmarshaller();
+                Clan clan = (Clan) u.unmarshal(node);
+
+                ea.setAkcija(dto.getAction());
+                ea.setReferencira(dto.getReference());
+                ea.setClan(clan);
+                lea.add(ea);
+
+
+                StringWriter sw = new StringWriter();
+                Marshaller m = jaxbContextAm.createMarshaller();
+                m.marshal(a,sw);
+
+                AmandmanString as = new AmandmanString();
+                as.setAm(sw.toString());
+
+                return as;
+            } catch (ParserConfigurationException | XPathExpressionException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        if(dto.getAction().equals("Dodaj")) {
+
+            List<ElementAmandmana> lea = a.getElementAmandmana();
+            ElementAmandmana ea = new ElementAmandmana();
+
+            ea.setReferencira(dto.getReference());
+            ea.setAkcija(dto.getAction());
+
+            ea.setClan(new Clan());
+            lea.add(ea);
+
+            StringWriter sw = new StringWriter();
+            Marshaller m = jaxbContextAm.createMarshaller();
+            m.marshal(a,sw);
+
+            AmandmanString as = new AmandmanString();
+            as.setAm(sw.toString());
+
+            return as;
+        }
+
+        if(dto.getAction().equals("Obrisi")) {
+
+            List<ElementAmandmana> lea = a.getElementAmandmana();
+            ElementAmandmana ea = new ElementAmandmana();
+
+            ea.setReferencira(dto.getReference());
+            ea.setAkcija(dto.getAction());
+
+            lea.add(ea);
+
+            StringWriter sw = new StringWriter();
+            Marshaller m = jaxbContextAm.createMarshaller();
+            m.marshal(a,sw);
+
+            AmandmanString as = new AmandmanString();
+            as.setAm(sw.toString());
+
+            return as;
+        }
+
+        return null;
+
+    }
+
 
     @Produces (MediaType.TEXT_XML)
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
