@@ -23,13 +23,7 @@ module.exports = [
                 dataType: "json",
                 traditional:true
             }).then(function (response) {
-                console.log('--' + response.data.data + "---");
-                if(response.data.data == "error"){
-                    alert("Trenutno nije moguće obaviti ovu operaciju! Pogledati 'Pravila korišćenja'.");
-                }else{
-                    $scope.data = response.data.data;
-                }
-
+                $scope.data = response.data.data;
             });
         }
     }

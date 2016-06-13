@@ -146,26 +146,6 @@ public class DatabaseHelper {
 
     }
 
-    public List<Akt> getAktiUsvojeniUNacelu(){
-        QueryManager queryMgr = client.newQueryManager();
-
-        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
-        stringQry.setCollections("akti");
-
-        List<Akt> ret = new ArrayList<>();
-
-        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
-        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
-
-            Akt a = manager.readAs(docSum.getUri(), Akt.class);
-            if(a.getStatus().equals("U nacelu"))
-                ret.add(a);
-        }
-
-        return ret;
-
-    }
-
     public List<Akt> getAktiUProceduri(){
         QueryManager queryMgr = client.newQueryManager();
 
@@ -216,7 +196,7 @@ public class DatabaseHelper {
 
         return a;
     }
-///////////////////////////////----------------------------STATE METHODS------------------------------////////////////////////////////
+
     public void initState(){
         String collId = "state";
         String docId = "stateVal";
