@@ -13,18 +13,19 @@ module.exports = [
         var data = $scope.currentUser.username;
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/uProceduriKorisnika",
             data: data,
             dataType: "json",
             traditional: true
         }).then(function (response) {
+           
             $scope.aktiUProceduri = response.data;
 
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/uNaceluKorisnika",
             data: data,
             dataType: "json",
@@ -35,7 +36,7 @@ module.exports = [
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/usvojeniKorisnika",
             data: data,
             dataType: "json",
@@ -46,7 +47,7 @@ module.exports = [
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/amandmani/korisnika",
             data: data,
             dataType: "json",

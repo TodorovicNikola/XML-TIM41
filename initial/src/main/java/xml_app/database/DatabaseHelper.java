@@ -237,25 +237,74 @@ public class DatabaseHelper {
     public List<Akt> getUsvojeniAktiKorisnika(String userId){
         List<Akt> ret = new ArrayList<>();
 
-        //TODO: implement Davide
+        QueryManager queryMgr = client.newQueryManager();
 
-        return null;
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt userId='" + userId + "' Status='Usvojen'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            ret.add(a);
+        }
+
+        return ret;
+
     }
 
     public List<Akt> getAktiUProceduriKorisnika(String userId){
         List<Akt> ret = new ArrayList<>();
 
-        //TODO: implement Davide
+        QueryManager queryMgr = client.newQueryManager();
 
-        return null;
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt userId='" + userId + "' Status='U proceduri'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            ret.add(a);
+        }
+
+        return ret;
     }
 
     public List<Akt> getAktiUsvojeniUNaceluKorisnika(String userId){
         List<Akt> ret = new ArrayList<>();
 
-        //TODO: implement Davide
+        QueryManager queryMgr = client.newQueryManager();
 
-        return null;
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt userId='" + userId + "' Status='U nacelu'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            ret.add(a);
+        }
+
+        return ret;
     }
 
     public List<Amandman> getAmandmaniKorisnika(String userId){
