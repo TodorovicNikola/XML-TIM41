@@ -9,6 +9,7 @@ import org.apache.xmlgraphics.util.MimeConstants;
 import org.springframework.util.xml.SimpleNamespaceContext;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -41,10 +42,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import javax.xml.xpath.*;
 import java.io.*;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Vuletic on 25.5.2016.
@@ -64,12 +62,24 @@ public class AmandmanController {
     }
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
-    public Amandman trial(@RequestBody String telo) throws JAXBException {
+    public Amandman dodaj(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Amandman.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
+
+        String telo = dto.getAmandman();
+        String uuAmId = UUID.randomUUID().toString();
+
         telo = telo.replace("xml:space='preserve'", "");
+        //telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");//ovo kad nestane validacija sa front end strane
+        /*telo = telo.replace("<Amandman","<Amandman IdAkta='" + dto.getAktId() + "'");
+        telo = telo.replace("<ns2:Stav","<ns2:Stav Id='' ");
+        telo = telo.replace("<ns2:Tacka","<ns2:Tacka Id='' ");
+        telo = telo.replace("<ns2:Podtacka","<ns2:Podtacka Id='' ");
+        telo = telo.replace("<ns2:Clan","<ns2:Clan Id='' ");*/
+
+
 
         StringReader reader = new StringReader(telo);
 
@@ -79,6 +89,8 @@ public class AmandmanController {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(new InputSource(reader));
             doc.getDocumentElement().normalize();
+
+            fillInIds(doc.getDocumentElement(), "/");
 
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Source schemaFile = new StreamSource(new File("XSDs/Amandman.xsd"));
@@ -105,7 +117,7 @@ public class AmandmanController {
 
 
     @RequestMapping(value = "/dogradi",method = RequestMethod.POST)
-    public AmandmanString trial(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
+    public AmandmanString dogradi(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
 
         JAXBContext jaxbContextAm = JAXBContext.newInstance(Amandman.class);
@@ -305,5 +317,49 @@ public class AmandmanController {
         resp.getOutputStream().write(outStream.toByteArray());
         System.out.println("Outputovan pdf");
     }
+
+
+
+    private void fillInIds(Node node, String parentsId){
+
+        Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
+
+        if(node.getNodeType() != Node.ELEMENT_NODE)
+            return;
+
+        if(!node.hasChildNodes())
+            return;
+
+        NodeList childNodes = node.getChildNodes();
+        for (int i=0; i < childNodes.getLength(); i++) {
+            Node subnode = childNodes.item(i);
+            String nameKey =  subnode.getNodeName();
+
+            if (subnode.getNodeType() == Node.ELEMENT_NODE) {
+
+                Integer count;
+                Element elNode = (Element) subnode;
+
+                if(namesCount.containsKey(nameKey)){
+                    count = namesCount.get(nameKey);
+                    namesCount.put(nameKey,++count);
+                }else{
+                    count = 1;
+                    namesCount.put(nameKey, count);
+                }
+
+                if(elNode.getAttributeNode("Id") == null) {
+                    fillInIds(subnode, "/");
+
+                }else{
+                    elNode.getAttributeNode("Id").setValue( parentsId + "/" + nameKey + count.toString());
+                    fillInIds(subnode,  parentsId + "/" + nameKey + count.toString());
+                }
+
+            }
+        }
+
+    }
+
 
 }

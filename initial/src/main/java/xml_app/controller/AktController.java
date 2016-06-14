@@ -208,7 +208,7 @@ public class AktController {
             Document doc = dBuilder.parse(new InputSource(new StringReader(telo)));
             doc.getDocumentElement().normalize();
 
-            fillInIds(doc.getDocumentElement(), doc, "/");
+            fillInIds(doc.getDocumentElement(), "/");
 
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Source schemaFile = new StreamSource(new File("XSDs/Akt.xsd"));
@@ -250,7 +250,7 @@ public class AktController {
 
     }
 
-    private void fillInIds(Node node, Document doc, String parentsId){
+    private void fillInIds(Node node, String parentsId){
 
         Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
 
@@ -284,7 +284,7 @@ public class AktController {
                     elNode.getAttributeNode("Id").setValue( parentsId + "/" + nameKey + count.toString());
 
                 }
-                fillInIds(subnode, doc,  parentsId + "/" + nameKey + count.toString());
+                fillInIds(subnode,  parentsId + "/" + nameKey + count.toString());
             }
         }
 

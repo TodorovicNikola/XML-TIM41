@@ -311,6 +311,19 @@ module.exports = [
         
         $scope.submit = function () {
 
+            var dto = {};
+            dto.amandman = Xonomy.harvest();
+            dto.reference = "";
+            dto.action = "";
+            dto.aktId = "4cc7c811-7788-4401-a36d-1755501bc577";
+
+            $http.post("/api/amandmani/dodaj", dto).success(function(data, status) {
+
+                alert("Uspešno dodat amandman.");
+
+            });
+
+
 
         }
 

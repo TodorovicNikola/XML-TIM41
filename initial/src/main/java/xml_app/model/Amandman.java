@@ -56,6 +56,8 @@ public class Amandman {
     protected XMLGregorianCalendar datumIVremePodnosenja;
     @XmlAttribute(name = "Id", required = true)
     protected String id;
+    @XmlAttribute(name = "IdAkta", required = true)
+    protected String IdAkta;
 
     /**
      * Gets the value of the podnosilac property.
@@ -155,4 +157,11 @@ public class Amandman {
         this.id = value;
     }
 
+    public String getIdAkta() {
+        return IdAkta;
+    }
+
+    public void setIdAkta(String idAkta) {
+        IdAkta = idAkta;
+    }
 }
