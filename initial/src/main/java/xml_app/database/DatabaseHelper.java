@@ -2,14 +2,11 @@ package xml_app.database;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
+import com.marklogic.client.admin.QueryOptionsManager;
+import com.marklogic.client.admin.config.QueryOptionsBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import com.marklogic.client.io.DocumentMetadataHandle;
-import com.marklogic.client.io.InputStreamHandle;
-import com.marklogic.client.io.JAXBHandle;
-import com.marklogic.client.io.SearchHandle;
-import com.marklogic.client.query.MatchDocumentSummary;
-import com.marklogic.client.query.QueryManager;
-import com.marklogic.client.query.StringQueryDefinition;
+import com.marklogic.client.io.*;
+import com.marklogic.client.query.*;
 import com.sun.xml.internal.fastinfoset.sax.SystemIdResolver;
 import com.sun.xml.txw2.Document;
 import org.w3c.dom.NodeList;
@@ -19,6 +16,7 @@ import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class DatabaseHelper {
@@ -146,12 +145,17 @@ public class DatabaseHelper {
     public List<Akt> getUsvojeniAkti(){
         QueryManager queryMgr = client.newQueryManager();
 
-        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
-        stringQry.setCollections("akti");
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt Status='Usvojen'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
 
         List<Akt> ret = new ArrayList<>();
 
-        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
         for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
 
             Akt a = manager.readAs(docSum.getUri(), Akt.class);
@@ -192,12 +196,17 @@ public class DatabaseHelper {
        public List<Akt> getAktiUsvojeniUNacelu(){
            QueryManager queryMgr = client.newQueryManager();
 
-           StringQueryDefinition stringQry = queryMgr.newStringDefinition();
-           stringQry.setCollections("akti");
+           String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                   "  <q:query>\n" +
+                   "      <a:Akt Status='U nacelu'></a:Akt>\n" +
+                   "  </q:query>\n" +
+                   "</q:qbe>";
+           StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+           RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
 
            List<Akt> ret = new ArrayList<>();
 
-           SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+           SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
 
            for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
                Akt a = manager.readAs(docSum.getUri(), Akt.class);
@@ -213,12 +222,17 @@ public class DatabaseHelper {
     public List<Akt> getAktiUProceduri(){
         QueryManager queryMgr = client.newQueryManager();
 
-        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
-        stringQry.setCollections("akti");
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt Status='U proceduri'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
 
         List<Akt> ret = new ArrayList<>();
 
-        SearchHandle searchHandle = queryMgr.search(stringQry, new SearchHandle());
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
         for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
 
             Akt a = manager.readAs(docSum.getUri(), Akt.class);
@@ -330,5 +344,56 @@ public class DatabaseHelper {
 
         // Write the document to the database
         manager.writeAs(docId, metadata, state);
+    }
+
+    public void search(){
+
+       QueryManager queryMgr = client.newQueryManager();
+
+
+        /*QueryOptionsManager optionsMgr = client.newServerConfigManager().newQueryOptionsManager();
+        QueryOptionsBuilder qob = new QueryOptionsBuilder();
+
+        QueryOptionsHandle optsHandle = new QueryOptionsHandle().withConstraints(
+                qob.constraint("Status",
+                        qob.properties()));
+
+        optionsMgr.writeOptions("akt", optsHandle);
+
+///////////////////////////////////////////////////////////////////////////
+        QueryOptionsListHandle listHandle = new QueryOptionsListHandle();
+
+        queryMgr.optionsList(listHandle);
+
+        for (Map.Entry<String,String> optionsSet : listHandle.getValuesMap().entrySet()) {
+            System.out.println(optionsSet.getKey() + ": " + optionsSet.getValue());
+        }
+
+        StringQueryDefinition stringQry = queryMgr.newStringDefinition();
+        stringQry.setCollections("akti");
+
+        stringQry.setOptionsName("akt");
+        //stringQry.setCriteria("Status:Usvojen");*/
+
+        /*KeyValueQueryDefinition kvqdef = queryMgr.newKeyValueDefinition();
+        kvqdef.put(queryMgr.newElementLocator(new QName("Akt"),new QName("Status")), "Usvojen");*/
+
+
+        /*String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
+                "  <q:query>\n" +
+                "      <a:Akt Status='Usvojen'></a:Akt>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Akt a = manager.readAs(docSum.getUri(), Akt.class);
+            System.out.println(a.getNaslov() + a.getStatus());
+        }*/
+
     }
 }
