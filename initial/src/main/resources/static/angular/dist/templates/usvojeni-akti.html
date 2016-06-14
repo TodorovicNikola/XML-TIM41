@@ -4,7 +4,9 @@
     <table class="table">
         <tr>
             <td width="15%"><h4><span class="label label-default">Pretraga po sadržaju:</span></h4></td>
-            <td width="85%"><input type="text" ng-model="kriterijumPretrage" ng-change="pretraga(kriterijumPretrage)" class="form-control input-sm"></td>
+            <td width="60%"><input type="text" ng-model="kriterijumPretrage" ng-change="pretraga(kriterijumPretrage)" class="form-control input-sm"></td>
+            <td width="13%"><h4><button ng-click="pretrazi" type="button" data-toggle="modal" class="btn btn-default" data-target="#pretragaModal">Napredna pretraga</button></td>
+            <td width="12%"><h4><button ng-click="ukloniFiltere()" type="button"class="btn btn-default" >Ukloni filtere</button></td>
         </tr>
     </table>
     <table class="table">
@@ -31,4 +33,56 @@
     </table>
 
 
+    <div id="pretragaModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Pretraga akta</h4>
+                </div>
+                <form ng-submit="pretraziNapredno()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Podnosilac:</label>
+                            <input ng-model="podnosilac" type="text" name="podnosilac" id="podnosilac" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Vreme donošenja(do): </label>
+                              <span><input type="text" class="form-control" uib-datepicker-popup ng-model="vremeDonosenjaOd" is-open="datumOdPopup.otvoren" datepicker-options="dateOptions" ng-required="true" close-text="Close"  ng-readonly="true"/>
+                                  <button type="button" class="btn btn-default" ng-click="otvoriDatumOdPopup()">
+                                      <i class="glyphicon glyphicon-calendar"></i>
+                                  </button>
+                              </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Vreme donošenja(do): </label>
+                              <span><input type="text" class="form-control" uib-datepicker-popup ng-model="vremeDonosenjaDo" is-open="datumDoPopup.otvoren" datepicker-options="dateOptions" ng-required="true" close-text="Close"  ng-readonly="true"/>
+                                  <button type="button" class="btn btn-default" ng-click="otvoriDatumDoPopup()">
+                                      <i class="glyphicon glyphicon-calendar"></i>
+                                  </button>
+                              </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Glasnik:</label>
+                            <input ng-model="glasnik" type="text" name="glasnik" id="glasnik" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Tip:</label>
+                            <select name="tipAktaSelect" id="tipAktaSelect"
+                                    ng-options="t.naziv as t.naziv for t in tipoviAkta"
+                                    ng-model="tipAkta" class="form-control" >
+                            </select>
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <input type="submit" value="Pretrazi" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
