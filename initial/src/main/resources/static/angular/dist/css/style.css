@@ -117,5 +117,24 @@ div.rs_right{
     width:75%;
 }
 
+#div_iframe
+{
+    width    : 550px;
+    height   : 1000px;
+    overflow : hidden;
+    position : relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#iframe
+{
+    position : absolute;
+    top      : -250px;
+    left     : -350px;
+    width    : 1280px;
+    height   : 1200px;
+}
+
 
 
