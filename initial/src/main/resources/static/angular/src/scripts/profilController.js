@@ -74,18 +74,19 @@ module.exports = [
         }
 
         $scope.povuciAmandman = function (id) {
-            $http({
-                method: "Post",
-                url: "api/amandmani/obrisi",
-                data: id,
-                dataType: "json",
-                traditional: true
-            }).then(function (response) {
-                alert(response.data.data);
-                $route.reload();
+            if (confirm("DA LI STE SIGURNI DA ŽELITE DA POVUČETE AMANDMAN?")) {
+                $http({
+                    method: "Post",
+                    url: "api/amandmani/obrisi",
+                    data: id,
+                    dataType: "json",
+                    traditional: true
+                }).then(function (response) {
+                    alert(response.data.data);
+                    $route.reload();
 
-            });
+                });
+            }
         }
-
     }
 ];

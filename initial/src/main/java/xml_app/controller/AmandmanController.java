@@ -71,6 +71,17 @@ public class AmandmanController {
         return amandmani;
     }
 
+    @RequestMapping(value="/obrisi", method = RequestMethod.POST)
+    public String obrisi(@RequestBody String id){
+        DatabaseHelper db = new DatabaseHelper();
+
+        db.deleteAmandman(id);
+
+        db.release();
+
+        return "{ \"data\": \"Amandman povučen!\" }";
+    }
+
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
     public Amandman dodaj(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
