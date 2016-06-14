@@ -6,7 +6,6 @@ import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.xalan.processor.TransformerFactoryImpl;
 import org.apache.xmlgraphics.util.MimeConstants;
-import org.springframework.util.xml.SimpleNamespaceContext;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,7 +30,6 @@ import javax.xml.bind.util.JAXBSource;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
@@ -40,7 +38,10 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import java.io.*;
 import java.util.*;
 
@@ -61,6 +62,15 @@ public class AmandmanController {
         return amandmani;
     }
 
+    @RequestMapping(value="/korisnika", method = RequestMethod.POST)
+    public Collection<Amandman> amandmaniKorisnika(@RequestBody String userId){
+        DatabaseHelper db = new DatabaseHelper();
+        //TODO: David pogledaj
+        List<Amandman> amandmani = db.getAmandmaniKorisnika(userId);
+        db.release();
+        return amandmani;
+    }
+
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
     public Amandman dodaj(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
@@ -72,7 +82,7 @@ public class AmandmanController {
         String uuAmId = UUID.randomUUID().toString();
 
         telo = telo.replace("xml:space='preserve'", "");
-        telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");
+        telo = telo.replace("<Amandman","<Amandman userId='" + dto.getUserId() +"' Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");
 
 
         StringReader reader = new StringReader(telo);

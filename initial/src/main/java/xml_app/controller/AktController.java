@@ -5,7 +5,6 @@ import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
-import org.apache.fop.render.java2d.SystemFontMetricsMapper;
 import org.apache.xmlgraphics.util.MimeConstants;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +60,15 @@ public class AktController {
         return akti;
     }
 
+    @RequestMapping(value="/usvojeniKorisnika", method = RequestMethod.POST)
+    public Collection<Akt> usvojeniAktiKorisnika(@RequestBody String userId){
+        DatabaseHelper db = new DatabaseHelper();
+        //TODO: David pogledaj
+        List<Akt> akti = db.getUsvojeniAktiKorisnika(userId);
+        db.release();
+        return akti;
+    }
+
     @RequestMapping(value="/u-proceduri", method = RequestMethod.GET)
     public Collection<Akt> aktiUProceduri(){
         DatabaseHelper db = new DatabaseHelper();
@@ -70,11 +78,29 @@ public class AktController {
         return akti;
     }
 
- @RequestMapping(value="/u-nacelu", method = RequestMethod.GET)
+    @RequestMapping(value="/uProceduriKorisnika", method = RequestMethod.POST)
+    public Collection<Akt> aktiUProceduriKorisnika(@RequestBody String userId){
+        DatabaseHelper db = new DatabaseHelper();
+        //TODO: David pogledaj
+        List<Akt> akti = db.getAktiUProceduriKorisnika(userId);
+        db.release();
+        return akti;
+    }
+
+    @RequestMapping(value="/u-nacelu", method = RequestMethod.GET)
     public Collection<Akt> aktiUsvojeniUNacelu(){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Akt> akti = db.getAktiUsvojeniUNacelu();
+        db.release();
+        return akti;
+    }
+
+    @RequestMapping(value="/uNaceluKorisnika", method = RequestMethod.POST)
+    public Collection<Akt> aktiUsvojeniUNaceluKorisnika(@RequestBody String userId){
+        DatabaseHelper db = new DatabaseHelper();
+        //TODO: David pogledaj
+        List<Akt> akti = db.getAktiUsvojeniUNaceluKorisnika(userId);
         db.release();
         return akti;
     }

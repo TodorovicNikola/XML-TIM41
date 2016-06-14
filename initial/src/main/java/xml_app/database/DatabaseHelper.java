@@ -2,31 +2,21 @@ package xml_app.database;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
-import com.marklogic.client.admin.QueryOptionsManager;
-import com.marklogic.client.admin.config.QueryOptionsBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.*;
-import com.marklogic.client.query.*;
-import com.sun.xml.internal.fastinfoset.sax.SystemIdResolver;
-import com.sun.xml.txw2.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import com.marklogic.client.query.MatchDocumentSummary;
+import com.marklogic.client.query.QueryManager;
+import com.marklogic.client.query.RawQueryByExampleDefinition;
+import com.marklogic.client.query.StringQueryDefinition;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class DatabaseHelper {
@@ -244,28 +234,36 @@ public class DatabaseHelper {
 
     }
 
-    public List<Akt> getAktiByUserId(String id){
-        QueryManager queryMgr = client.newQueryManager();
-
-        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
-                "  <q:query>\n" +
-                "      <a:Akt UserId='" + id + "'></a:Akt>\n" +
-                "  </q:query>\n" +
-                "</q:qbe>";
-        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
-        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
-
+    public List<Akt> getUsvojeniAktiKorisnika(String userId){
         List<Akt> ret = new ArrayList<>();
 
-        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
-        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+        //TODO: implement Davide
 
-            Akt a = manager.readAs(docSum.getUri(), Akt.class);
-                ret.add(a);
-        }
+        return null;
+    }
 
-        return ret;
+    public List<Akt> getAktiUProceduriKorisnika(String userId){
+        List<Akt> ret = new ArrayList<>();
 
+        //TODO: implement Davide
+
+        return null;
+    }
+
+    public List<Akt> getAktiUsvojeniUNaceluKorisnika(String userId){
+        List<Akt> ret = new ArrayList<>();
+
+        //TODO: implement Davide
+
+        return null;
+    }
+
+    public List<Amandman> getAmandmaniKorisnika(String userId){
+        List<Amandman> ret = new ArrayList<>();
+
+        //TODO: implement Davide
+
+        return null;
     }
 
     /*public List<Akt> getAktiByMetaData(String naziv, String tip, String datumOd, String datumDo, String glasnik){

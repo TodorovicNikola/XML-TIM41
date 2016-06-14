@@ -28,6 +28,7 @@
             <xs:attribute name="UCelostiProtiv" type="xs:nonNegativeInteger"/>
             <xs:attribute name="UCelostiUzdrzano" type="xs:nonNegativeInteger"/>
             <xs:attribute name="DatumGlasanja" type="xs:date"/>
+            <xs:attribute name="userId" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">

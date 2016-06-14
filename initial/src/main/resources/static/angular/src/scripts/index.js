@@ -9,6 +9,7 @@ myApp.controller('kreirajAmandmanCtrl', require('./kreirajAmandmanController.js'
 myApp.controller('rukovodjenjeSednicomCtrl', require('./rukovodjenjeSednicomController.js'));
 myApp.controller('aktiUsvojeniUNaceluCtrl', require('./aktiUsvojeniUNaceluController.js'));
 myApp.controller('amandmaniCtrl', require('./amandmaniController.js'));
+myApp.controller('profilCtrl', require('./profilController.js'));
 myApp.service('loginService', require('./loginService.js'));
 
 myApp.config(['$routeProvider',
@@ -45,7 +46,11 @@ myApp.config(['$routeProvider',
 	 when('/amandmani', {
 		templateUrl: '/angular/dist/templates/amandmani.html',
 		controller: 'amandmaniCtrl'
-	  }).
+	 }).
+	when('/profil', {
+		templateUrl: '/angular/dist/templates/profil.html',
+		controller: 'profilCtrl'
+	}).
 	when('/login', {
 		templateUrl: '/angular/dist/templates/login.html',
 		controller: 'loginCtrl'

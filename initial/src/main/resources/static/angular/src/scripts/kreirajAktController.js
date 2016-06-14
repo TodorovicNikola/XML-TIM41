@@ -445,11 +445,16 @@ module.exports = [
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
+        console.log($scope.currentUser.username );
+
 
         $scope.submit = function () {
             //alert("as");
 
-            $http.post("/api/akti/dodaj", Xonomy.harvest()).success(function(data, status) {
+            var reqData = Xonomy.harvest();
+            reqData = reqData.replace("<Akt", "<Akt userId='" + $scope.currentUser.username + "'");
+
+            $http.post("/api/akti/dodaj", reqData).success(function(data, status) {
                 alert("Uspešno dodat akt.");
             })
         }
