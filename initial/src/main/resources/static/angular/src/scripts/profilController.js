@@ -1,6 +1,6 @@
 module.exports = [
-    '$scope', '$http',
-    function myController($scope, $http){
+    '$scope', '$http', '$route',
+    function myController($scope, $http, $route){
         $http({
             method: "Get",
             url: "api/state/getState",
@@ -58,11 +58,33 @@ module.exports = [
         });
 
         $scope.povuciAkt = function (id) {
-            alert(id);
+            if (confirm("DA LI STE SIGURNI DA ŽELITE DA POVUČETE AKT?")) {
+                $http({
+                    method: "Post",
+                    url: "api/akti/obrisi",
+                    data: id,
+                    dataType: "json",
+                    traditional: true
+                }).then(function (response) {
+                    alert(response.data.data);
+                    $route.reload();
+
+                });
+            }
         }
 
         $scope.povuciAmandman = function (id) {
-            alert(id);
+            $http({
+                method: "Post",
+                url: "api/amandmani/obrisi",
+                data: id,
+                dataType: "json",
+                traditional: true
+            }).then(function (response) {
+                alert(response.data.data);
+                $route.reload();
+
+            });
         }
 
     }

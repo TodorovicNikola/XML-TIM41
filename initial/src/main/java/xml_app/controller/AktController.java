@@ -105,6 +105,17 @@ public class AktController {
         return akti;
     }
 
+    @RequestMapping(value="/obrisi", method = RequestMethod.POST)
+    public String obrisi(@RequestBody String id){
+        DatabaseHelper db = new DatabaseHelper();
+
+        db.deleteAkt(id);
+
+        db.release();
+
+        return "{ \"data\": \"Akt povučen!\" }";
+    }
+
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)
     public void konkretanAkt(@PathVariable String aktId, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
