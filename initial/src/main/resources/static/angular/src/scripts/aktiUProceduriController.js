@@ -27,6 +27,12 @@ module.exports = [
             $scope.naslov = naslov;
         }
 
+        $scope.ucitajAkteUProceduri=function()
+        {
+            $http.get("/api/akti/u-proceduri").then(function(response) {
+                $scope.data = response.data;
+            });
+        }
         $scope.pretraga=function(pretraga)
         {
                 data = { kriterijum:pretraga,tip:"sadrzaj",status:"U proceduri" };
@@ -37,12 +43,69 @@ module.exports = [
                     dataType: "json",
                     traditional:true
                 }).then(function (response) {
+                    console.log("ok pretraga");
                     $scope.data=response.data;
-                }).then(function(error)
+
+                },function(error)
                 {
                     console.log('Greska prilikom pretrage akata' );
                 });
         }
+        $scope.otvoriDatumOdPopup = function() {
+            $scope.datumOdPopup.otvoren = true;
+        };
+        $scope.otvoriDatumDoPopup = function() {
+            $scope.datumDoPopup.otvoren = true;
+        };
+        $scope.datumOdPopup = {
+            otvoren: false
+        };
+        $scope.datumDoPopup = {
+            otvoren: false
+        };
+
+        $scope.pretraziNapredno=function() {
+            var pretragaPodaci = {
+                podnosilac: $scope.podnosilac,
+                vremeDonosenjaOd: $scope.vremeDonosenjaOd,
+                vremeDonosenjaDo: $scope.vremeDonosenjaDo,
+                glasnik: $scope.glasnik,
+                tip:$scope.tipAkta,
+                statusAkta:"U proceduri"
+
+            };
+            console.log(pretragaPodaci);
+            $http({
+                method: "post",
+                url: "api/akti/pretraga",
+                data: pretragaPodaci,
+                dataType: "json",
+                traditional: true
+            }).then(function (response) {
+                console.log("Ok pretraga");
+
+                $scope.data = response.data;
+            },function (error) {
+                console.log('Greska prilikom napredne pretrage');
+            });
+        }
+
+        $scope.tipoviAkta= [{naziv:"Zakon", value:"Zakon"}, {naziv:"Nepoznati tip",value:"nepoznatiTip"}];
+
+        $scope.ukloniFiltere=function()
+        {
+            $scope.podnosilac=null;
+            $scope.vremeDonosenjaOd=null;
+            $scope.vremeDonosenjaDo=null;
+            $scope.glasnik=null;
+            $scope.tipAkta=null;
+            //posle ponistenih filtera ucitavaju se svi akti ponovo.
+            $scope.ucitajAkteUProceduri();
+        }
+
+
+
+        
         $scope.submitVotes = function(){
             data = { id: $scope.idAkta, glasoviZa: $scope.glasoviZa, glasoviProtiv: $scope.glasoviProtiv, glasoviUzdrzani: $scope.glasoviUzdrzani };
             $http({
