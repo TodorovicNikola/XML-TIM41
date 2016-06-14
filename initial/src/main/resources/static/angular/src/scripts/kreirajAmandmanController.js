@@ -288,23 +288,30 @@ module.exports = [
         $scope.form.action = '';
         $scope.form.submit = function(){
 
+            if($scope.form.reference.trim() === '' || $scope.form.action.trim() === '')
+                return;
+
+
             var dto = {};
             dto.amandman = Xonomy.harvest();
             dto.reference = $scope.form.reference;
             dto.action = $scope.form.action;
-            dto.aktId = "4cc7c811-7788-4401-a36d-1755501bc577";
+            dto.aktId = $routeParams.id;
 
             $http.post("/api/amandmani/dogradi", dto).success(function(data, status) {
 
-                if($scope.form.reference === '' && $scope.form.action === '')
-                    return;
 
+                if(data.am.trim() === ''){
+                    alert("Kod odeljka, pododeljka ili člana ne postoji u aktu.");
 
-                alert("Uspešno dodat amandman.");
-                Xonomy.render(data.am, editor, docSpec);
+                }else{
 
-                $scope.form.reference = '';
-                $scope.form.action = '';
+                    Xonomy.render(data.am, editor, docSpec);
+
+                    $scope.form.reference = '';
+                    $scope.form.action = '';
+                }
+
             });
 
         }
@@ -315,7 +322,7 @@ module.exports = [
             dto.amandman = Xonomy.harvest();
             dto.reference = "";
             dto.action = "";
-            dto.aktId = "4cc7c811-7788-4401-a36d-1755501bc577";
+            dto.aktId = $routeParams.id;
 
             $http.post("/api/amandmani/dodaj", dto).success(function(data, status) {
 

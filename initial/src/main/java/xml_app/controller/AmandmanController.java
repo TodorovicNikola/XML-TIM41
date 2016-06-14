@@ -72,13 +72,7 @@ public class AmandmanController {
         String uuAmId = UUID.randomUUID().toString();
 
         telo = telo.replace("xml:space='preserve'", "");
-        telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");//ovo kad nestane validacija sa front end strane
-        /*telo = telo.replace("<Amandman","<Amandman IdAkta='" + dto.getAktId() + "'");
-        telo = telo.replace("<ns2:Stav","<ns2:Stav Id='' ");
-        telo = telo.replace("<ns2:Tacka","<ns2:Tacka Id='' ");
-        telo = telo.replace("<ns2:Podtacka","<ns2:Podtacka Id='' ");
-        telo = telo.replace("<ns2:Clan","<ns2:Clan Id='' ");*/
-
+        telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");
 
 
         StringReader reader = new StringReader(telo);
@@ -119,6 +113,8 @@ public class AmandmanController {
     @RequestMapping(value = "/dogradi",method = RequestMethod.POST)
     public AmandmanString dogradi(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
+        AmandmanString retDto = new AmandmanString();
+        retDto.setAm("");
 
         JAXBContext jaxbContextAm = JAXBContext.newInstance(Amandman.class);
         Unmarshaller unmarshaller = jaxbContextAm.createUnmarshaller();
@@ -128,66 +124,76 @@ public class AmandmanController {
 
 
 
-
         if(dto.getAction().equals("Izmeni")) {
 
-            DatabaseHelper dbh = new DatabaseHelper();
-            Akt akt = dbh.findAktById(dto.getAktId());//getReference:)
-            dbh.release();
-
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            dbFactory.setNamespaceAware(true);
-
-
-            Document doc;
-            try {
-                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                doc = dBuilder.newDocument();
-
-                JAXBContext jaxbContextAk = JAXBContext.newInstance(Akt.class);
-                Marshaller marshaller = jaxbContextAk.createMarshaller();
-                marshaller.marshal(akt, doc);
-
-                HashMap<String, String> prefMap = new HashMap<>();
-                prefMap.put("ns2", "http://www.xmlProjekat.com/akt");
-
-
-                XPathFactory xPathFactory = XPathFactory.newInstance();
-                XPath xPath = xPathFactory.newXPath();
-                xPath.setNamespaceContext(new NameSpaceContext(prefMap));
-                XPathExpression xPathExpression = xPath.compile("//ns2:Clan[@Id = '" + dto.getReference() +"']");////Deo1/Glava1/Odeljak1/Clan1
-
-
-                Node node = (Node) xPathExpression.evaluate(doc, XPathConstants.NODE);
-
-                List<ElementAmandmana> lea = a.getElementAmandmana();
-                ElementAmandmana ea = new ElementAmandmana();
-
-                JAXBContext jaxbContextCl = JAXBContext.newInstance(Clan.class);
-                Unmarshaller u = jaxbContextCl.createUnmarshaller();
-                Clan clan = (Clan) u.unmarshal(node);
-
-                ea.setAkcija(dto.getAction());
-                ea.setReferencira(dto.getReference());
-                ea.setClan(clan);
-                lea.add(ea);
-
-
-                StringWriter sw = new StringWriter();
-                Marshaller m = jaxbContextAm.createMarshaller();
-                m.marshal(a,sw);
-
-                AmandmanString as = new AmandmanString();
-                as.setAm(sw.toString());
-
-                return as;
-            } catch (ParserConfigurationException | XPathExpressionException e) {
-                e.printStackTrace();
+            if(!dto.getReference().contains("Clan")){
+                return retDto;
             }
+
+
+            Node node = getNode(dto);
+
+            if(node == null){
+                return retDto;
+            }
+
+            List<ElementAmandmana> lea = a.getElementAmandmana();
+            ElementAmandmana ea = new ElementAmandmana();
+
+            JAXBContext jaxbContextCl = JAXBContext.newInstance(Clan.class);
+            Unmarshaller u = jaxbContextCl.createUnmarshaller();
+            Clan clan = (Clan) u.unmarshal(node);
+
+            ea.setAkcija(dto.getAction());
+            ea.setReferencira(dto.getReference());
+            ea.setClan(clan);
+            lea.add(ea);
+
+
+            StringWriter sw = new StringWriter();
+            Marshaller m = jaxbContextAm.createMarshaller();
+            m.marshal(a,sw);
+
+
+            retDto.setAm(sw.toString());
+
+            return retDto;
+
         }
 
 
+
         if(dto.getAction().equals("Dodaj")) {
+
+
+            if(dto.getReference().contains("Clan")) {
+                return  retDto;
+            }
+
+
+            Node node = getNode(dto);
+            if(node == null){
+                return retDto;
+            }
+
+            try{
+
+                if(!dto.getReference().contains("Pododeljak")) {
+
+                    JAXBContext jaxbContextPod = JAXBContext.newInstance(Odeljak.class);
+                    Unmarshaller u = jaxbContextPod.createUnmarshaller();
+                    Odeljak o = (Odeljak) u.unmarshal(node);
+
+                    if(!o.getPododeljak().isEmpty()){
+                        return retDto;
+                    }
+                }
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
 
             List<ElementAmandmana> lea = a.getElementAmandmana();
             ElementAmandmana ea = new ElementAmandmana();
@@ -211,7 +217,21 @@ public class AmandmanController {
             return as;
         }
 
+
+
         if(dto.getAction().equals("Obrisi")) {
+
+            if(!dto.getReference().contains("Clan")){
+                return retDto;
+            }
+
+
+            Node node = getNode(dto);
+
+            if(node == null){
+                return retDto;
+            }
+
 
             List<ElementAmandmana> lea = a.getElementAmandmana();
             ElementAmandmana ea = new ElementAmandmana();
@@ -364,5 +384,55 @@ public class AmandmanController {
 
     }
 
+    private Node getNode(BuildAmandmanDTO dto){
 
+        DatabaseHelper dbh = new DatabaseHelper();
+        Akt akt = dbh.findAktById(dto.getAktId());
+        dbh.release();
+
+        try {
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            dbFactory.setNamespaceAware(true);
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
+
+            JAXBContext jaxbContextAk = JAXBContext.newInstance(Akt.class);
+            Marshaller marshaller = jaxbContextAk.createMarshaller();
+            marshaller.marshal(akt, doc);
+
+            HashMap<String, String> prefMap = new HashMap<>();
+            prefMap.put("ns2", "http://www.xmlProjekat.com/akt");
+
+
+            XPathFactory xPathFactory = XPathFactory.newInstance();
+            XPath xPath = xPathFactory.newXPath();
+            xPath.setNamespaceContext(new NameSpaceContext(prefMap));
+
+
+            if(dto.getReference().contains("Clan")) {
+                XPathExpression xPathExpression = xPath.compile("//ns2:Clan[@Id = '" + dto.getReference() + "']");
+                Node node = (Node) xPathExpression.evaluate(doc, XPathConstants.NODE);
+                return node;
+            }
+
+            if(dto.getReference().contains("Pododeljak")) {
+                XPathExpression xPathExpression = xPath.compile("//ns2:Pododeljak[@Id = '" + dto.getReference() + "']");
+                Node node = (Node) xPathExpression.evaluate(doc, XPathConstants.NODE);
+                return node;
+            }
+
+            if(dto.getReference().contains("Odeljak")) {
+                XPathExpression xPathExpression = xPath.compile("//ns2:Odeljak[@Id = '" + dto.getReference() + "']");
+                Node node = (Node) xPathExpression.evaluate(doc, XPathConstants.NODE);
+                return node;
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
