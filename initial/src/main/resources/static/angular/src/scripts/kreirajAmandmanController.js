@@ -82,7 +82,7 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ns2:Stav>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<ns2:Stav xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Stav Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
@@ -118,12 +118,12 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ns2:Stav>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<ns2:Stav xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Stav Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
                         caption: "Dodaj novi <ns2:Tacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<ns2:Tacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Tacka Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
@@ -159,16 +159,16 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ns2:Tacka>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<ns2:Tacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Tacka Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
                         caption: "Dodaj novi <ns2:Podtacka>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<ns2:Podtacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Podtacka Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<ns2:Sadrzaj xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Sadrzaj  xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj @Naslov",
                         action: Xonomy.newAttribute,
@@ -200,7 +200,7 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ns2:Podtacka>",
                         action: Xonomy.newElementAfter,
-                        actionParameter: "<ns2:Podtacka xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Podtacka Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
 
                     },{
                         caption: "Dodaj novi <ns2:Alineja>",

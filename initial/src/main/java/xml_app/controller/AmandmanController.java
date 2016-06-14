@@ -72,7 +72,7 @@ public class AmandmanController {
         String uuAmId = UUID.randomUUID().toString();
 
         telo = telo.replace("xml:space='preserve'", "");
-        //telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");//ovo kad nestane validacija sa front end strane
+        telo = telo.replace("<Amandman","<Amandman Id='" + uuAmId + "' IdAkta='" + dto.getAktId() + "'");//ovo kad nestane validacija sa front end strane
         /*telo = telo.replace("<Amandman","<Amandman IdAkta='" + dto.getAktId() + "'");
         telo = telo.replace("<ns2:Stav","<ns2:Stav Id='' ");
         telo = telo.replace("<ns2:Tacka","<ns2:Tacka Id='' ");
@@ -99,7 +99,7 @@ public class AmandmanController {
             Validator validator = schema.newValidator();
             validator.validate(new DOMSource(doc));
 
-            Amandman a = (Amandman) unmarshaller.unmarshal(reader);
+            Amandman a = (Amandman) unmarshaller.unmarshal(doc);
             GregorianCalendar date = new GregorianCalendar();
             a.setDatumIVremePodnosenja( DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
 
@@ -195,7 +195,10 @@ public class AmandmanController {
             ea.setReferencira(dto.getReference());
             ea.setAkcija(dto.getAction());
 
-            ea.setClan(new Clan());
+            Clan cl =  new Clan();
+            cl.setId(" ");
+
+            ea.setClan(cl);
             lea.add(ea);
 
             StringWriter sw = new StringWriter();
