@@ -11,7 +11,7 @@ module.exports = [
 
             validate: function(jsElement){
                 //Cycle through the element's attributes:
-                for(var i=0; i<jsElement.attributes.length; i++) {
+               /* for(var i=0; i<jsElement.attributes.length; i++) {
                     var jsAttribute=jsElement.attributes[i];
                     //Make sure item/@label is not an empty string:
                     if(jsElement.name=="Amandman" && jsAttribute.name=="Id") {
@@ -29,7 +29,7 @@ module.exports = [
                     if(jsChild.type=="element") { //if element
                         docSpec.validate(jsChild); //recursion
                     }
-                }
+                }*/
 
             },
             elements: {
@@ -275,7 +275,7 @@ module.exports = [
             }
         };
 
-        var xml="<Amandman Id='' xmlns='http://www.xmlProjekat.com/amandman'  xmlns:ns2='http://www.xmlProjekat.com/akt'><Podnosilac></Podnosilac></Amandman>";
+        var xml="<Amandman xmlns='http://www.xmlProjekat.com/amandman'  xmlns:ns2='http://www.xmlProjekat.com/akt'><Podnosilac></Podnosilac></Amandman>";
         var editor=document.getElementById("editor");
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
