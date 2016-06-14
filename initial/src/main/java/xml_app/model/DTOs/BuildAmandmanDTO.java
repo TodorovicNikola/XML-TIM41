@@ -1,7 +1,5 @@
 package xml_app.model.DTOs;
 
-import xml_app.model.Amandman;
-
 /**
  * Created by Eugene on 6/13/2016.
  */
@@ -11,6 +9,7 @@ public class BuildAmandmanDTO {
     private String reference;
     private String action;
     private String aktId;
+    private String userId;
 
     public String getAktId() {
         return aktId;
@@ -44,4 +43,11 @@ public class BuildAmandmanDTO {
         this.amandman = am;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

@@ -297,6 +297,7 @@ module.exports = [
             dto.reference = $scope.form.reference;
             dto.action = $scope.form.action;
             dto.aktId = $routeParams.id;
+            dto.userId = "";
 
             $http.post("/api/amandmani/dogradi", dto).success(function(data, status) {
 
@@ -323,6 +324,8 @@ module.exports = [
             dto.reference = "";
             dto.action = "";
             dto.aktId = $routeParams.id;
+            dto.userId = $scope.currentUser.username;
+
 
             $http.post("/api/amandmani/dodaj", dto).success(function(data, status) {
 
