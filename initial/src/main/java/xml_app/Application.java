@@ -2,6 +2,7 @@ package xml_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import xml_app.database.DatabaseHelper;
 
 import java.io.IOException;
 
@@ -29,6 +30,8 @@ public class Application {
 
         db.release();*/
 
+       /* DatabaseHelper db = new DatabaseHelper();
+        db.search();*/
 
         SpringApplication.run(Application.class, args);
     }
