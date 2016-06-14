@@ -56,5 +56,14 @@ module.exports = [
             $scope.amandmani = response.data;
 
         });
+
+        $scope.povuciAkt = function (id) {
+            alert(id);
+        }
+
+        $scope.povuciAmandman = function (id) {
+            alert(id);
+        }
+
     }
 ];
