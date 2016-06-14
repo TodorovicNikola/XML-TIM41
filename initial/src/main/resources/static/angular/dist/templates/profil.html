@@ -3,7 +3,7 @@
     <hr />
     <h3>Vaše aktivnosti:</h3>
     <br />
-    <div style="min-height: 200px;">
+    <div ng-hide="aktiUProceduri.length == 0" style="min-height: 200px;">
         <h4>Akti u proceduri</h4>
 
         <table class="table" >
@@ -27,7 +27,7 @@
                     </a>
                 </td>
                 <td ng-show="state == 'predlaganjeAkata'">
-                    <a class="btn btn-danger" ng-click="povuciAkt(akt.id)" style="position:relative; left:5px;">Povuci</a>
+                    <a class="btn btn-danger" ng-click="povuciAkt(akt.id)">Povuci</a>
                 </td>
             </tr>
             </tbody>
@@ -35,14 +35,14 @@
     </div>
     <hr />
     <br />
-    <div style="min-height: 200px;">
+    <div ng-hide="amandmani.length == 0" style="min-height: 200px;">
         <h4>Predloženi amandmani</h4>
         <table class="table" >
             <thead>
             <th>Naziv</th>
             <th>Datum</th>
             <th>Podnosilac</th>
-            <th>Pogledaj PDF</th>
+            <th>PDF</th>
             <th ng-show="state == 'predlaganjeAmandmana'">Povlačenje</th>
 
             </thead>
@@ -53,11 +53,11 @@
                 <td><p ng-repeat="podnosilac in amandman.podnosilac">{{podnosilac}} </p></td>
                 <td>
                     <a href="/api/amandmani/{{amandman.id}}/pdf">
-                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="40" height="40" style="position: relative; left: 20px;">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
                     </a>
                 </td>
                 <td ng-show="state == 'predlaganjeAmandmana'">
-                    <a class="btn btn-danger" ng-click="povuciAmandman(akt.id)" style="position:relative; left:5px;">Povuci</a>
+                    <a class="btn btn-danger" ng-click="povuciAmandman(akt.id)">Povuci</a>
                 </td>
             </tr>
             </tbody>
@@ -65,7 +65,7 @@
     </div>
     <hr />
     <br />
-    <div style="min-height: 200px;">
+    <div ng-hide="aktiUNacelu.length == 0" style="min-height: 200px;">
         <h4>Akti usvojeni u načelu</h4>
         <table class="table">
             <thead>
@@ -92,7 +92,7 @@
     </div>
     <hr />
     <br />
-    <div style="min-height: 200px;">
+    <div ng-hide="aktiUsvojeni.length == 0" style="min-height: 200px;">
         <h4>Usvojeni akti</h4>
         <table class="table" >
             <thead>

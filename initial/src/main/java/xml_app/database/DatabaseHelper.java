@@ -309,10 +309,25 @@ public class DatabaseHelper {
 
     public List<Amandman> getAmandmaniKorisnika(String userId){
         List<Amandman> ret = new ArrayList<>();
+        QueryManager queryMgr = client.newQueryManager();
 
-        //TODO: implement Davide
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/amandman\">\n" +
+                "  <q:query>\n" +
+                "      <a:Amandman userId='" + userId + "'></a:Amandman>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
 
-        return null;
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Amandman a = manager.readAs(docSum.getUri(), Amandman.class);
+            ret.add(a);
+        }
+
+        return ret;
     }
 
     /*public List<Akt> getAktiByMetaData(String naziv, String tip, String datumOd, String datumDo, String glasnik){
