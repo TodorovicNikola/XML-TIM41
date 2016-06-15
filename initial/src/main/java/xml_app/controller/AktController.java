@@ -16,6 +16,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
+import xml_app.model.DTOs.StringDTO;
 import xml_app.model.utils.PretragaKriterijum;
 
 import javax.servlet.http.HttpServletResponse;
@@ -222,7 +223,7 @@ public class AktController {
 
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
-    public Akt trial(@RequestBody String telo) throws JAXBException {
+    public StringDTO trial(@RequestBody String telo) throws JAXBException {
 
         String uuid = UUID.randomUUID().toString();
 
@@ -269,7 +270,12 @@ public class AktController {
             db.release();
 
             System.out.print(" Ovo jeee uuid: " + uuid);
-            return a;
+
+
+            StringDTO retVal = new StringDTO();
+            retVal.setAm("Ok");
+
+            return retVal;
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -281,8 +287,10 @@ public class AktController {
             e.printStackTrace();
         }
 
+        StringDTO retVal = new StringDTO();
+        retVal.setAm("Error");
 
-        return null;
+        return retVal;
 
 
     }

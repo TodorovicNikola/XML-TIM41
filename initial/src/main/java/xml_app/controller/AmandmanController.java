@@ -15,7 +15,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.*;
-import xml_app.model.DTOs.AmandmanString;
+import xml_app.model.DTOs.StringDTO;
 import xml_app.model.DTOs.BuildAmandmanDTO;
 
 import javax.servlet.http.HttpServletResponse;
@@ -141,9 +141,9 @@ public class AmandmanController {
 
 
     @RequestMapping(value = "/dogradi",method = RequestMethod.POST)
-    public AmandmanString dogradi(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
+    public StringDTO dogradi(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
-        AmandmanString retDto = new AmandmanString();
+        StringDTO retDto = new StringDTO();
         retDto.setAm("");
 
         JAXBContext jaxbContextAm = JAXBContext.newInstance(Amandman.class);
@@ -241,7 +241,7 @@ public class AmandmanController {
             Marshaller m = jaxbContextAm.createMarshaller();
             m.marshal(a,sw);
 
-            AmandmanString as = new AmandmanString();
+            StringDTO as = new StringDTO();
             as.setAm(sw.toString());
 
             return as;
@@ -275,7 +275,7 @@ public class AmandmanController {
             Marshaller m = jaxbContextAm.createMarshaller();
             m.marshal(a,sw);
 
-            AmandmanString as = new AmandmanString();
+            StringDTO as = new StringDTO();
             as.setAm(sw.toString());
 
             return as;
