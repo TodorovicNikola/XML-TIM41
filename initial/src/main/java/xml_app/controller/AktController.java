@@ -16,6 +16,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
+import xml_app.model.DTOs.StringDTO;
 import xml_app.model.utils.PretragaKriterijum;
 
 import javax.servlet.http.HttpServletResponse;
@@ -126,6 +127,32 @@ public class AktController {
 
         try{
             TransformerFactory tf = TransformerFactory.newInstance();
+            StreamSource xslt = new StreamSource("XSDs/Akt.xsl");
+
+            Transformer transformer = tf.newTransformer(xslt);
+
+            JAXBContext jc = JAXBContext.newInstance(Akt.class);
+            JAXBSource source = new JAXBSource(jc, a);
+
+            StreamResult result = new StreamResult(resp.getOutputStream());
+
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/zaAmandman/{aktId}",method = RequestMethod.GET)
+    public void konkretanAktZaAmandman(@PathVariable String aktId, HttpServletResponse resp){
+        DatabaseHelper db = new DatabaseHelper();
+
+        Akt a = db.findAktById(aktId);
+
+        db.release();
+
+        try{
+
+            TransformerFactory tf = TransformerFactory.newInstance();
             StreamSource xslt = new StreamSource("XSDs/AktZaAmandmane.xsl");
 
             Transformer transformer = tf.newTransformer(xslt);
@@ -135,13 +162,10 @@ public class AktController {
 
             StreamResult result = new StreamResult(resp.getOutputStream());
 
-
             transformer.transform(source, result);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     @RequestMapping(value="/sadrzaj", method = RequestMethod.POST)
@@ -222,7 +246,7 @@ public class AktController {
 
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
-    public Akt trial(@RequestBody String telo) throws JAXBException {
+    public StringDTO trial(@RequestBody String telo) throws JAXBException {
 
         String uuid = UUID.randomUUID().toString();
 
@@ -269,7 +293,12 @@ public class AktController {
             db.release();
 
             System.out.print(" Ovo jeee uuid: " + uuid);
-            return a;
+
+
+            StringDTO retVal = new StringDTO();
+            retVal.setAm("Ok");
+
+            return retVal;
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -281,8 +310,10 @@ public class AktController {
             e.printStackTrace();
         }
 
+        StringDTO retVal = new StringDTO();
+        retVal.setAm("Error");
 
-        return null;
+        return retVal;
 
 
     }

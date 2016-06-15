@@ -2,8 +2,8 @@
  * Created by Aleksa on 6/7/2016.
  */
 module.exports = [
-    '$scope', '$http',
-    function ctrl($scope, $http){
+    '$scope', '$http', '$window',
+    function ctrl($scope, $http, $window){
 
         var docSpec = {
 
@@ -449,14 +449,23 @@ module.exports = [
 
 
         $scope.submit = function () {
-            //alert("as");
 
             var reqData = Xonomy.harvest();
             reqData = reqData.replace("<Akt", "<Akt userId='" + $scope.currentUser.username + "'");
 
+
             $http.post("/api/akti/dodaj", reqData).success(function(data, status) {
-                alert("Uspešno dodat akt.");
-            })
+
+                if(data.am === "Ok") {
+                    alert("Uspešno dodat akt.");
+                    $window.location = "#/akti-u-proceduri";
+
+                 }else{
+
+                    alert("Dokument nije dobro formatiran!\n Svaki dokument mora da ima podnosioca i bar neki tekstualni sadrzaj.");
+                }
+
+            });
         }
 
     }
