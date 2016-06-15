@@ -101,7 +101,28 @@ public class DatabaseHelper {
     }
 
     public void deleteAkt(String id){
+
+        QueryManager queryMgr = client.newQueryManager();
+
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/amandman\">\n" +
+                "  <q:query>\n" +
+                "      <a:Amandman IdAkta='" + id + "'></a:Amandman>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Amandman a = manager.readAs(docSum.getUri(), Amandman.class);
+            deleteAmandman(a.getId());
+        }
+
+
         manager.delete("akti/" + id + ".xml");
+
     }
 
     public void deleteAmandman(String id){
