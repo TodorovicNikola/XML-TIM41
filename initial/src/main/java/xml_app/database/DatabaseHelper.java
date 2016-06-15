@@ -359,6 +359,14 @@ public class DatabaseHelper {
 
     }*/
 
+    public List<Amandman> getAmandmaniAkta(String IdAkta){
+        List<Amandman> ret = new ArrayList<>();
+
+        //TODO: Davide, getAmandmaniAkta :)
+
+        return ret;
+    }
+
     public List<Amandman> getAmandmani(){
         QueryManager queryMgr = client.newQueryManager();
 

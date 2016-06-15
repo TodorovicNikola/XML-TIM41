@@ -11,13 +11,13 @@
     </table>
     <table class="table">
         <thead>
-        <th>Naziv</th>
+        <th style="width: 35%;">Naziv</th>
         <th>Tip</th>
         <th>Datum</th>
         <th>Podnosilac</th>
         <th>PDF</th>
         <th ng-show="state == 'glasanjeUNacelu' && currentUser.role == 'Predsednik'" >Glasanje</th>
-        <th ng-show="state == 'predlaganjeAmandmana'">Amandman</th>
+        <th ng-show="(state == 'predlaganjeAmandmana' || state == 'glasanjeUNacelu' || state == 'glasanjeZaAmandmane') && currentUser" style="position:relative; left:35px" >Amandmani</th>
         </thead>
         <tbody>
         <tr ng-repeat="akt in data">
@@ -33,8 +33,9 @@
             <td ng-show="state == 'glasanjeUNacelu' && currentUser.role == 'Predsednik'">
                 <button class="open-voteModal btn btn-default" data-toggle="modal" ng-click="setParams(akt.id, akt.naslov)" data-target="#voteModal">Iniciraj</button>
              </td>
-            <td ng-show="state == 'predlaganjeAmandmana'">
-                <a class="btn btn-default" href="#/kreiraj-amandman/{{akt.id}}">Predloži</a>
+            <td>
+                <a class="btn btn-default" ng-show="(state == 'predlaganjeAmandmana' || state == 'glasanjeUNacelu' || state == 'glasanjeZaAmandmane') && currentUser" href="#/amandmani/{{akt.id}}">Pogledaj predložene</a>
+                <a ng-show="state == 'predlaganjeAmandmana'" class="btn btn-default" href="#/kreiraj-amandman/{{akt.id}}">Predloži</a>
             </td>
         </tr>
         </tbody>

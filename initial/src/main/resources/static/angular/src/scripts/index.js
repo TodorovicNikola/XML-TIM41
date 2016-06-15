@@ -43,7 +43,7 @@ myApp.config(['$routeProvider',
 			templateUrl: '/angular/dist/templates/akti-usvojeni-u-nacelu.html',
 			controller: 'aktiUsvojeniUNaceluCtrl'
 	 }).
-	 when('/amandmani', {
+	 when('/amandmani/:id', {
 		templateUrl: '/angular/dist/templates/amandmani.html',
 		controller: 'amandmaniCtrl'
 	 }).

@@ -62,6 +62,15 @@ public class AmandmanController {
         return amandmani;
     }
 
+    @RequestMapping(value="/akta", method = RequestMethod.POST)
+    public Collection<Amandman> amandmaniAkta(@RequestBody String IdAkta){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Amandman> amandmani = db.getAmandmaniAkta(IdAkta);
+        db.release();
+        return amandmani;
+    }
+
     @RequestMapping(value="/korisnika", method = RequestMethod.POST)
     public Collection<Amandman> amandmaniKorisnika(@RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
