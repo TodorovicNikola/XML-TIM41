@@ -361,8 +361,23 @@ public class DatabaseHelper {
 
     public List<Amandman> getAmandmaniAkta(String IdAkta){
         List<Amandman> ret = new ArrayList<>();
+        QueryManager queryMgr = client.newQueryManager();
 
-        //TODO: Davide, getAmandmaniAkta :)
+        String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/amandman\">\n" +
+                "  <q:query>\n" +
+                "      <a:Amandman IdAkta='" + IdAkta + "'></a:Amandman>\n" +
+                "  </q:query>\n" +
+                "</q:qbe>";
+        StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
+        RawQueryByExampleDefinition query = queryMgr.newRawQueryByExampleDefinition(qbeHandle, "akt");
+
+
+        SearchHandle searchHandle = queryMgr.search(query, new SearchHandle());
+        for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
+
+            Amandman a = manager.readAs(docSum.getUri(), Amandman.class);
+            ret.add(a);
+        }
 
         return ret;
     }
