@@ -62,7 +62,7 @@ module.exports = [
                 traditional: true
             }).then(function (response) {
                 console.log("Ok pretraga");
-
+                angular.element(document.querySelector('#pretragaModal')).modal('hide');
                 $scope.data = response.data;
             },function (error) {
                 console.log('Greska prilikom napredne pretrage');

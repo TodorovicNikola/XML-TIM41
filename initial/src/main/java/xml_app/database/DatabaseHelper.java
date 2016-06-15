@@ -351,17 +351,21 @@ public class DatabaseHelper {
         return ret;
     }
 
-    /*public List<Akt> getAktiByMetaData(String naziv, String tip, String datumOd, String datumDo, String glasnik){
+    public List<Akt> getAktiByMetaData(String podnosilac, String tip, String datumOd, String datumDo, String glasnik, String status){
         QueryManager queryMgr = client.newQueryManager();
-        String str = "";
+        String attributes = " Status='" + status + "'";
 
-        if(naziv != "")
-            str += " Naslov='<q:word>" + naziv + "</q:word>'";
+
+        if(glasnik != "" && glasnik != null)
+            attributes += " SluzbeniGlasnik='" + glasnik + "'";
+
+        if(tip != "" && tip != null)
+            attributes += " Tip='" + tip + "'";
 
 
         String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
                 "  <q:query>\n" +
-                "      <a:Akt" + str + "></a:Akt>\n" +
+                "      <a:Akt" + attributes + "></a:Akt>\n" +
                 "  </q:query>\n" +
                 "</q:qbe>";
         StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
@@ -378,7 +382,7 @@ public class DatabaseHelper {
 
         return ret;
 
-    }*/
+    }
 
     public List<Amandman> getAmandmaniAkta(String IdAkta){
         List<Amandman> ret = new ArrayList<>();

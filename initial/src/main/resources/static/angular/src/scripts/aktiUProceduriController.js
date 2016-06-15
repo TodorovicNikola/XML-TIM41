@@ -69,7 +69,7 @@ module.exports = [
                 podnosilac: $scope.podnosilac,
                 vremeDonosenjaOd: $scope.vremeDonosenjaOd,
                 vremeDonosenjaDo: $scope.vremeDonosenjaDo,
-                glasnik: $scope.glasnik,
+                glasnik: "",
                 tip:$scope.tipAkta,
                 statusAkta:"U proceduri"
 
@@ -83,8 +83,9 @@ module.exports = [
                 traditional: true
             }).then(function (response) {
                 console.log("Ok pretraga");
-
                 $scope.data = response.data;
+                angular.element(document.querySelector('#pretragaModal')).modal('hide');
+             
             },function (error) {
                 console.log('Greska prilikom napredne pretrage');
             });

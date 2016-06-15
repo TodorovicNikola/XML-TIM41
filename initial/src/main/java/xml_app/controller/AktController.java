@@ -18,6 +18,7 @@ import xml_app.database.DatabaseHelper;
 import xml_app.model.Akt;
 import xml_app.model.DTOs.StringDTO;
 import xml_app.model.utils.PretragaKriterijum;
+import xml_app.model.utils.SearchMetadata;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
@@ -175,6 +176,24 @@ public class AktController {
         String pretraga=kriterijum.getKriterijum();
         DatabaseHelper db = new DatabaseHelper();
         List<Akt> akti = db.getAktiByCriteria(pretraga,kriterijum.getStatus());
+        db.release();
+
+        return akti;
+
+    }
+
+    @RequestMapping(value="/pretraga", method = RequestMethod.POST)
+    public Collection<Akt> aktiNaprednaPretraga(@RequestBody SearchMetadata metadata){
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("evo ga " + metadata.getVremeDonosenjaDo());
+        String podnosilac = metadata.getPodnosilac();
+        String tip = metadata.getTip();
+        String datumOd = metadata.getVremeDonosenjaOd();
+        String datumDo = metadata.getVremeDonosenjaDo();
+        String glasnik = metadata.getGlasnik();
+        String status = metadata.getStatusAkta();
+        DatabaseHelper db = new DatabaseHelper();
+        List<Akt> akti = db.getAktiByMetaData(podnosilac,tip,datumOd,datumDo,glasnik,status);
         db.release();
 
         return akti;

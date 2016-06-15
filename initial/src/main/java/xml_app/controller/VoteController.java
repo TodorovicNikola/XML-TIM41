@@ -64,7 +64,7 @@ public class VoteController {
 
             return "{ \"data\": \"Akt označen kao 'USVOJEN U NAČELU'!\" }";
         } else {
-            //TODO: OBRISATI AMANDMANE BRISANOG AKTA
+
             db.deleteAkt(votes.getId());
 
             db.release();
@@ -81,7 +81,7 @@ public class VoteController {
         DatabaseHelper db = new DatabaseHelper();
         Amandman am = db.findAmandmanById(votes.getId());
         if (votes.getGlasoviZa() > votes.getGlasoviProtiv() + votes.getGlasoviUzdrzani()) {
-            //TODO: PRIMENITI AMANDMAN
+
             List<ElementAmandmana> elementiAmandmana = am.getElementAmandmana();
             Akt akt = db.findAktById(am.getIdAkta());
             DocumentBuilderFactory dbFactoryAkt = DocumentBuilderFactory.newInstance();
