@@ -16,7 +16,7 @@
 
             <fo:page-sequence master-reference="amandman-strana">
                 <fo:flow flow-name="xsl-region-body">
-                    <fo:block font-family="sans-serif" font-size="9px"   width="70%" margin-left="10%" margin-right="10%" >
+                    <fo:block font-family="Arial" font-size="9px"   width="70%" margin-left="10%" margin-right="10%" >
                         <fo:block font-weight="bold">Datum i vreme podnošenja:<br />
                         <xsl:for-each select="am:Amandman">
                             <fo:block><xsl:value-of select="@DatumIVremePodnosenja"/>

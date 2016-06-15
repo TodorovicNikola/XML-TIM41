@@ -16,78 +16,78 @@
 
             <fo:page-sequence master-reference="akt-strana">
                 <fo:flow flow-name="xsl-region-body">
-            <fo:block font-family="Helvetica" font-size="10px"   width="70%" margin-left="10%" margin-right="10%" >
+            <fo:block font-family="Arial" font-size="10px"   width="70%" margin-left="10%" margin-right="10%" >
                 <xsl:for-each select="a:Akt">
 
-                    <fo:block font-family="Helvetica" text-align="center" font-size="23" margin="20px" >
+                    <fo:block font-family="Arial" text-align="center" font-size="23" margin="20px" >
                         <xsl:value-of select="@Naslov"/>
 
                     </fo:block>
                         <xsl:for-each select="//a:Deo">
-                            <fo:block font-family="TimesRoman" text-align="center" font-size="21" margin="20px" >
+                            <fo:block font-family="Arial" text-align="center" font-size="21" margin="20px" >
                                <xsl:value-of select="@Naslov"/>
                             </fo:block>
 
 
 
                             <xsl:for-each select="a:Glava">
-                                <fo:block font-family="sans-serif" text-align="center" font-size="19" margin="20px">
+                                <fo:block font-family="Arial" text-align="center" font-size="19" margin="20px">
                                     <xsl:value-of select="@Naslov"/>
                                 </fo:block>
 
                                 <xsl:for-each select="a:Odeljak">
-                                    <fo:block font-family="sans-serif"  text-align="center" font-size="17" margin="20px">
+                                    <fo:block font-family="Arial"  text-align="center" font-size="17" margin="20px">
                                        <xsl:value-of select="@Naslov"/>
 
                                     </fo:block>
-                                    <fo:block font-family="sans-serif" font-size="8" >
+                                    <fo:block font-family="Arial" font-size="8" >
                                        <xsl:value-of select="a:Sadrzaj"/>
                                     </fo:block>
                                     <xsl:choose>
                                         <xsl:when test="a:Pododeljak">
 
                                     <xsl:for-each select="a:Pododeljak">
-                                        <fo:block font-family="sans-serif" text-align="center" font-size="15" margin="20px">
+                                        <fo:block font-family="Arial" text-align="center" font-size="15" margin="20px">
                                             <xsl:value-of select="@Naslov"/>
 
                                         </fo:block>
-                                        <fo:block font-family="sans-serif" font-size="8" >
+                                        <fo:block font-family="Arial" font-size="8" >
                                             <xsl:value-of select="a:Sadrzaj"/>
                                         </fo:block>
 
                                     <xsl:for-each select="a:Clan">
-                                        <fo:block font-family="sans-serif" text-align="center" font-size="14" margin="20px">
+                                        <fo:block font-family="Arial" text-align="center" font-size="14" margin="20px">
                                           <xsl:value-of select="@Naslov"/>
 
                                         </fo:block>
-                                        <fo:block font-family="sans-serif" font-size="8" >
+                                        <fo:block font-family="Arial" font-size="8" >
                                             <xsl:value-of select="a:Sadrzaj"/>
 
                                         </fo:block>
                                         <xsl:for-each select="a:Stav">
-                                            <fo:block font-family="sans-serif" text-align="center" font-size="13" margin="20px">
+                                            <fo:block font-family="Arial" text-align="center" font-size="13" margin="20px">
                                              <xsl:value-of select="@Naslov"/>
                                             </fo:block>
-                                            <fo:block font-family="sans-serif" font-size="8" >
+                                            <fo:block font-family="Arial" font-size="8" >
                                                 <xsl:value-of select="a:Sadrzaj"/>
                                             </fo:block>
                                             <xsl:for-each select="a:Tacka">
-                                                <fo:block font-family="sans-serif" text-align="center" font-size="12" margin="20px" >
+                                                <fo:block font-family="Arial" text-align="center" font-size="12" margin="20px" >
                                                     <xsl:value-of select="@Naslov"/>
                                                 </fo:block>
-                                                <fo:block font-family="sans-serif" font-size="8" >
+                                                <fo:block font-family="Arial" font-size="8" >
                                                     <xsl:value-of select="a:Sadrzaj"/>
                                                 </fo:block>
                                                 <xsl:for-each select="a:Podtacka">
-                                                    <fo:block font-family="sans-serif" text-align="center"  font-size="11" margin="20px">
+                                                    <fo:block font-family="Arial" text-align="center"  font-size="11" margin="20px">
                                                        <xsl:value-of select="@Naslov"/>
                                                     </fo:block>
-                                                    <fo:block font-family="sans-serif" font-size="8" >
+                                                    <fo:block font-family="Arial" font-size="8" >
                                                         <xsl:value-of select="a:Sadrzaj"/>
                                                     </fo:block>
 
                                                     <xsl:for-each select="a:Alineja">
-                                                        <fo:block font-family="sans-serif" font-size="10" >
+                                                        <fo:block font-family="Arial" font-size="10" >
                                                             <xsl:value-of select="a:Sadrzaj"/>
                                                         </fo:block>
 
@@ -102,38 +102,38 @@
                                     <xsl:otherwise>
 
                                         <xsl:for-each select="a:Clan">
-                                        <fo:block font-family="sans-serif" text-align="center" font-size="14" margin="20px">
+                                        <fo:block font-family="Arial" text-align="center" font-size="14" margin="20px">
                                             <xsl:value-of select="@Naslov"/>
 
                                         </fo:block>
-                                        <fo:block font-family="sans-serif" font-size="8" >
+                                        <fo:block font-family="Arial" font-size="8" >
                                             <xsl:value-of select="a:Sadrzaj"/>
 
                                         </fo:block>
                                         <xsl:for-each select="a:Stav">
-                                            <fo:block font-family="sans-serif" text-align="center" font-size="13" margin="20px">
+                                            <fo:block font-family="Arial" text-align="center" font-size="13" margin="20px">
                                                 <xsl:value-of select="@Naslov"/>
                                             </fo:block>
-                                            <fo:block font-family="sans-serif" font-size="8" >
+                                            <fo:block font-family="Arial" font-size="8" >
                                                 <xsl:value-of select="a:Sadrzaj"/>
                                             </fo:block>
                                             <xsl:for-each select="a:Tacka">
-                                                <fo:block font-family="sans-serif" text-align="center" font-size="12" margin="20px" >
+                                                <fo:block font-family="Arial" text-align="center" font-size="12" margin="20px" >
                                                     <xsl:value-of select="@Naslov"/>
                                                 </fo:block>
-                                                <fo:block font-family="sans-serif" font-size="8" >
+                                                <fo:block font-family="Arial" font-size="8" >
                                                     <xsl:value-of select="a:Sadrzaj"/>
                                                 </fo:block>
                                                 <xsl:for-each select="a:Podtacka">
-                                                    <fo:block font-family="sans-serif" text-align="center"  font-size="11" margin="20px">
+                                                    <fo:block font-family="Arial" text-align="center"  font-size="11" margin="20px">
                                                         <xsl:value-of select="@Naslov"/>
                                                     </fo:block>
-                                                    <fo:block font-family="sans-serif" font-size="8" >
+                                                    <fo:block font-family="Arial" font-size="8" >
                                                         <xsl:value-of select="a:Sadrzaj"/>
                                                     </fo:block>
 
                                                     <xsl:for-each select="a:Alineja">
-                                                        <fo:block font-family="sans-serif" font-size="10" >
+                                                        <fo:block font-family="Arial" font-size="10" >
                                                             <xsl:value-of select="a:Sadrzaj"/>
                                                         </fo:block>
 
