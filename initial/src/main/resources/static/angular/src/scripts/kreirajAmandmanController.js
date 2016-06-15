@@ -280,7 +280,7 @@ module.exports = [
         Xonomy.setMode("laic");
         Xonomy.render(xml, editor, docSpec);
         
-        
+        $scope.aktId = $routeParams.id;
         
         
         $scope.form = {};

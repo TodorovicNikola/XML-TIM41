@@ -2,9 +2,9 @@
 
 
     <div class="form-group">
-        <a target="_blank" href="http://your_url_here.html" class="btn btn-info" role="button">Akt sa kodovima</a>
-        Kod: <input type="text" data-toggle="tooltip" data-placement="top" title="Unesite kod ." class="form-control" ng-model="form.reference"/>
-        <select name="actionSelect" class="form-control" ng-model="form.action">
+        <a target="_blank" href="/api/akti/zaAmandman/{{aktId}}" class="btn btn-info" role="button" style="position:relative; float:right">Akt sa kodovima</a><br /><br/>
+        Kod: <input type="text" data-toggle="tooltip" data-placement="top" title="Unesite kod ." class="form-control" ng-model="form.reference" style="width: 30%"/>
+        <select name="actionSelect" class="form-control" ng-model="form.action" style="width: 30%">
             <option value="Izmeni">Izmeni</option>
             <option value="Dodaj">Dodaj</option>
             <option value="Obrisi">Obriši</option>
