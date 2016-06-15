@@ -1,6 +1,121 @@
 <div>
-    <h2>Dobrodošli, {{currentUser.username}}</h2>
+    <h2>Dobrodošli, {{currentUser.username}}!</h2>
     <hr />
-    <h4>Akti u proceduri</h4>
+    <h3>Vaše aktivnosti</h3>
+    <br />
+    <div ng-hide="aktiUProceduri.length == 0" style="min-height: 200px;">
+        <h4>Akti u proceduri</h4>
+
+        <table class="table" >
+            <thead>
+            <th>Naziv</th>
+            <th>Tip</th>
+            <th>Datum</th>
+            <th>Podnosilac</th>
+            <th>PDF</th>
+            <th ng-show="state == 'predlaganjeAkata'">Povlačenje</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="akt in aktiUProceduri">
+                <td><a href="/api/akti/{{akt.id}}">{{akt.naslov | uppercase}}</a></td>
+                <td>{{akt.tip}}</td>
+                <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
+                <td><p ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}} </p></td>
+                <td>
+                    <a href="api/akti/{{akt.id}}/pdf">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
+                    </a>
+                </td>
+                <td ng-show="state == 'predlaganjeAkata'">
+                    <a class="btn btn-danger" ng-click="povuciAkt(akt.id)">Povuci</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <br />
+    <div ng-hide="amandmani.length == 0" style="min-height: 200px;">
+        <h4>Predloženi amandmani</h4>
+        <table class="table" >
+            <thead>
+            <th>Naziv</th>
+            <th>Datum</th>
+            <th>Podnosilac</th>
+            <th>PDF</th>
+            <th ng-show="state == 'predlaganjeAmandmana'">Povlačenje</th>
+
+            </thead>
+            <tbody>
+            <tr ng-repeat="amandman in amandmani">
+                <td><a href="/api/amandmani/{{amandman.id}}">Amandman</a></td>
+                <td>{{amandman.datumIVremePodnosenja | date: "d.M.yyyy."}}</td>
+                <td><p ng-repeat="podnosilac in amandman.podnosilac">{{podnosilac}} </p></td>
+                <td>
+                    <a href="/api/amandmani/{{amandman.id}}/pdf">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
+                    </a>
+                </td>
+                <td ng-show="state == 'predlaganjeAmandmana'">
+                    <a class="btn btn-danger" ng-click="povuciAmandman(amandman.id)">Povuci</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <br />
+    <div ng-hide="aktiUNacelu.length == 0" style="min-height: 200px;">
+        <h4>Akti usvojeni u načelu</h4>
+        <table class="table">
+            <thead>
+            <th>Naziv</th>
+            <th>Tip</th>
+            <th>Datum</th>
+            <th>Podnosilac</th>
+            <th>PDF</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="akt in aktiUNacelu">
+                <td><a href="/api/akti/{{akt.id}}">{{akt.naslov | uppercase}}</a></td>
+                <td>{{akt.tip}}</td>
+                <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
+                <td><p ng-repeat="podnosilac in akt.podnosilac">{{podnosilac}} </p></td>
+                <td>
+                    <a href="api/akti/{{akt.id}}/pdf">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <br />
+    <div ng-hide="aktiUsvojeni.length == 0" style="min-height: 200px;">
+        <h4>Usvojeni akti</h4>
+        <table class="table" >
+            <thead>
+            <th>Naziv</th>
+            <th>Tip</th>
+            <th>Datum</th>
+            <th>Službeni glasnik</th>
+            <th>PDF</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="akt in aktiUsvojeni">
+                <td><a href="/api/akti/{{akt.id}}">{{akt.naslov | uppercase}}</a></td>
+                <td>{{akt.tip}}</td>
+                <td>{{akt.datumPodnosenja | date: "d.M.yyyy."}}</td>
+                <td>{{akt.sluzbeniGlasnik}}</td>
+                <td>
+                    <a href="api/akti/{{akt.id}}/pdf">
+                        <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>

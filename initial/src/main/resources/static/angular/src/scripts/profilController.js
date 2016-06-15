@@ -1,6 +1,6 @@
 module.exports = [
-    '$scope', '$http',
-    function myController($scope, $http){
+    '$scope', '$http', '$route',
+    function myController($scope, $http, $route){
         $http({
             method: "Get",
             url: "api/state/getState",
@@ -13,18 +13,19 @@ module.exports = [
         var data = $scope.currentUser.username;
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/uProceduriKorisnika",
             data: data,
             dataType: "json",
             traditional: true
         }).then(function (response) {
+           
             $scope.aktiUProceduri = response.data;
 
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/uNaceluKorisnika",
             data: data,
             dataType: "json",
@@ -35,7 +36,7 @@ module.exports = [
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/akti/usvojeniKorisnika",
             data: data,
             dataType: "json",
@@ -46,7 +47,7 @@ module.exports = [
         });
 
         $http({
-            method: "Get",
+            method: "Post",
             url: "api/amandmani/korisnika",
             data: data,
             dataType: "json",
@@ -55,5 +56,37 @@ module.exports = [
             $scope.amandmani = response.data;
 
         });
+
+        $scope.povuciAkt = function (id) {
+            if (confirm("DA LI STE SIGURNI DA ŽELITE DA POVUČETE AKT?")) {
+                $http({
+                    method: "Post",
+                    url: "api/akti/obrisi",
+                    data: id,
+                    dataType: "json",
+                    traditional: true
+                }).then(function (response) {
+                    alert(response.data.data);
+                    $route.reload();
+
+                });
+            }
+        }
+
+        $scope.povuciAmandman = function (id) {
+            if (confirm("DA LI STE SIGURNI DA ŽELITE DA POVUČETE AMANDMAN?")) {
+                $http({
+                    method: "Post",
+                    url: "api/amandmani/obrisi",
+                    data: id,
+                    dataType: "json",
+                    traditional: true
+                }).then(function (response) {
+                    alert(response.data.data);
+                    $route.reload();
+
+                });
+            }
+        }
     }
 ];

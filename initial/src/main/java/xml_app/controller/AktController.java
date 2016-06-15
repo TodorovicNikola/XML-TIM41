@@ -63,7 +63,7 @@ public class AktController {
     @RequestMapping(value="/usvojeniKorisnika", method = RequestMethod.POST)
     public Collection<Akt> usvojeniAktiKorisnika(@RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
-        //TODO: David pogledaj
+
         List<Akt> akti = db.getUsvojeniAktiKorisnika(userId);
         db.release();
         return akti;
@@ -81,7 +81,7 @@ public class AktController {
     @RequestMapping(value="/uProceduriKorisnika", method = RequestMethod.POST)
     public Collection<Akt> aktiUProceduriKorisnika(@RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
-        //TODO: David pogledaj
+
         List<Akt> akti = db.getAktiUProceduriKorisnika(userId);
         db.release();
         return akti;
@@ -99,10 +99,21 @@ public class AktController {
     @RequestMapping(value="/uNaceluKorisnika", method = RequestMethod.POST)
     public Collection<Akt> aktiUsvojeniUNaceluKorisnika(@RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
-        //TODO: David pogledaj
+
         List<Akt> akti = db.getAktiUsvojeniUNaceluKorisnika(userId);
         db.release();
         return akti;
+    }
+
+    @RequestMapping(value="/obrisi", method = RequestMethod.POST)
+    public String obrisi(@RequestBody String id){
+        DatabaseHelper db = new DatabaseHelper();
+
+        db.deleteAkt(id);
+
+        db.release();
+
+        return "{ \"data\": \"Akt povučen!\" }";
     }
 
     @RequestMapping(value = "/{aktId}",method = RequestMethod.GET)

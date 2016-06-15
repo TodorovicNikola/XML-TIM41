@@ -37,11 +37,11 @@
 						<li><a href="#/kreiraj-amandman">Test kreiraj amandman</a></li>
 					</ul>
 				</li>
-				<li><a href="#/amandmani">Amandmani</a></li>
 				<li ng-show="currentUser && state=='predlaganjeAkata'"><a href="#/kreiraj-akt">Predloži akt</a></li>
-				<li ng-show="currentUser.role == 'Predsednik'"><a href="#/rukovodjenje-sednicom">Rukovodi sednicom</a></li>
+
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" style="position: relative; right: 50px">
+				<li ng-show="currentUser.role == 'Predsednik'"><a href="#/rukovodjenje-sednicom">Rukovodi sednicom</a></li>
 				<li ng-hide="currentUser"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				<li ng-show="currentUser"><a href="#/profil"><span class="glyphicon glyphicon-user"></span> {{currentUser.username}}</a></li>
 				<li ng-show="currentUser"><a href ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

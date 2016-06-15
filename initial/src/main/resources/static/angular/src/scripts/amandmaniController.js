@@ -1,9 +1,15 @@
 module.exports = [
     '$scope', '$http', '$routeParams', '$route',
     function myController($scope, $http, $routeParams, $route){
-        $http.get("/api/amandmani/svi").then(function(response) {
+        $http({
+            method: "Post",
+            url: "api/amandmani/akta",
+            data: $routeParams.id,
+            dataType: "json",
+            traditional: true
+        }).then(function (response) {
             $scope.data = response.data;
-                        
+
         });
 
 

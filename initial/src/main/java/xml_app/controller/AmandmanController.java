@@ -62,6 +62,15 @@ public class AmandmanController {
         return amandmani;
     }
 
+    @RequestMapping(value="/akta", method = RequestMethod.POST)
+    public Collection<Amandman> amandmaniAkta(@RequestBody String IdAkta){
+        DatabaseHelper db = new DatabaseHelper();
+
+        List<Amandman> amandmani = db.getAmandmaniAkta(IdAkta);
+        db.release();
+        return amandmani;
+    }
+
     @RequestMapping(value="/korisnika", method = RequestMethod.POST)
     public Collection<Amandman> amandmaniKorisnika(@RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
@@ -69,6 +78,17 @@ public class AmandmanController {
         List<Amandman> amandmani = db.getAmandmaniKorisnika(userId);
         db.release();
         return amandmani;
+    }
+
+    @RequestMapping(value="/obrisi", method = RequestMethod.POST)
+    public String obrisi(@RequestBody String id){
+        DatabaseHelper db = new DatabaseHelper();
+
+        db.deleteAmandman(id);
+
+        db.release();
+
+        return "{ \"data\": \"Amandman povučen!\" }";
     }
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
