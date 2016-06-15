@@ -11,6 +11,7 @@ myApp.controller('aktiUsvojeniUNaceluCtrl', require('./aktiUsvojeniUNaceluContro
 myApp.controller('amandmaniCtrl', require('./amandmaniController.js'));
 myApp.controller('profilCtrl', require('./profilController.js'));
 myApp.service('loginService', require('./loginService.js'));
+myApp.controller('registerCtrl',require('./registerController.js'));
 
 myApp.config(['$routeProvider',
   function($routeProvider) {

@@ -64,6 +64,19 @@ public class KorisnikController {
         }
 
     }
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(@RequestBody Korisnik korisnik) {
+        if (db.findKorisnikById(korisnik.getKorisnickoIme())!=null)
+        {
+            return "{ \"data\": \"Postoji korisnik sa tim korisničkim imenom!\" }";
+        }
+        else
+        {
+            db.writeKorisnik(korisnik);
+            return "{ \"data\": \"Registracija uspela!\" }";
+        }
+
+    }
 
     /* PRIMER SA PARAMETROM */
     /*@RequestMapping(method = RequestMethod.GET)
