@@ -211,6 +211,7 @@ public class VoteController {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 Akt a = (Akt) u.unmarshal(docAkt);
                 db.writeAkt(a);
+                db.deleteAmandman(votes.getId());
             } catch (JAXBException e) {
                 e.printStackTrace();
             }

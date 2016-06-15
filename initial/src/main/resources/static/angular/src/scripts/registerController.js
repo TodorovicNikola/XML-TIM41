@@ -23,6 +23,17 @@ module.exports = [
             return true;
 
         }
+        $scope.izbrisiPodatkeOKorisniku=function()
+        {
+            $scope.imeKorisnika =null;
+            $scope.prezimeKorisnika =null;
+            $scope.lozinkaKorisnika=null;
+            $scope.korisnickoImeKorisnika=null;
+            $scope.lozinkaKorisnikaPonovljena=null;
+            $scope.tipKorisnika=null;
+            $scope.emailKorisnika=null;
+            $scope.telefonKorisnika=null;
+        }
         $scope.registruj=function()
         {
 
@@ -46,7 +57,8 @@ module.exports = [
                 }).then(function (response) {
                     alert(response.data.data);
                     angular.element(document.querySelector('#registrujOdbornika')).modal('hide');
-                    $scope.data=response.data;
+                    $scope.izbrisiPodatkeOKorisniku();
+
                 },function(error)
                 {
                     alert("Nepoznata greska");
