@@ -354,7 +354,7 @@ public class DatabaseHelper {
     public List<Akt> getAktiByMetaData(String podnosilac, String tip, String datumOd, String datumDo, String glasnik, String status){
         QueryManager queryMgr = client.newQueryManager();
         String attributes = " Status='" + status + "'";
-
+        String podnosilacXml = "";
 
         if(glasnik != "" && glasnik != null)
             attributes += " SluzbeniGlasnik='" + glasnik + "'";
@@ -362,10 +362,13 @@ public class DatabaseHelper {
         if(tip != "" && tip != null)
             attributes += " Tip='" + tip + "'";
 
+        if(podnosilac != "" && podnosilac != null)
+            podnosilacXml = "<a:Podnosilac><q:word>" + podnosilac + "</q:word></a:Podnosilac>";
+
 
         String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
                 "  <q:query>\n" +
-                "      <a:Akt" + attributes + "></a:Akt>\n" +
+                "      <a:Akt" + attributes + ">" + podnosilacXml + "</a:Akt>\n" +
                 "  </q:query>\n" +
                 "</q:qbe>";
         StringHandle qbeHandle = new StringHandle(rawXMLQuery).withFormat(Format.XML);
