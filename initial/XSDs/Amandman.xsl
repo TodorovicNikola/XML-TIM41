@@ -71,6 +71,9 @@
                         text-align:left !important;
                         font-size:16px !important;
                     }
+                    h6.part {
+                        font-style: italic;
+                    }
                 </style>
             </head>
             <body>
@@ -91,41 +94,36 @@
                             <xsl:variable name="REFERENCE"><xsl:value-of select="@Referencira"/></xsl:variable>
                             <xsl:choose>
                                 <xsl:when test="@Akcija = 'Dodaj'">
-                                    <p> &#8226; Dodaje se ispod <a href="{$REFERENCE}">člana</a> sledeći član:</p> 
+                                    <p> &#8226; Dodaje se ispod <a href="http://localhost:8080/api/akti/{$REFERENCE}">člana</a> sledeći član:</p> 
                                 </xsl:when>
                                 <xsl:when test="@Akcija = 'Izmeni'">
-                                    <p>&#8226; Zamenjuje se <a href="{$REFERENCE}">član</a> sledećim članom:</p> 
+                                    <p>&#8226; Zamenjuje se <a href="http://localhost:8080/api/akti/{$REFERENCE}">član</a> sledećim članom:</p> 
                                 </xsl:when>
                                 <xsl:when test="@Akcija = 'Obrisi'">
-                                    <p>&#8226; Briše se <a href="{$REFERENCE}">član</a>.</p>
+                                    <p>&#8226; Briše se <a href="http://localhost:8080/api/akti/{$REFERENCE}">član</a>.</p>
                                 </xsl:when>
                             </xsl:choose>
                             <xsl:for-each select="akt:Clan">
-
-                                
                                 <h5><xsl:value-of select="@Naslov"/></h5>
+                                <h6 class="part">Član <xsl:value-of select="@RedniBroj"/></h6>
                                 
-                                <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                <xsl:apply-templates select="akt:Sadrzaj"/>
                                 
-                                <xsl:for-each select="//akt:Stav">
+                                <xsl:for-each select="akt:Stav">
                                     <h6><xsl:value-of select="@Naslov"/></h6>
                                     
-                                    <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                    <xsl:apply-templates select="akt:Sadrzaj"/>
                                     
-                                    <xsl:for-each select="//akt:Tacka">
+                                    <xsl:for-each select="akt:Tacka">
                                         <h6 class="TackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                         
-                                        <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                        <xsl:apply-templates select="akt:Sadrzaj"/>
                                         
-                                        <xsl:for-each select="//akt:Podtacka">
+                                        <xsl:for-each select="akt:Podtacka">
                                             <h6 class="PodtackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                             
-                                            <p><xsl:value-of select="akt:Sadrzaj"/></p>
-                                            
-                                            <xsl:for-each select="//akt:Alineja">                                                            
-                                                <p><xsl:value-of select="akt:Sadrzaj"/></p>
-                                                
-                                            </xsl:for-each>
+                                            <xsl:apply-templates select="akt:Sadrzaj"/>
+                                            <xsl:apply-templates select="akt:Alineja"/>
                                             
                                         </xsl:for-each>
                                         
@@ -137,4 +135,59 @@
             </body>
         </html>   
     </xsl:template>
+    <xsl:template match="akt:Sadrzaj">
+        <p>
+            <xsl:apply-templates />
+        </p>
+    </xsl:template>
+    
+    <!-- default rule: copy any node beneath <description> -->
+    <xsl:template match="akt:Sadrzaj//*">
+        <xsl:copy>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- override rule: <link> nodes get special treatment -->
+    <xsl:template match="akt:Sadrzaj//akt:Referenca">
+        <a href="{@ReferencaURI}">
+            <xsl:apply-templates />
+        </a>
+    </xsl:template>
+    
+    <!-- default rule: ignore any unspecific text node -->
+    <xsl:template match="text()" />
+    
+    <!-- override rule: copy any text node beneath description -->
+    <xsl:template match="akt:Sadrzaj//text()">
+        <xsl:copy-of select="." />
+    </xsl:template>
+    
+    <xsl:template match="akt:Alineja">
+        <p>
+            <xsl:apply-templates />
+        </p>
+    </xsl:template>
+    
+    <!-- default rule: copy any node beneath <description> -->
+    <xsl:template match="akt:Alineja//*">
+        <xsl:copy>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- override rule: <link> nodes get special treatment -->
+    <xsl:template match="akt:Alineja//akt:Referenca">
+        <a href="{@ReferencaURI}">
+            <xsl:apply-templates />
+        </a>
+    </xsl:template>
+    
+    <!-- override rule: copy any text node beneath description -->
+    <xsl:template match="akt:Alineja//text()">
+        <xsl:copy-of select="." />
+    </xsl:template>
+    
 </xsl:stylesheet>

@@ -57,6 +57,10 @@
                     font-size:20px;
                   }
                   
+                  h6.part {
+                    font-style: italic;
+                  }
+                  
                   h6.TackaNaslov{
                     font-size:18px;
                     font-weight:bold;
@@ -75,42 +79,41 @@
                 <h1> <xsl:value-of select="/*/@Naslov"/></h1>
                  
                  <xsl:for-each select="//akt:Deo">
-                     <h2><xsl:value-of select="@Naslov"/></h2>
+                     <h2 id="{@Id}"><xsl:value-of select="@Naslov"/></h2>
+                     <h6 class="part">Deo <xsl:value-of select="@RedniBroj"/></h6>
                      <xsl:for-each select="akt:Glava">
-                            <h3><xsl:value-of select="@Naslov"/></h3>
+                         <h3 id="{@Id}"><xsl:value-of select="@Naslov"/></h3>
+                            <h6 class="part">Glava <xsl:value-of select="@RedniBroj"/></h6>
                                 <xsl:for-each select="akt:Odeljak">
-                                    <h4><xsl:value-of select="@Naslov"/></h4>
-                                    
+                                    <h4 id="{@Id}"><xsl:value-of select="@Naslov"/></h4>
+                                    <h6 class="part">Odeljak <xsl:value-of select="@RedniBroj"/></h6>
                                     <xsl:choose>
                                         <xsl:when test="akt:Pododeljak">
                                             <xsl:for-each select="akt:Pododeljak">
-                                                <h5><xsl:value-of select="@Naslov"/></h5>
-                                                
+                                                <h5 id="{@Id}"><xsl:value-of select="@Naslov"/></h5>
+                                                <h6 class="part">Pododeljak <xsl:value-of select="@RedniBroj"/></h6>
                                                 <xsl:for-each select="akt:Clan">
-                                                    <h5><xsl:value-of select="@Naslov"/></h5>
-                                                    
-                                                    <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                    <h5 id="{@Id}"><xsl:value-of select="@Naslov"/></h5>
+                                                    <h6 class="part">Član <xsl:value-of select="@RedniBroj"/></h6>
+
+                                                    <xsl:apply-templates select="akt:Sadrzaj"/>
                                                     
                                                     <xsl:for-each select="akt:Stav">
-                                                        <h6><xsl:value-of select="@Naslov"/></h6>
+                                                        <h6 id="{@Id}"><xsl:value-of select="@Naslov"/></h6>
                                                         
-                                                        <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                        <xsl:apply-templates select="akt:Sadrzaj"/>
                                                         
                                                         <xsl:for-each select="akt:Tacka">
-                                                            <h6 class="TackaNaslov"><xsl:value-of select="@Naslov"/></h6>
+                                                            <h6 class="TackaNaslov" id="{@Id}"><xsl:value-of select="@Naslov"/></h6>
                                                             
-                                                            <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                            <xsl:apply-templates select="akt:Sadrzaj"/>
                                                             
                                                             <xsl:for-each select="akt:Podtacka">
-                                                                <h6 class="PodtackaNaslov"><xsl:value-of select="@Naslov"/></h6>
+                                                                <h6 class="PodtackaNaslov" id="{@Id}"><xsl:value-of select="@Naslov"/></h6>
                                                                 
-                                                                <p><xsl:value-of select="akt:Sadrzaj"/></p>
-                                                                
-                                                                <xsl:for-each select="akt:Alineja">                                                            
-                                                                    <p><xsl:value-of select="akt:Sadrzaj"/></p>
-                                                                    
-                                                                </xsl:for-each>
-                                                                
+                                                                <xsl:apply-templates select="akt:Sadrzaj"/>
+                                                                <xsl:apply-templates select="akt:Alineja"/>
+
                                                             </xsl:for-each>
                                                             
                                                         </xsl:for-each>
@@ -122,28 +125,25 @@
                                         <xsl:otherwise>
                                             <xsl:for-each select="akt:Clan">
                                                 <h5><xsl:value-of select="@Naslov"/></h5>
-                                                
-                                                <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                <h6 class="part">Član <xsl:value-of select="@RedniBroj"/></h6>
+                                                <xsl:apply-templates select="akt:Sadrzaj"/>
                                                 
                                                 <xsl:for-each select="akt:Stav">
                                                     <h6><xsl:value-of select="@Naslov"/></h6>
                                                     
-                                                    <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                    <xsl:apply-templates select="akt:Sadrzaj"/>
                                                     
                                                     <xsl:for-each select="akt:Tacka">
                                                         <h6 class="TackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                         
-                                                        <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                        <xsl:apply-templates select="akt:Sadrzaj"/>
                                                         
                                                         <xsl:for-each select="akt:Podtacka">
                                                             <h6 class="PodtackaNaslov"><xsl:value-of select="@Naslov"/></h6>
                                                             
-                                                            <p><xsl:value-of select="akt:Sadrzaj"/></p>
+                                                            <xsl:apply-templates select="akt:Sadrzaj"/>
+                                                            <xsl:apply-templates select="akt:Alineja"/>
                                                             
-                                                            <xsl:for-each select="akt:Alineja">                                                            
-                                                                <p><xsl:value-of select="akt:Sadrzaj"/></p>
-                                                                
-                                                            </xsl:for-each>
                                                             
                                                         </xsl:for-each>
                                                         
@@ -158,5 +158,59 @@
              </div> 
           </body>
       </html>  
+    </xsl:template>
+    <xsl:template match="akt:Sadrzaj">
+        <p>
+            <xsl:apply-templates />
+        </p>
+    </xsl:template>
+    
+    <!-- default rule: copy any node beneath <description> -->
+    <xsl:template match="akt:Sadrzaj//*">
+        <xsl:copy>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- override rule: <link> nodes get special treatment -->
+    <xsl:template match="akt:Sadrzaj//akt:Referenca">
+        <a href="http://localhost:8080/api/akti/{@ReferencaURI}">
+            <xsl:apply-templates />
+        </a>
+    </xsl:template>
+    
+    <!-- default rule: ignore any unspecific text node -->
+    <xsl:template match="text()" />
+    
+    <!-- override rule: copy any text node beneath description -->
+    <xsl:template match="akt:Sadrzaj//text()">
+        <xsl:copy-of select="." />
+    </xsl:template>
+    
+    <xsl:template match="akt:Alineja">
+        <p>
+            <xsl:apply-templates />
+        </p>
+    </xsl:template>
+    
+    <!-- default rule: copy any node beneath <description> -->
+    <xsl:template match="akt:Alineja//*">
+        <xsl:copy>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- override rule: <link> nodes get special treatment -->
+    <xsl:template match="akt:Alineja//akt:Referenca">
+        <a href="http://localhost:8080/api/akti/{@ReferencaURI}">
+            <xsl:apply-templates />
+        </a>
+    </xsl:template>
+    
+    <!-- override rule: copy any text node beneath description -->
+    <xsl:template match="akt:Alineja//text()">
+        <xsl:copy-of select="." />
     </xsl:template>
 </xsl:stylesheet>
