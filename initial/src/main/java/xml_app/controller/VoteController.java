@@ -286,68 +286,6 @@ public class VoteController {
 
     }
 
-    private void fillInBrojeve(Node node, String parentsId) {
-
-        Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
-        if (node.getNodeType() != Node.ELEMENT_NODE)
-            return;
-
-        if (!node.hasChildNodes())
-            return;
-
-        NodeList childNodes = node.getChildNodes();
-
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node subnode = childNodes.item(i);
-            //String nameKey2 = subnode.getNodeName();
-            String nameKey = subnode.getLocalName();
-
-            if (subnode.getNodeType() == Node.ELEMENT_NODE) {
-
-                Integer count;
-                Integer countAbsolute;
-                Element elNode = (Element) subnode;
-
-                if (namesCount.containsKey(nameKey)) {
-                    count = namesCount.get(nameKey);
-                    namesCount.put(nameKey, ++count);
-                } else {
-                    count = 1;
-                    namesCount.put(nameKey, count);
-                }
-                //
-                if (absoluteNamesCount.containsKey(nameKey)) {
-                    countAbsolute = absoluteNamesCount.get(nameKey);
-                    absoluteNamesCount.put(nameKey, ++countAbsolute);
-                } else {
-                    countAbsolute = 1;
-                    absoluteNamesCount.put(nameKey, countAbsolute);
-                }
-                //
-
-                if (elNode.getAttributeNode("Id") == null) {
-                    fillInBrojeve(subnode, "/");
-
-                } else {
-                    System.out.println("pre" + elNode.getAttributeNode("Id"));
-                    elNode.getAttributeNode("Id").setValue(parentsId + "/" + nameKey + count.toString());
-                    if (elNode.getAttributeNode("RedniBroj")!=null) {
-                        elNode.getAttributeNode("RedniBroj").setValue((countAbsolute.toString()));
-                    }
-                    else{
-                        System.out.println("null je");
-                    }
-                    System.out.println("Broj " + count + elNode.getLocalName());
-                    System.out.println("Broj abs " + countAbsolute + elNode.getLocalName());
-                    System.out.println("Posle " + elNode.getAttributeNode("Id"));
-                    fillInBrojeve(subnode, parentsId + "/" + nameKey + count.toString());
-                }
-
-            }
-        }
-    }
-
-
 
     @RequestMapping(value = "/voteUCelosti", method = RequestMethod.POST)
     public String voteUCelosti(@RequestBody VoteDTO votes) {

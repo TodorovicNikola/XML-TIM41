@@ -87,7 +87,6 @@ public class StateController {
                         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                         Akt a = (Akt) u.unmarshal(docAkt);
                         db.writeAkt(a);
-                        db.deleteAmandman(votes.getId());
                     } catch (JAXBException e) {
                         e.printStackTrace();
                     }
@@ -137,7 +136,7 @@ public class StateController {
         NodeList childNodes = node.getChildNodes();
         for (int i=0; i < childNodes.getLength(); i++) {
             Node subnode = childNodes.item(i);
-            String nameKey =  subnode.getNodeName();
+            String nameKey =  subnode.getLocalName();
 
             if (subnode.getNodeType() == Node.ELEMENT_NODE) {
 
