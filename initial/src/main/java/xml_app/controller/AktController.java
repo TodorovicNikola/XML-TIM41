@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.datatype.DatatypeFactory;
@@ -38,10 +39,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -264,8 +262,8 @@ public class AktController {
     }
 
 
-    @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
-    public StringDTO trial(@RequestBody String telo) throws JAXBException {
+    @RequestMapping(value = "/dodaj1",method = RequestMethod.POST)
+    public StringDTO dodajPrvaFaza(@RequestBody String telo) throws JAXBException {
 
         String uuid = UUID.randomUUID().toString();
 
@@ -306,18 +304,17 @@ public class AktController {
             GregorianCalendar date = new GregorianCalendar();
             a.setDatumPodnosenja( DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
 
-            DatabaseHelper db = new DatabaseHelper();
-            db.writeAkt(a);
-
-            db.release();
-
             System.out.print(" Ovo jeee uuid: " + uuid);
 
 
-            StringDTO retVal = new StringDTO();
-            retVal.setAm("Ok");
+            StringWriter sw = new StringWriter();
+            Marshaller m = jaxbContext.createMarshaller();
+            m.marshal(a,sw);
 
-            return retVal;
+            StringDTO retDto = new StringDTO();
+            retDto.setAm(sw.toString());
+
+            return retDto;
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -336,6 +333,35 @@ public class AktController {
 
 
     }
+
+    @RequestMapping(value = "/dodaj2",method = RequestMethod.POST)
+    public StringDTO dodajDrugaFaza(@RequestBody String telo) throws JAXBException {
+
+
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(Akt.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            Akt a = (Akt) unmarshaller.unmarshal(new StringReader(telo));
+
+            DatabaseHelper db = new DatabaseHelper();
+            db.writeAkt(a);
+
+            db.release();
+
+            StringDTO retVal = new StringDTO();
+            retVal.setAm("Ok");
+
+            return retVal;
+        }catch (Exception e){
+            StringDTO retVal = new StringDTO();
+            retVal.setAm("");
+
+            return retVal;
+        }
+    }
+
+
+
 
     private void fillInIds(Node node, String parentsId){
 

@@ -1,2 +1,7 @@
-<div id="editor"></div>
-<button class="btn btn-default" ng-click="submit()">Submit</button>
+<div>
+    <h1>{{phaseText}}</h1>
+
+    <div id="editor"></div>
+    <button ng-if="phase1" class="btn btn-default" ng-click="submit1()">Submit</button>
+    <button ng-if="!phase1" class="btn btn-default" ng-click="submit2()">Submit</button>
+</div>
