@@ -35,6 +35,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/vote")
 public class VoteController {
+    private Hashtable<String, Integer> absoluteNamesCount = new Hashtable<>();
+
     @RequestMapping(value = "/voteUNacelu", method = RequestMethod.POST)
     public String voteUNacelu(@RequestBody VoteDTO votes) {
         DatabaseHelper db = new DatabaseHelper();
@@ -77,7 +79,7 @@ public class VoteController {
 
     @RequestMapping(value = "/voteAmandman", method = RequestMethod.POST)
     public String voteAmandman(@RequestBody VoteDTO votes) throws TransformerException {
-
+        System.out.println("Vote");
         DatabaseHelper db = new DatabaseHelper();
         Amandman am = db.findAmandmanById(votes.getId());
         if (votes.getGlasoviZa() > votes.getGlasoviProtiv() + votes.getGlasoviUzdrzani()) {
@@ -162,15 +164,15 @@ public class VoteController {
                                 //node za ispis
                                 Node proba = node.getParentNode();
 
-                                System.out.println("Broj dece pre brisanja = " + proba.getChildNodes().getLength());
-                                System.out.println("Pokrenuto brisanje");
+                                //System.out.println("Broj dece pre brisanja = " + proba.getChildNodes().getLength());
+                                //System.out.println("Pokrenuto brisanje");
                                 node.getParentNode().removeChild(node);
-                                System.out.println("Broj dece posle brisanja = " + proba.getChildNodes().getLength());
+                                //System.out.println("Broj dece posle brisanja = " + proba.getChildNodes().getLength());
                             } else if (element.getAkcija().equals("Izmeni")) {
-                                System.out.println("Pokrenuto menjanje");
-                                System.out.println("Text content pre " + node.getTextContent());
+                                //System.out.println("Pokrenuto menjanje");
+                                //System.out.println("Text content pre " + node.getTextContent());
                                 node.getParentNode().replaceChild(nodeUpd,node);
-                                System.out.println("Text content posle " + nodeUpd.getTextContent());
+                                //System.out.println("Text content posle " + nodeUpd.getTextContent());
                             }
                         }
                     } else {
@@ -178,15 +180,15 @@ public class VoteController {
                             XPathExpression xPathExpression = xPath.compile("//ns3:Pododeljak[@Id = '" + referenca + "']");
                             Node node = (Node) xPathExpression.evaluate(docAkt, XPathConstants.NODE);
                             System.out.println("Pokrenuto dodavenje u pododeljak");
-                            System.out.println("Broj dece pre dodavanja =" + node.getChildNodes().getLength());
+                            //System.out.println("Broj dece pre dodavanja =" + node.getChildNodes().getLength());
                             node.appendChild(nodeUpd);
-                            System.out.println("Broj dece posle dodavanja =" + node.getChildNodes().getLength());
+                            //System.out.println("Broj dece posle dodavanja =" + node.getChildNodes().getLength());
                         } else {
                             XPathExpression xPathExpression = xPath.compile("//ns3:Odeljak[@Id = '" + referenca + "']");
                             Node node = (Node) xPathExpression.evaluate(docAkt, XPathConstants.NODE);
-                            System.out.println("Broj dece pre dodavanja =" + node.getChildNodes().getLength());
+                            //System.out.println("Broj dece pre dodavanja =" + node.getChildNodes().getLength());
                             node.appendChild(nodeUpd);
-                            System.out.println("Broj dece posle dodavanja =" + node.getChildNodes().getLength());
+                            //System.out.println("Broj dece posle dodavanja =" + node.getChildNodes().getLength());
 
 
                         }
@@ -200,9 +202,9 @@ public class VoteController {
 
             }
             System.out.println("FILL IN IDS");
-            docAkt.getDocumentElement().normalize();
-            fillInIds(docAkt.getDocumentElement(), "/");
-
+            //docAkt.getDocumentElement().normalize();
+            //fillInIds(docAkt.getDocumentElement(), "/");
+            //fillInBrojeve(docAkt.getDocumentElement(), "/");
             JAXBContext jc = null;
             try {
                 jc = JAXBContext.newInstance(Akt.class);
@@ -211,7 +213,7 @@ public class VoteController {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 Akt a = (Akt) u.unmarshal(docAkt);
                 db.writeAkt(a);
-                db.deleteAmandman(votes.getId());
+                //db.deleteAmandman(votes.getId());
             } catch (JAXBException e) {
                 e.printStackTrace();
             }
@@ -233,10 +235,60 @@ public class VoteController {
 
     }
 
-    private void fillInIds(Node node, String parentsId) {
+    private void fillInIds(Node node, String parentsId){
 
         Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
 
+        if(node.getNodeType() != Node.ELEMENT_NODE)
+            return;
+
+        if(!node.hasChildNodes())
+            return;
+
+        NodeList childNodes = node.getChildNodes();
+        for (int i=0; i < childNodes.getLength(); i++) {
+            Node subnode = childNodes.item(i);
+            String nameKey =  subnode.getNodeName();
+
+            if (subnode.getNodeType() == Node.ELEMENT_NODE) {
+
+                Integer count;
+                Integer countAbsolute;
+                Element elNode = (Element) subnode;
+
+                if(namesCount.containsKey(nameKey)){
+                    count = namesCount.get(nameKey);
+                    namesCount.put(nameKey,++count);
+                }else{
+                    count = 1;
+                    namesCount.put(nameKey, count);
+                }
+                if (absoluteNamesCount.containsKey(nameKey)) {
+                    countAbsolute = absoluteNamesCount.get(nameKey);
+                    absoluteNamesCount.put(nameKey, ++countAbsolute);
+                } else {
+                    countAbsolute = 1;
+                    absoluteNamesCount.put(nameKey, countAbsolute);
+                }
+
+                if(elNode.getAttributeNode("Id") == null) {
+                    continue;
+                }else{
+                    elNode.getAttributeNode("Id").setValue( parentsId + "/" + nameKey + count.toString());
+                    if (elNode.getAttributeNode("RedniBroj")!=null) {
+                        elNode.getAttributeNode("RedniBroj").setValue((countAbsolute.toString()));
+                    }
+
+                }
+                fillInIds(subnode,  parentsId + "/" + nameKey + count.toString());
+            }
+        }
+
+    }
+
+    private void fillInBrojeve(Node node, String parentsId) {
+
+        Hashtable<String, Integer> namesCount = new Hashtable<String, Integer>();
         if (node.getNodeType() != Node.ELEMENT_NODE)
             return;
 
@@ -248,11 +300,12 @@ public class VoteController {
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node subnode = childNodes.item(i);
             //String nameKey2 = subnode.getNodeName();
-            String nameKey=subnode.getLocalName();
+            String nameKey = subnode.getLocalName();
 
             if (subnode.getNodeType() == Node.ELEMENT_NODE) {
 
                 Integer count;
+                Integer countAbsolute;
                 Element elNode = (Element) subnode;
 
                 if (namesCount.containsKey(nameKey)) {
@@ -262,23 +315,39 @@ public class VoteController {
                     count = 1;
                     namesCount.put(nameKey, count);
                 }
+                //
+                if (absoluteNamesCount.containsKey(nameKey)) {
+                    countAbsolute = absoluteNamesCount.get(nameKey);
+                    absoluteNamesCount.put(nameKey, ++countAbsolute);
+                } else {
+                    countAbsolute = 1;
+                    absoluteNamesCount.put(nameKey, countAbsolute);
+                }
+                //
 
                 if (elNode.getAttributeNode("Id") == null) {
-                    fillInIds(subnode, "/");
+                    fillInBrojeve(subnode, "/");
 
                 } else {
                     System.out.println("pre" + elNode.getAttributeNode("Id"));
                     elNode.getAttributeNode("Id").setValue(parentsId + "/" + nameKey + count.toString());
-
-                    System.out.println("Posle "  +elNode.getAttributeNode("Id"));
-                    fillInIds(subnode, parentsId + "/" + nameKey + count.toString());
+                    if (elNode.getAttributeNode("RedniBroj")!=null) {
+                        elNode.getAttributeNode("RedniBroj").setValue((countAbsolute.toString()));
+                    }
+                    else{
+                        System.out.println("null je");
+                    }
+                    System.out.println("Broj " + count + elNode.getLocalName());
+                    System.out.println("Broj abs " + countAbsolute + elNode.getLocalName());
+                    System.out.println("Posle " + elNode.getAttributeNode("Id"));
+                    fillInBrojeve(subnode, parentsId + "/" + nameKey + count.toString());
                 }
 
             }
         }
-
-
     }
+
+
 
     @RequestMapping(value = "/voteUCelosti", method = RequestMethod.POST)
     public String voteUCelosti(@RequestBody VoteDTO votes) {

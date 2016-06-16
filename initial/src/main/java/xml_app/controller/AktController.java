@@ -50,6 +50,7 @@ import java.util.*;
 @RequestMapping("/api/akti")
 public class AktController {
 
+    private Hashtable<String, Integer> absoluteNamesCount = new Hashtable<>();
 
     @RequestMapping(value="/usvojeni", method = RequestMethod.GET)
     public Collection<Akt> usvojeniAkti(){
@@ -269,14 +270,14 @@ public class AktController {
 
         telo = telo.replace("xml:space='preserve'", "");
         telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri'");
-        telo = telo.replace("<Deo","<Deo Id='' RedniBroj='' ");
-        telo = telo.replace("<Glava","<Glava Id='' RedniBroj='' ");
-        telo = telo.replace("<Odeljak","<Odeljak Id='' RedniBroj='' ");
-        telo = telo.replace("<Pododeljak","<Pododeljak Id='' RedniBroj='' ");
+        telo = telo.replace("<Deo","<Deo Id='' RedniBroj='1' ");
+        telo = telo.replace("<Glava","<Glava Id='' RedniBroj='1' ");
+        telo = telo.replace("<Odeljak","<Odeljak Id='' RedniBroj='1' ");
+        telo = telo.replace("<Pododeljak","<Pododeljak Id='' RedniBroj='1' ");
         telo = telo.replace("<Stav","<Stav Id='' ");
         telo = telo.replace("<Tacka","<Tacka Id='' ");
         telo = telo.replace("<Podtacka","<Podtacka Id='' ");
-        telo = telo.replace("<Clan","<Clan Id='' RedniBroj='' ");
+        telo = telo.replace("<Clan","<Clan Id='' RedniBroj='1' ");
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         dbFactory.setNamespaceAware(true);
@@ -287,6 +288,7 @@ public class AktController {
             doc.getDocumentElement().normalize();
 
             fillInIds(doc.getDocumentElement(), "/");
+            absoluteNamesCount.clear();
             //TODO: Aleksa, ovde negde dodela za RedniBroj
 
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -382,6 +384,7 @@ public class AktController {
             if (subnode.getNodeType() == Node.ELEMENT_NODE) {
 
                 Integer count;
+                Integer countAbsolute;
                 Element elNode = (Element) subnode;
 
                 if(namesCount.containsKey(nameKey)){
@@ -391,11 +394,21 @@ public class AktController {
                     count = 1;
                     namesCount.put(nameKey, count);
                 }
+                if (absoluteNamesCount.containsKey(nameKey)) {
+                    countAbsolute = absoluteNamesCount.get(nameKey);
+                    absoluteNamesCount.put(nameKey, ++countAbsolute);
+                } else {
+                    countAbsolute = 1;
+                    absoluteNamesCount.put(nameKey, countAbsolute);
+                }
 
                 if(elNode.getAttributeNode("Id") == null) {
                     continue;
                 }else{
                     elNode.getAttributeNode("Id").setValue( parentsId + "/" + nameKey + count.toString());
+                    if (elNode.getAttributeNode("RedniBroj")!=null) {
+                        elNode.getAttributeNode("RedniBroj").setValue((countAbsolute.toString()));
+                    }
 
                 }
                 fillInIds(subnode,  parentsId + "/" + nameKey + count.toString());
