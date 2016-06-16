@@ -16,6 +16,7 @@
             <th>Datum</th>
             <th>Službeni glasnik</th>
             <th>PDF</th>
+            <th ng-show="currentUser">Referenciranje</th>
         </thead>
         <tbody>
             <tr ng-repeat="akt in data">
@@ -27,6 +28,9 @@
                     <a href="api/akti/{{akt.id}}/pdf">
                         <img border="0" alt="PDF-Icon" src="../../../images/pdf-icon.png" width="32" height="32">
                     </a>
+                </td>
+                <td ng-show="currentUser">
+                    <a class="btn btn-default" href="api/akti/zaReferenciranje/{{akt.id}}">Pogledaj</a>
                 </td>
             </tr>
         </tbody>

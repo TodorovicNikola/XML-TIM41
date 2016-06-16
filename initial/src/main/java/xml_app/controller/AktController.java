@@ -142,6 +142,31 @@ public class AktController {
         }
     }
 
+    @RequestMapping(value = "/zaReferenciranje/{aktId}",method = RequestMethod.GET)
+    public void konkretanAktZaReferenciranje(@PathVariable String aktId, HttpServletResponse resp){
+        DatabaseHelper db = new DatabaseHelper();
+
+        Akt a = db.findAktById(aktId);
+
+        db.release();
+
+        try{
+            TransformerFactory tf = TransformerFactory.newInstance();
+            StreamSource xslt = new StreamSource("XSDs/AktZaReferenciranje.xsl");
+
+            Transformer transformer = tf.newTransformer(xslt);
+
+            JAXBContext jc = JAXBContext.newInstance(Akt.class);
+            JAXBSource source = new JAXBSource(jc, a);
+
+            StreamResult result = new StreamResult(resp.getOutputStream());
+
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @RequestMapping(value = "/zaAmandman/{aktId}",method = RequestMethod.GET)
     public void konkretanAktZaAmandman(@PathVariable String aktId, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
