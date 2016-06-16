@@ -150,7 +150,7 @@
 
                                                                     <fo:basic-link color="blue"
                                                                                    external-destination="http://localhost:8080/api/akti/{$link}">
-                                                                        g
+                                                                        <xsl:value-of select="text()"/>
                                                                     </fo:basic-link>
                                                                 </fo:block>
                                                             </xsl:for-each>
@@ -284,7 +284,7 @@
                                             <xsl:otherwise>
 
                                                 <xsl:for-each select="a:Clan">
-                                                    Ovde2
+
                                                     <fo:block id="{@Id}" font-family="Arial" text-align="center"
                                                               font-size="14" margin="20px">
                                                         <fox:destination internal-destination="{@Id}"/>
@@ -322,7 +322,7 @@
 
                                                     </fo:block>
                                                     <xsl:for-each select="a:Stav">
-                                                        stav
+                                         
                                                         <fo:block id="{@Id}" font-family="Arial" text-align="center"
                                                                   font-size="13" margin="20px">
                                                             <fox:destination internal-destination="{@Id}"/>
