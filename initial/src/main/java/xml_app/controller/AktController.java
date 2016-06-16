@@ -269,14 +269,14 @@ public class AktController {
 
         telo = telo.replace("xml:space='preserve'", "");
         telo = telo.replace("<Akt","<Akt Id='" + uuid + "' Status='U proceduri'");
-        telo = telo.replace("<Deo","<Deo Id='' ");
-        telo = telo.replace("<Glava","<Glava Id='' ");
-        telo = telo.replace("<Odeljak","<Odeljak Id='' ");
-        telo = telo.replace("<Pododeljak","<Pododeljak Id='' ");
+        telo = telo.replace("<Deo","<Deo Id='' RedniBroj='' ");
+        telo = telo.replace("<Glava","<Glava Id='' RedniBroj='' ");
+        telo = telo.replace("<Odeljak","<Odeljak Id='' RedniBroj='' ");
+        telo = telo.replace("<Pododeljak","<Pododeljak Id='' RedniBroj='' ");
         telo = telo.replace("<Stav","<Stav Id='' ");
         telo = telo.replace("<Tacka","<Tacka Id='' ");
         telo = telo.replace("<Podtacka","<Podtacka Id='' ");
-        telo = telo.replace("<Clan","<Clan Id='' ");
+        telo = telo.replace("<Clan","<Clan Id='' RedniBroj='' ");
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         dbFactory.setNamespaceAware(true);
@@ -287,6 +287,7 @@ public class AktController {
             doc.getDocumentElement().normalize();
 
             fillInIds(doc.getDocumentElement(), "/");
+            //TODO: Aleksa, ovde negde dodela za RedniBroj
 
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Source schemaFile = new StreamSource(new File("XSDs/Akt.xsd"));

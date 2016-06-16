@@ -36,12 +36,15 @@ public class StateController {
             } break;
             case "glasanjeZaAmandmane": {
                 /*if(db.getAmandmani().isEmpty()){
+                       //TODO: Aleksa, ovde negde ponovna dodela za Id i za RedniBroj
+
                      db.nextState();
 
                  }else{
                      return "{ \"data\": \"error\" }";
 
                  }*/
+
                 db.nextState();
             } break;
             case "glasanjeUCelosti": {
