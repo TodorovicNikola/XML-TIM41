@@ -11,11 +11,17 @@ import com.marklogic.client.query.StringQueryDefinition;
 import xml_app.model.Akt;
 import xml_app.model.Amandman;
 import xml_app.model.Korisnik;
+import xml_app.utils.DateUtil;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -355,6 +361,8 @@ public class DatabaseHelper {
         QueryManager queryMgr = client.newQueryManager();
         String attributes = " Status='" + status + "'";
         String podnosilacXml = "";
+        Date d1 = null;
+        Date d2 = null;
 
         if(glasnik != "" && glasnik != null)
             attributes += " SluzbeniGlasnik='" + glasnik + "'";
@@ -365,6 +373,13 @@ public class DatabaseHelper {
         if(podnosilac != "" && podnosilac != null)
             podnosilacXml = "<a:Podnosilac><q:word>" + podnosilac + "</q:word></a:Podnosilac>";
 
+        if(datumOd != null){
+            d1 = DateUtil.parseDate(datumOd);
+        }
+
+        if(datumDo != null){
+            d2 = DateUtil.parseDate(datumDo);
+        }
 
         String rawXMLQuery = "<q:qbe xmlns:q=\"http://marklogic.com/appservices/querybyexample\" xmlns:a=\"http://www.xmlProjekat.com/akt\">\n" +
                 "  <q:query>\n" +
@@ -380,7 +395,28 @@ public class DatabaseHelper {
         for (MatchDocumentSummary docSum: searchHandle.getMatchResults()) {
 
             Akt a = manager.readAs(docSum.getUri(), Akt.class);
-            ret.add(a);
+            if(d1 != null && d2 != null) {
+                Date aktDate = a.getDatumPodnosenja().toGregorianCalendar().getTime();
+                int cmp1 = d1.compareTo(aktDate);
+                int cmp2 = d2.compareTo(aktDate);
+
+                if(cmp1 <= 0 && cmp2 >= 0)
+                    ret.add(a);
+
+            }else if (d1 != null){
+                Date aktDate = a.getDatumPodnosenja().toGregorianCalendar().getTime();
+                int cmp = d1.compareTo(aktDate);
+                if (cmp <= 0)
+                    ret.add(a);
+            }else if (d2 != null){
+                Date aktDate = a.getDatumPodnosenja().toGregorianCalendar().getTime();
+                int cmp = d2.compareTo(aktDate);
+                if (cmp >= 0)
+                    ret.add(a);
+            }else{
+                ret.add(a);
+            }
+
         }
 
         return ret;
@@ -562,4 +598,6 @@ public class DatabaseHelper {
         }*/
 
     }
+
+
 }
