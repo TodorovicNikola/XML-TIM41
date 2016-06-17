@@ -7,6 +7,10 @@ module.exports = [
 
         $scope.currentUser  = $localStorage.currentUser;
 
+        if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = $localStorage.currentUser.token;
+        }
+
         $scope.logout=function () {
             loginService.logout();
             $scope.refreshUser();
