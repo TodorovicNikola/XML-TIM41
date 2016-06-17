@@ -124,7 +124,7 @@
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <xsl:for-each select="akt:Clan">
-                                                <h5><xsl:value-of select="@Naslov"/></h5>
+                                                <h5 id="{@Id}"><xsl:value-of select="@Naslov"/></h5>
                                                 <h6 class="part">Član <xsl:value-of select="@RedniBroj"/></h6>
                                                 <xsl:apply-templates select="akt:Sadrzaj"/>
                                                 
