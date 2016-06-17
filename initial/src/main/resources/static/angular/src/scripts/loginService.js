@@ -50,7 +50,8 @@ module.exports = [
                         // prijavljenog korisnika cuva u lokalnom skladistu
                         $localStorage.currentUser = currentUser;
                         // jwt token dodajemo u to auth header za sve $http zahteve
-                        $http.defaults.headers.common.Authorization = response.token;
+                        $http.defaults.headers.common.Authorization = response;
+                        console.log(response);
                         // callback za uspesan login
                         callback(true);
                     } else {

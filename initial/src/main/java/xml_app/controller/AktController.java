@@ -62,7 +62,7 @@ public class AktController {
     }
 
     @RequestMapping(value="/usvojeniKorisnika", method = RequestMethod.POST)
-    public Collection<Akt> usvojeniAktiKorisnika(@RequestBody String userId){
+    public Collection<Akt> usvojeniAktiKorisnika(@RequestHeader(value="Authorization") String authorization, @RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Akt> akti = db.getUsvojeniAktiKorisnika(userId);
@@ -80,7 +80,7 @@ public class AktController {
     }
 
     @RequestMapping(value="/uProceduriKorisnika", method = RequestMethod.POST)
-    public Collection<Akt> aktiUProceduriKorisnika(@RequestBody String userId){
+    public Collection<Akt> aktiUProceduriKorisnika(@RequestHeader(value="Authorization") String authorization, @RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Akt> akti = db.getAktiUProceduriKorisnika(userId);
@@ -89,7 +89,8 @@ public class AktController {
     }
 
     @RequestMapping(value="/u-nacelu", method = RequestMethod.GET)
-    public Collection<Akt> aktiUsvojeniUNacelu(){
+    public Collection<Akt> aktiUsvojeniUNacelu(@RequestHeader(value="Authorization") String authorization){
+
         DatabaseHelper db = new DatabaseHelper();
 
         List<Akt> akti = db.getAktiUsvojeniUNacelu();
@@ -98,7 +99,7 @@ public class AktController {
     }
 
     @RequestMapping(value="/uNaceluKorisnika", method = RequestMethod.POST)
-    public Collection<Akt> aktiUsvojeniUNaceluKorisnika(@RequestBody String userId){
+    public Collection<Akt> aktiUsvojeniUNaceluKorisnika(@RequestHeader(value="Authorization") String authorization, @RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Akt> akti = db.getAktiUsvojeniUNaceluKorisnika(userId);
@@ -107,7 +108,7 @@ public class AktController {
     }
 
     @RequestMapping(value="/obrisi", method = RequestMethod.POST)
-    public String obrisi(@RequestBody String id){
+    public String obrisi(@RequestHeader(value="Authorization") String authorization, @RequestBody String id){
         DatabaseHelper db = new DatabaseHelper();
 
         db.deleteAkt(id);
@@ -289,7 +290,7 @@ public class AktController {
 
 
     @RequestMapping(value = "/dodaj1",method = RequestMethod.POST)
-    public StringDTO dodajPrvaFaza(@RequestBody String telo) throws JAXBException {
+    public StringDTO dodajPrvaFaza(@RequestHeader(value="Authorization") String authorization, @RequestBody String telo) throws JAXBException {
 
         String uuid = UUID.randomUUID().toString();
 
@@ -363,7 +364,7 @@ public class AktController {
     }
 
     @RequestMapping(value = "/dodaj2",method = RequestMethod.POST)
-    public StringDTO dodajDrugaFaza(@RequestBody String telo) throws JAXBException {
+    public StringDTO dodajDrugaFaza(@RequestHeader(value="Authorization") String authorization, @RequestBody String telo) throws JAXBException {
 
 
         try {

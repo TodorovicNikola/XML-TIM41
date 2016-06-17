@@ -65,7 +65,7 @@ public class KorisnikController {
 
     }
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@RequestBody Korisnik korisnik) {
+    public String register(@RequestHeader(value="Authorization") String authorization, @RequestBody Korisnik korisnik) {
         if (db.findKorisnikById(korisnik.getKorisnickoIme())!=null)
         {
             return "{ \"data\": \"Postoji korisnik sa tim korisničkim imenom!\" }";

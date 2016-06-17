@@ -54,7 +54,7 @@ import java.util.*;
 public class AmandmanController {
 
     @RequestMapping(value="/svi", method = RequestMethod.GET)
-    public Collection<Amandman> amandmani(){
+    public Collection<Amandman> amandmani(@RequestHeader(value="Authorization") String authorization){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Amandman> amandmani = db.getAmandmani();
@@ -63,7 +63,7 @@ public class AmandmanController {
     }
 
     @RequestMapping(value="/akta", method = RequestMethod.POST)
-    public Collection<Amandman> amandmaniAkta(@RequestBody String IdAkta){
+    public Collection<Amandman> amandmaniAkta(@RequestHeader(value="Authorization") String authorization, @RequestBody String IdAkta){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Amandman> amandmani = db.getAmandmaniAkta(IdAkta);
@@ -72,7 +72,7 @@ public class AmandmanController {
     }
 
     @RequestMapping(value="/korisnika", method = RequestMethod.POST)
-    public Collection<Amandman> amandmaniKorisnika(@RequestBody String userId){
+    public Collection<Amandman> amandmaniKorisnika(@RequestHeader(value="Authorization") String authorization, @RequestBody String userId){
         DatabaseHelper db = new DatabaseHelper();
 
         List<Amandman> amandmani = db.getAmandmaniKorisnika(userId);
@@ -81,7 +81,7 @@ public class AmandmanController {
     }
 
     @RequestMapping(value="/obrisi", method = RequestMethod.POST)
-    public String obrisi(@RequestBody String id){
+    public String obrisi(@RequestHeader(value="Authorization") String authorization, @RequestBody String id){
         DatabaseHelper db = new DatabaseHelper();
 
         db.deleteAmandman(id);
@@ -92,7 +92,7 @@ public class AmandmanController {
     }
 
     @RequestMapping(value = "/dodaj",method = RequestMethod.POST)
-    public Amandman dodaj(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
+    public Amandman dodaj(@RequestHeader(value="Authorization") String authorization, @RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Amandman.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -141,7 +141,7 @@ public class AmandmanController {
 
 
     @RequestMapping(value = "/dogradi",method = RequestMethod.POST)
-    public StringDTO dogradi(@RequestBody BuildAmandmanDTO dto) throws JAXBException {
+    public StringDTO dogradi(@RequestHeader(value="Authorization") String authorization, @RequestBody BuildAmandmanDTO dto) throws JAXBException {
 
         StringDTO retDto = new StringDTO();
         retDto.setAm("");
@@ -288,7 +288,7 @@ public class AmandmanController {
 
     @Produces (MediaType.TEXT_XML)
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public void konkretanAmandman(@PathVariable String id, HttpServletResponse resp){
+    public void konkretanAmandman(@RequestHeader(value="Authorization") String authorization, @PathVariable String id, HttpServletResponse resp){
         DatabaseHelper db = new DatabaseHelper();
 
         Amandman a = db.findAmandmanById(id);
@@ -315,7 +315,7 @@ public class AmandmanController {
     }
 
     @RequestMapping(value = "/{amandmanId}/pdf",method = RequestMethod.GET)
-    public void konkretanAmandmanPdf(@PathVariable String amandmanId, HttpServletResponse resp) throws IOException {
+    public void konkretanAmandmanPdf(@RequestHeader(value="Authorization") String authorization, @PathVariable String amandmanId, HttpServletResponse resp) throws IOException {
         //trebalo bi ovo wrapovati u neku metodu, ali za sada neka ostane tako
         DatabaseHelper db = new DatabaseHelper();
         Amandman a = db.findAmandmanById(amandmanId);

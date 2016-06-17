@@ -1,11 +1,8 @@
 package xml_app.controller;
 
 
+import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Node;
 import xml_app.database.DatabaseHelper;
 import xml_app.model.*;
@@ -38,7 +35,7 @@ public class VoteController {
     private Hashtable<String, Integer> absoluteNamesCount = new Hashtable<>();
 
     @RequestMapping(value = "/voteUNacelu", method = RequestMethod.POST)
-    public String voteUNacelu(@RequestBody VoteDTO votes) {
+    public String voteUNacelu(@RequestHeader(value="Authorization") String authorization, @RequestBody VoteDTO votes) {
         DatabaseHelper db = new DatabaseHelper();
         Akt a = db.findAktById(votes.getId());
 
@@ -78,7 +75,7 @@ public class VoteController {
     }
 
     @RequestMapping(value = "/voteAmandman", method = RequestMethod.POST)
-    public String voteAmandman(@RequestBody VoteDTO votes) throws TransformerException {
+    public String voteAmandman(@RequestHeader(value="Authorization") String authorization, @RequestBody VoteDTO votes) throws TransformerException {
         System.out.println("Vote");
         DatabaseHelper db = new DatabaseHelper();
         Amandman am = db.findAmandmanById(votes.getId());
@@ -288,7 +285,7 @@ public class VoteController {
 
 
     @RequestMapping(value = "/voteUCelosti", method = RequestMethod.POST)
-    public String voteUCelosti(@RequestBody VoteDTO votes) {
+    public String voteUCelosti(@RequestHeader(value="Authorization") String authorization, @RequestBody VoteDTO votes) {
         DatabaseHelper db = new DatabaseHelper();
         Akt a = db.findAktById(votes.getId());
 
@@ -317,7 +314,7 @@ public class VoteController {
             return "{ \"data\": \"Akt označen kao 'USVOJEN'!\" }";
 
         } else {
-            //TODO: OBRISATI AMANDMANE BRISANOG AKTA
+
 
             db.deleteAkt(votes.getId());
 
