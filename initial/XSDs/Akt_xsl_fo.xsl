@@ -174,16 +174,14 @@
 
 
                                                         <xsl:apply-templates select="a:Sadrzaj"/>
-
-
+                                                        
                                                     </fo:block>
                                                     <xsl:for-each select="a:Stav">
 
                                                         <fo:block id="{@Id}" font-family="Arial" text-align="center"
-                                                                  font-size="13" margin="20px">
+                                                                  font-size="13" margin="18px">
                                                             <fox:destination internal-destination="{@Id}"/>
                                                             <xsl:value-of select="@Naslov"/>
-                                                            <xsl:apply-templates select="a:Sadrzaj"/>
                                                         </fo:block>
                                                         <fo:block font-family="Arial" font-size="8">
                                                             <xsl:apply-templates select="a:Sadrzaj"/>
