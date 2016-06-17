@@ -175,7 +175,7 @@
     
     <!-- override rule: <link> nodes get special treatment -->
     <xsl:template match="akt:Sadrzaj//akt:Referenca">
-        <a href="http://localhost:8080/api/akti/{@ReferencaURI}">
+        <a href="http://localhost:8080/api/akti/{@ReferencaURI}" target="_blank">
             <xsl:apply-templates />
         </a>
     </xsl:template>
@@ -204,7 +204,7 @@
     
     <!-- override rule: <link> nodes get special treatment -->
     <xsl:template match="akt:Alineja//akt:Referenca">
-        <a href="http://localhost:8080/api/akti/{@ReferencaURI}">
+        <a href="http://localhost:8080/api/akti/{@ReferencaURI}" target="_blank">
             <xsl:apply-templates />
         </a>
     </xsl:template>

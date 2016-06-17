@@ -91,16 +91,16 @@
                     
                     <h2>AMANDMAN</h2>
                         <xsl:for-each select="//am:ElementAmandmana">
-                            <xsl:variable name="REFERENCE"><xsl:value-of select="@Referencira"/></xsl:variable>
+                            <xsl:variable name="REFERENCE"><xsl:value-of select="/*/@IdAkta"/>#<xsl:value-of select="@Referencira"/></xsl:variable>
                             <xsl:choose>
                                 <xsl:when test="@Akcija = 'Dodaj'">
-                                    <p> &#8226; Dodaje se ispod <a href="http://localhost:8080/api/akti/{$REFERENCE}">člana</a> sledeći član:</p> 
+                                    <p> &#8226; Dodaje se u <a href="http://localhost:8080/api/akti/{$REFERENCE}" target="_blank">odeljak/pododeljak</a> sledeći član:</p> 
                                 </xsl:when>
                                 <xsl:when test="@Akcija = 'Izmeni'">
-                                    <p>&#8226; Zamenjuje se <a href="http://localhost:8080/api/akti/{$REFERENCE}">član</a> sledećim članom:</p> 
+                                    <p>&#8226; Zamenjuje se <a href="http://localhost:8080/api/akti/{$REFERENCE}" target="_blank">član</a> sledećim članom:</p> 
                                 </xsl:when>
                                 <xsl:when test="@Akcija = 'Obrisi'">
-                                    <p>&#8226; Briše se <a href="http://localhost:8080/api/akti/{$REFERENCE}">član</a>.</p>
+                                    <p>&#8226; Briše se <a href="http://localhost:8080/api/akti/{$REFERENCE}" target="_blank">član</a>.</p>
                                 </xsl:when>
                             </xsl:choose>
                             <xsl:for-each select="akt:Clan">
