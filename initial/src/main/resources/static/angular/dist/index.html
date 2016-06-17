@@ -32,9 +32,8 @@
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#/akti-u-proceduri">U proceduri</a></li>
-						<li><a href="#/akti-usvojeni-u-nacelu">Usvojeni u načelu</a></li>
+						<li><a ng-show="currentUser" href="#/akti-usvojeni-u-nacelu">Usvojeni u načelu</a></li>
 						<li><a href="#/usvojeni-akti">Usvojeni</a></li>
-						<li><a href="#/kreiraj-amandman">Test kreiraj amandman</a></li>
 					</ul>
 				</li>
 				<li ng-show="currentUser && state=='predlaganjeAkata'"><a href="#/kreiraj-akt">Predloži akt</a></li>
@@ -69,28 +68,28 @@
 						<div class="form-group">
 							<label>Korisnicko ime:</label>
 							<input ng-model="korisnickoImeKorisnika" type="text"  class="form-control input-sm"/>
-							<span ng-show="!korisnickoImeKorisnika">Potrebno uneti :</span>
+							<span ng-show="!korisnickoImeKorisnika">Potrebno uneti!</span>
 						</div>
 						<div class="form-group">
 							<label>Lozinka:</label>
-							<input ng-model="lozinkaKorisnika" type="text" class="form-control input-sm"/>
-							<span ng-show="!lozinkaKorisnika">Potrebno uneti :</span>
+							<input ng-model="lozinkaKorisnika" type="password" class="form-control input-sm"/>
+							<span ng-show="!lozinkaKorisnika">Potrebno uneti!</span>
 						</div>
 						<div class="form-group">
 							<label>Ponovi lozinku:</label>
-							<input ng-model="lozinkaKorisnikaPonovljena" type="text" class="form-control input-sm"/>
-							<span ng-show="!lozinkaKorisnikaPonovljena">Potrebno uneti :<br></span>
-							<span ng-show="!isteLozinke()">Lozinke se ne podudaraju :</span>
+							<input ng-model="lozinkaKorisnikaPonovljena" type="password" class="form-control input-sm"/>
+							<span ng-show="!lozinkaKorisnikaPonovljena">Potrebno uneti!<br></span>
+							<span ng-show="!isteLozinke()">Lozinke se ne podudaraju!</span>
 						</div>
 						<div class="form-group">
 							<label>Ime:</label>
 							<input ng-model="imeKorisnika" type="text"  class="form-control input-sm"/>
-							<span ng-show="!imeKorisnika">Potrebno uneti :</span>
+							<span ng-show="!imeKorisnika">Potrebno uneti!</span>
 						</div>
 						<div class="form-group">
 							<label>Prezime:</label>
 							<input ng-model="prezimeKorisnika" type="text"  class="form-control input-sm"/>
-							<span ng-show="!prezimeKorisnika">Potrebno uneti :</span>
+							<span ng-show="!prezimeKorisnika">Potrebno uneti!</span>
 						</div>
 						<div class="form-group">
 							<label>Email:</label>

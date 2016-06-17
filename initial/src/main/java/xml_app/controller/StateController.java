@@ -43,75 +43,74 @@ public class StateController {
 
         switch (db.getState()){
             case "glasanjeUNacelu": {
-                /*if(db.getAktiUProceduri().isEmpty()){
+                if(db.getAktiUProceduri().isEmpty()){
                      db.nextState();
 
                  }else{
                     return "{ \"data\": \"error\" }";
 
-                 }*/
-                db.nextState();
+                 }
+                //db.nextState();
             } break;
             case "glasanjeZaAmandmane": {
+                if(db.getAmandmani().isEmpty()){
+                    List<Akt> akti=db.getAktiUsvojeniUNacelu();
+                    for (Akt akt:akti)
+                    {
+                        DocumentBuilderFactory dbFactoryAkt = DocumentBuilderFactory.newInstance();
 
-                List<Akt> akti=db.getAktiUsvojeniUNacelu();
-                for (Akt akt:akti)
-                {
-                    DocumentBuilderFactory dbFactoryAkt = DocumentBuilderFactory.newInstance();
+                        dbFactoryAkt.setNamespaceAware(true);
+                        DocumentBuilder dBuilderAkt = null;
 
-                    dbFactoryAkt.setNamespaceAware(true);
-                    DocumentBuilder dBuilderAkt = null;
+                        try {
+                            dBuilderAkt = dbFactoryAkt.newDocumentBuilder();
+                        } catch (ParserConfigurationException e) {
+                            e.printStackTrace();
+                        }
+                        Document docAkt = dBuilderAkt.newDocument();
+                        JAXBContext jaxbContextAkt = null;
+                        try {
+                            jaxbContextAkt = JAXBContext.newInstance(Akt.class);
+                            Marshaller marshallerAkt = jaxbContextAkt.createMarshaller();
+                            marshallerAkt.marshal(akt, docAkt);
+                        } catch (JAXBException e) {
+                            e.printStackTrace();
+                        }
+                        fillInIds(docAkt.getDocumentElement(),"/");
+                        absoluteNamesCount.clear();
 
-                    try {
-                        dBuilderAkt = dbFactoryAkt.newDocumentBuilder();
-                    } catch (ParserConfigurationException e) {
-                        e.printStackTrace();
+                        JAXBContext jc = null;
+                        try {
+                            jc = JAXBContext.newInstance(Akt.class);
+                            Unmarshaller u = jc.createUnmarshaller();
+
+                            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                            Akt a = (Akt) u.unmarshal(docAkt);
+                            db.writeAkt(a);
+                        } catch (JAXBException e) {
+                            e.printStackTrace();
+                        }
+
                     }
-                    Document docAkt = dBuilderAkt.newDocument();
-                    JAXBContext jaxbContextAkt = null;
-                    try {
-                        jaxbContextAkt = JAXBContext.newInstance(Akt.class);
-                        Marshaller marshallerAkt = jaxbContextAkt.createMarshaller();
-                        marshallerAkt.marshal(akt, docAkt);
-                    } catch (JAXBException e) {
-                        e.printStackTrace();
-                    }
-                    fillInIds(docAkt.getDocumentElement(),"/");
-                    absoluteNamesCount.clear();
-
-                    JAXBContext jc = null;
-                    try {
-                        jc = JAXBContext.newInstance(Akt.class);
-                        Unmarshaller u = jc.createUnmarshaller();
-
-                        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                        Akt a = (Akt) u.unmarshal(docAkt);
-                        db.writeAkt(a);
-                    } catch (JAXBException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                /*if(db.getAmandmani().isEmpty()){
-                       //TODO: Aleksa, ovde negde ponovna dodela za Id i za RedniBroj
 
                      db.nextState();
 
                  }else{
                      return "{ \"data\": \"error\" }";
 
-                 }*/
+                 }
 
-                db.nextState();
+                //db.nextState();
             } break;
             case "glasanjeUCelosti": {
-                /*if(db.getAktiUsvojeniUNacelu().isEmpty()){
+                if(db.getAktiUsvojeniUNacelu().isEmpty()){
                      db.nextState();
+
                 }else{
                     return "{ \"data\": \"error\" }";
 
-                 }*/
-                db.nextState();
+                 }
+                //db.nextState();
             } break;
             default: { db.nextState(); }
             break;

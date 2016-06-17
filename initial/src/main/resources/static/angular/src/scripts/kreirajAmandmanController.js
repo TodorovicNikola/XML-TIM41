@@ -3,8 +3,8 @@
  */
 //TODO ogranicenja: datum,  referenca
 module.exports = [
-    '$scope', '$http', '$interval', '$routeParams',
-    function ctrl($scope, $http, $interval, $routeParams){
+    '$scope', '$http', '$interval', '$routeParams', '$window',
+    function ctrl($scope, $http, $interval, $routeParams, $window){
       
         $scope.warns = 0;
         var docSpec={
@@ -82,7 +82,7 @@ module.exports = [
                     menu: [{
                         caption: "Dodaj novi <ns2:Stav>",
                         action: Xonomy.newElementChild,
-                        actionParameter: "<ns2:Stav Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
+                        actionParameter: "<ns2:Stav RedniBroj='1' Id='' xmlns:ns2='http://www.xmlProjekat.com/akt'/>"
                     },{
                         caption: "Dodaj novi <ns2:Sadrzaj>",
                         action: Xonomy.newElementChild,
@@ -329,7 +329,13 @@ module.exports = [
 
             $http.post("/api/amandmani/dodaj", dto).success(function(data, status) {
 
-                alert("Uspešno dodat amandman.");
+                if(data === ""){
+                    alert("Amandman mora imati podnosioca i bar nesto sadrzaja.");
+                }else{
+                    alert("Uspešno dodat amandman.");
+                    $window.location = "#/akti-u-proceduri";
+                }
+
 
             });
 

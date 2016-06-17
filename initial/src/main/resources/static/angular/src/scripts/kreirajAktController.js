@@ -32,21 +32,10 @@ module.exports = [
                                 hideIf: function(jsElement) {
                                     return jsElement.hasAttribute("Naslov");
                                 }
-                            },
-                            {
-                                caption: "Dodaj @Redni @broj",
-                                action: Xonomy.newAttribute,
-                                actionParameter: {name: "RedniBroj", value: ""},
-                                hideIf: function(jsElement){
-                                    return jsElement.hasAttribute("RedniBroj");
-                                }
                             }
                     ],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         },
                         "Status": {
@@ -91,23 +80,12 @@ module.exports = [
                         }
                     },
                     {
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },
-                    {
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     mustBeAfter: ["Podnosilac"],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -130,22 +108,12 @@ module.exports = [
                         hideIf: function(jsElement) {
                             return jsElement.hasAttribute("Naslov");
                         }
-                    },{
-                            caption: "Dodaj @Redni @broj",
-                            action: Xonomy.newAttribute,
-                            actionParameter: {name: "RedniBroj", value: ""},
-                            hideIf: function(jsElement){
-                                return jsElement.hasAttribute("RedniBroj");
-                            }
-                    },{
+                    }, {
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -178,21 +146,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -217,21 +175,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -259,21 +207,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -300,21 +238,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -341,21 +269,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
@@ -382,21 +300,11 @@ module.exports = [
                             return jsElement.hasAttribute("Naslov");
                         }
                     },{
-                        caption: "Dodaj @Redni @broj",
-                        action: Xonomy.newAttribute,
-                        actionParameter: {name: "RedniBroj", value: ""},
-                        hideIf: function(jsElement){
-                            return jsElement.hasAttribute("RedniBroj");
-                        }
-                    },{
                         caption: "Obriši",
                         action: Xonomy.deleteElement
                     }],
                     attributes:{
                         "Naslov":{
-                            asker: Xonomy.askString
-                        },
-                        "RedniBroj":{
                             asker: Xonomy.askString
                         }
                     }
