@@ -43,6 +43,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -233,6 +234,7 @@ public class AmandmanController {
 
             Clan cl =  new Clan();
             cl.setId(" ");
+            cl.setRedniBroj(BigInteger.valueOf(1));
 
             ea.setClan(cl);
             lea.add(ea);
