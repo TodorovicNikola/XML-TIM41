@@ -1,5 +1,7 @@
 # XML-TIM41
 
+# Jar je u initial/jar !!!
+
 Ovako:
 
 Prvo: skinite i instalirajte IntelliJ, skinite trial verziju, ne community. Bice nam dosta tih 30 dana... Instalirajte JDK 8u91.
