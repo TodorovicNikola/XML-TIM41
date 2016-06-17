@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.xmlProjekat.com/amandman"
+    xmlns:am="http://www.xmlProjekat.com/amandman" xmlns:ak="http://www.xmlProjekat.com/akt">
+    <xs:import namespace="http://www.xmlProjekat.com/akt" schemaLocation="Akt.xsd"/>
+
+    <xs:element name="Amandman">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Podnosilac" type="xs:string"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="am:ElementAmandmana"/>
+                </xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="DatumIVremePodnosenja" type="xs:dateTime"/>
+            <xs:attribute name="Id" type="xs:string" use="required"/>
+            <xs:attribute name="IdAkta" type="xs:string" use="required"/>
+            <xs:attribute name="userId" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ElementAmandmana">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ak:Clan" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="Akcija">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Dodaj"/>
+                        <xs:enumeration value="Izmeni"/>
+                        <xs:enumeration value="Obrisi"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Referencira"> </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
